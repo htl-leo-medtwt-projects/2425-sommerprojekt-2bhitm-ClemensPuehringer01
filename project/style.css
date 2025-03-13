@@ -1,0 +1,30 @@
+@font-face {
+    font-family: 'poke';
+    src: url(./media/Pokefont.ttf);
+}
+
+body{
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    font-family: poke;
+    text-align: center;
+}
+#forestBG{
+    background-image: url(./media/img/title.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+}
+.mainBtn{
+    background-color: #ffca02;
+    border-radius: 10px;
+    border: 3px solid #3561ac;
+    width: 17%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1%;
+    box-shadow: -5px 1px 7px 5px rgba(0, 0, 0, 0.25) inset;
+    margin-top: 3%;
+}
