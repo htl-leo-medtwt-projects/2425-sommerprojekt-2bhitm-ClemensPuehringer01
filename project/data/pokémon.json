@@ -1,0 +1,13 @@
+{
+    "pokémon":[
+        {
+            "name": "Charizard",
+            "type":["fire", "flying"],
+            "hp": 78,
+            "stamina": 160,
+            "might": 100,
+            "attack":[0,1],
+            "specials":[0]
+        }
+    ]
+}

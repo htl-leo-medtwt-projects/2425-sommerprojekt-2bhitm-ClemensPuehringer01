@@ -1,0 +1,27 @@
+{
+    "moves":[
+        {
+            "name": "Ember",
+            "type": "fire",
+            "power": 40,
+            "acc": 100,
+            "stamina_cost": 14
+        },
+        {
+            "name": "Flame Wheel",
+            "type": "fire",
+            "power": 60,
+            "acc": 100,
+            "stamina_cost": 16
+        }
+    ],
+    "specials":[
+        {
+            "name": "Blazing Rush",
+            "type": "fire",
+            "power": 90,
+            "acc": 95,
+            "stamina_cost": 19
+        }
+    ]
+}
