@@ -1,13 +1,204 @@
 {
-    "pokémon":[
+"pokémon": [
+        {
+            "name": "Blaziken",
+            "type": ["fire", "fighting"],
+            "hp": 80,
+            "stamina": 160,
+            "might": 120,
+            "resistance": 70
+        },
+        {
+            "name": "Bulbasaur",
+            "type": ["grass", "poison"],
+            "hp": 90,
+            "stamina": 140,
+            "might": 65,
+            "resistance": 75
+        },
+        {
+            "name": "Caterpie",
+            "type": ["bug"],
+            "hp": 110,
+            "stamina": 120,
+            "might": 30,
+            "resistance": 40
+        },
         {
             "name": "Charizard",
-            "type":["fire", "flying"],
-            "hp": 78,
+            "type": ["fire", "flying"],
+            "hp": 80,
             "stamina": 160,
             "might": 100,
-            "attack":[0,1],
-            "specials":[0]
+            "resistance": 60
+        },
+        {
+            "name": "Ditto",
+            "type": ["normal"],
+            "hp": 100,
+            "stamina": 130,
+            "might": 48,
+            "resistance": 48
+        },
+        {
+            "name": "Dragapult",
+            "type": ["dragon", "ghost"],
+            "hp": 70,
+            "stamina": 170,
+            "might": 120,
+            "resistance": 75
+        },
+        {
+            "name": "Eevee",
+            "type": ["normal"],
+            "hp": 100,
+            "stamina": 130,
+            "might": 55,
+            "resistance": 50
+        },
+        {
+            "name": "Electrike",
+            "type": ["electric"],
+            "hp": 95,
+            "stamina": 135,
+            "might": 65,
+            "resistance": 50
+        },
+        {
+            "name": "Gengar",
+            "type": ["ghost", "poison"],
+            "hp": 75,
+            "stamina": 165,
+            "might": 110,
+            "resistance": 60
+        },
+        {
+            "name": "Grovyle",
+            "type": ["grass"],
+            "hp": 85,
+            "stamina": 155,
+            "might": 90,
+            "resistance": 60
+        },
+        {
+            "name": "Gyarados",
+            "type": ["water", "flying"],
+            "hp": 85,
+            "stamina": 155,
+            "might": 115,
+            "resistance": 79
+        },
+        {
+            "name": "Jynx",
+            "type": ["ice", "psychic"],
+            "hp": 75,
+            "stamina": 165,
+            "might": 95,
+            "resistance": 50
+        },
+        {
+            "name": "Lickilicky",
+            "type": ["normal"],
+            "hp": 110,
+            "stamina": 120,
+            "might": 85,
+            "resistance": 95
+        },
+        {
+            "name": "Litten",
+            "type": ["fire"],
+            "hp": 95,
+            "stamina": 135,
+            "might": 65,
+            "resistance": 50
+        },
+        {
+            "name": "Lucario",
+            "type": ["fighting", "steel"],
+            "hp": 80,
+            "stamina": 160,
+            "might": 110,
+            "resistance": 70
+        },
+        {
+            "name": "Marowak",
+            "type": ["ground"],
+            "hp": 90,
+            "stamina": 140,
+            "might": 75,
+            "resistance": 85
+        },
+        {
+            "name": "Mewtwo",
+            "type": ["psychic"],
+            "hp": 70,
+            "stamina": 170,
+            "might": 130,
+            "resistance": 90
+        },
+        {
+            "name": "Onix",
+            "type": ["rock", "ground"],
+            "hp": 120,
+            "stamina": 100,
+            "might": 45,
+            "resistance": 120
+        },
+        {
+            "name": "Oshawott",
+            "type": ["water"],
+            "hp": 95,
+            "stamina": 135,
+            "might": 65,
+            "resistance": 50
+        },
+        {
+            "name": "Palkia",
+            "type": ["water", "dragon"],
+            "hp": 80,
+            "stamina": 160,
+            "might": 120,
+            "resistance": 100
+        },
+        {
+            "name": "Pikachu",
+            "type": ["electric"],
+            "hp": 95,
+            "stamina": 135,
+            "might": 70,
+            "resistance": 50
+        },
+        {
+            "name": "Rayquaza",
+            "type": ["dragon", "flying"],
+            "hp": 75,
+            "stamina": 165,
+            "might": 130,
+            "resistance": 80
+        },
+        {
+            "name": "Rowlet",
+            "type": ["grass", "flying"],
+            "hp": 100,
+            "stamina": 130,
+            "might": 55,
+            "resistance": 55
+        },
+        {
+            "name": "Snorlax",
+            "type": ["normal"],
+            "hp": 130,
+            "stamina": 90,
+            "might": 110,
+            "resistance": 110
+        },
+        {
+            "name": "Togetic",
+            "type": ["fairy", "flying"],
+            "hp": 105,
+            "stamina": 115,
+            "might": 60,
+            "resistance": 80
         }
     ]
 }

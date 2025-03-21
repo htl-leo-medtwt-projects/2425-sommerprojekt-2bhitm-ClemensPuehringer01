@@ -1,0 +1,18 @@
+Normal: Ditto, Eevee, Lickilicky, Snorlax
+Kampf: Lucario, 
+Flug: Pidgey,
+Gift: Skuntank, Skrelp
+Boden: Marowak, Rhynhorn
+Stein: Onix, Geodude
+Käfer: Caterpie, Scolipede
+Geist: Gengar, Haunter, Mimikyu
+Stahl: Steelix
+Feuer: Blaziken, Charizard, Litten
+Wasser: Gyarados, Oshawott, Palkia
+Pflanze: Bulbasaur, Grovyle, Rowlet
+Elektro: Electrike, Pikachu, Magneton
+Psycho: Mewtwo, Wobbuffet, Gardevoir
+Eis: Jynx, 
+Drache: Dragapult, Rayquaza
+Dunkel: Darkrai
+Fee: Togetic
