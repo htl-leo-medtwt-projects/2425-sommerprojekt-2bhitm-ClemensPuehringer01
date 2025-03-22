@@ -1,4 +1,4 @@
-{
+let trainer ={
     "trainers": [
         {
             "name": "Fire-Trainer",

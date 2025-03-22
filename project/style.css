@@ -1,3 +1,9 @@
+:root{
+    --mainColor: #ffca02;
+    --secondColor: #3561ac;	
+}
+
+
 @font-face {
     font-family: 'poke';
     src: url(./media/Pokefont.ttf);
@@ -6,6 +12,14 @@
 @keyframes moveUp {
     to {
         top: -150%;
+    }
+}
+@keyframes movein {
+    from{
+        top: 200%;
+    }
+    to{
+        top: 0%;
     }
 }
 
@@ -37,9 +51,9 @@ body{
     left: 22%;
 }
 .mainBtn{
-    background-color: #ffca02;
+    background-color: var(--mainColor);
     border-radius: 10px;
-    border: 3px solid #3561ac;
+    border: 3px solid var(--secondColor);
     width: 17%;
     margin-left: auto;
     margin-right: auto;
@@ -50,17 +64,17 @@ body{
     cursor: pointer;
 }
 .mainBtn:hover{
-    background-color: #3561ac;
-    border: #ffca02 solid 3px;
+    background-color: var(--secondColor);
+    border: var(--mainColor) solid 3px;
     scale: 1.1;
 }
 #mute{
     position: absolute;
     top: 85%;
     left: 0%;
-    background-color: #ffca02;
+    background-color: var(--mainColor);
     border-radius: 10px;
-    border: 3px solid #3561ac;
+    border: 3px solid var(--secondColor);
     width: 10%;
     padding: 1%;
     box-shadow: -5px 1px 7px 5px rgba(0, 0, 0, 0.25) inset;
@@ -72,6 +86,136 @@ body{
     width: 80%;
 }
 #mute:hover{
-    background-color: #3561ac;
-    border: #ffca02 solid 3px;
+    background-color: var(--secondColor);
+    border: var(--mainColor) solid 3px;
+}
+
+#selectionScreen{
+    display: none;
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+}
+#headPlayerSelection{
+    position: absolute;
+    top : 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    background-color: var(--mainColor);
+    border: solid 3px var(--secondColor);
+    border-radius: 10px;
+    padding: 1%;
+    box-shadow: -5px 1px 7px 5px rgba(0, 0, 0, 0.25) inset;
+    font-size: 170%;
+}
+#pokeSelectorMini{
+    position: absolute;
+    left: 7%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 10%;
+}
+.pokeBox{
+    background-color: var(--mainColor);
+    border: solid 3px var(--secondColor);
+    border-radius: 10px;
+    padding: 1%;
+    box-shadow: -5px 1px 7px 5px rgba(0, 0, 0, 0.25) inset;
+    margin-top: 3%;
+    transition: .3s;
+    cursor: pointer;
+}
+.pokeBox>img{
+    width: 100%;
+    transform: scaleX(-1);
+}
+.pokeBox:hover{
+    background-color: var(--secondColor);
+    border: var(--mainColor) solid 3px;
+}
+#back{
+    position: absolute;
+    top: 5%;
+    left: 90%;
+    transform: translate(-50%, -50%);
+    background-color: var(--mainColor);
+    border-radius: 10px;
+    border: 3px solid var(--secondColor);
+    width: 15%;
+    padding: 1%;
+    box-shadow: -5px 1px 7px 5px rgba(0, 0, 0, 0.25) inset;
+    transition: .3s;
+    font-size: 150%;
+    cursor: pointer;
+    scale: 0.6;
+}
+#back:hover{
+    background-color: var(--secondColor);
+    border: var(--mainColor) solid 3px;
+}
+#trainerSelector{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 50%;
+    left: 85%;
+    transform: translate(-50%, -50%);
+    width: 20%;
+    height: 42%;
+    background-color: var(--mainColor);
+    border: solid 3px var(--secondColor);
+    border-radius: 10px;
+    padding: 1%;
+    box-shadow: -5px 1px 7px 5px rgba(0, 0, 0, 0.25) inset;
+    transition: .3s;
+    cursor: pointer;
+}
+#trainerSelector>img{
+    width: 90%;
+    transform: scaleX(-1);
+}
+#trainerSelector:hover{
+    background-color: var(--secondColor);
+    border: var(--mainColor) solid 3px;
+}
+.nameSelector{
+    font-family: poke;
+    position: absolute;
+    top: 92%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+    width: 20%;
+    background-color: var(--mainColor);
+    border: solid 3px var(--secondColor);
+    border-radius: 10px;
+    padding: 1%;
+    box-shadow: -5px 1px 7px 5px rgba(0, 0, 0, 0.25) inset;
+    font-size: 150%;
+}
+#finish{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 90%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    background-color: var(--mainColor);
+    border-radius: 10px;
+    border: 3px solid var(--secondColor);
+    width: 40%;
+    height: 10%;
+    padding: 1%;
+    box-shadow: -5px 1px 7px 5px rgba(0, 0, 0, 0.25) inset;
+    transition: .3s;
+    font-size: 200%;
+    cursor: pointer;
+    scale: 0.6;
+    transition: .3s;
+}
+#finish:hover{
+    background-color: var(--secondColor);
+    border: var(--mainColor) solid 3px;
 }

@@ -1,4 +1,5 @@
-{
+let
+perks={
     "pokemon_perks": [
         {
             "type": "fire",
@@ -6,7 +7,7 @@
         },
         {
             "type": "fire",
-            "perk": "Ember Shield: Fire Pokémon take 15% less damage from the first attack they receive in battle."
+            "perk": "Ember Shield: Fire Pokémon take 5% less damage."
         },
         {
             "type": "water",
