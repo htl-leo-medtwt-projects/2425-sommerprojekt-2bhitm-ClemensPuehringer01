@@ -115,10 +115,13 @@ function loadSelectorP1(){
         <div id = "trainerSelector" onclick="selectTrainer(${player1.trainer.type.toLocaleLowerCase()})">
             <img src="./media/img/trainer/${player1.trainer.type.toLocaleLowerCase()}.png" alt="">
         </div>
+        <div id = "selectionDetail">   
+        </div>
             <input type="text" placeholder="Name..." id="player1Name" class = "nameSelector">
         <div id = "finish" onclick="loadSelectorP2()">
             Finish
         </div>
+        <div id="mute" onclick="mute()"><img src="./media/img/muteOn.png" alt=""></div>
         </div>
         `
         setTimeout(function(){
