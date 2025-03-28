@@ -233,3 +233,85 @@ body{
     padding: 1%;
     box-shadow: -5px 1px 7px 5px rgba(0, 0, 0, 0.25) inset;
 }
+#TrainerArrowL{
+    position: absolute;
+    top: 30%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    width: 10%;
+    padding: 2%;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: var(--mainColor);
+    border: 3px solid var(--secondColor);
+    transition: 0.3s;
+    box-shadow: -5px 1px 7px 5px rgba(0, 0, 0, 0.25) inset;
+}
+#TrainerArrowL:hover{
+    background-color: var(--secondColor);
+    border: var(--mainColor) solid 3px;
+}
+#TrainerArrowL>img{
+    width: 100%;
+    scale: -1;
+}
+#TrainerArrowR>img{
+    width: 100%;
+}
+#TrainerArrowR{
+    position: absolute;
+    top: 30%;
+    right: 20%;
+    transform: translate(50%, -50%);
+    width: 10%;
+    padding: 2%;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: var(--mainColor);
+    border: 3px solid var(--secondColor);
+    transition: 0.3s;
+    box-shadow: -5px 1px 7px 5px rgba(0, 0, 0, 0.25) inset;
+}
+#TrainerArrowR:hover{
+    background-color: var(--secondColor);
+    border: var(--mainColor) solid 3px;
+}
+#TrainerImgBox{
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30%;
+    height: 50%;
+    background-color: var(--mainColor);
+    border: solid 3px var(--secondColor);
+    border-radius: 10px;
+    padding: 1%;
+    box-shadow: -5px 1px 7px 5px rgba(0, 0, 0, 0.25) inset;
+}
+#TrainerImgBox>img{
+    width: 90%;
+}
+#trainerPerk{
+    display: grid;
+    grid-template-columns: 10% auto;
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 20%;
+    background-color: var(--mainColor);
+    border: solid 3px var(--secondColor);
+    border-radius: 10px;
+    padding: 1%;
+    box-shadow: -5px 1px 7px 5px rgba(0, 0, 0, 0.25) inset;
+}
+#trainerPerk>img{
+    width: 100%;
+}
+#trainerDetail{
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto;
+}

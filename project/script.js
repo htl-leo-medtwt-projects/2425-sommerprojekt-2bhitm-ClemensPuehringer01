@@ -8,6 +8,7 @@ let player1 = {
         {
             poke: pokémon.list[4],
             perk: perks.pokemon_perks[0],
+            hp: pokémon.list[4].hp,
             moves: [
                 attacks.moves[0],
                 attacks.special_moves[1],
@@ -16,6 +17,7 @@ let player1 = {
         {
             poke: pokémon.list[7],
             perk: perks.pokemon_perks[0],
+            hp: pokémon.list[7].hp,
             moves: [
                 attacks.moves[3],
                 attacks.special_moves[1],
@@ -24,6 +26,7 @@ let player1 = {
         {
             poke: pokémon.list[26],
             perk: perks.pokemon_perks[0],
+            hp: pokémon.list[26].hp,
             moves: [
                 attacks.moves[0],
                 attacks.moves[2]
@@ -112,7 +115,7 @@ function loadSelectorP1(){
         <div id = "back" onclick="homescreen()">
             Back
         </div>
-        <div id = "trainerSelector" onclick="selectTrainer(${player1.trainer.type.toLocaleLowerCase()})">
+        <div id = "trainerSelector" onclick="selectTrainer1()">
             <img src="./media/img/trainer/${player1.trainer.type.toLocaleLowerCase()}.png" alt="">
         </div>
         <div id = "selectionDetail">   
@@ -134,4 +137,31 @@ function loadSelectorP1(){
 }
 function homescreen(){
     location.reload();
+}
+function selectTrainer1(){
+
+    let tempstring = `
+    <div id = "trainerDetailTop">
+        <div id = "TrainerArrowL" onclick="changeTrainer1(-1)"> <img src="./media/img/pokearrow.png" alt=""></div>
+            <div id = "TrainerImgBox"><img src="./media/img/trainer/${player1.trainer.type}.png" alt=""></div>
+        <div id = "TrainerArrowR" onclick="changeTrainer1(1)"> <img src="./media/img/pokearrow.png" alt=""></div>
+    </div>
+    <div id = "trainerDetailBottom">
+        <div id = "trainerPerk">
+            <img src="./media/img/types/${player1.trainer.type}.png" alt=""> ${player1.trainer.perk}
+        </div>
+    </div>
+    `
+    document.getElementById("selectionDetail").style.display = "block"
+    document.getElementById("selectionDetail").innerHTML = tempstring;
+}
+function changeTrainer1(num){
+    if(player1.trainer == trainer.trainers[0] && num == -1){
+        player1.trainer = trainer.trainers[17]
+    }else if(player1.trainer == trainer.trainers[17] && num == 1){
+        player1.trainer = trainer.trainers[0]
+    }else{
+        player1.trainer = trainer.trainers[trainer.trainers.indexOf(player1.trainer)+num]
+    }
+    selectTrainer1();
 }
