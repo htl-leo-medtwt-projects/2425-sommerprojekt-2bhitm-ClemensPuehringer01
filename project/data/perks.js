@@ -19,7 +19,7 @@ perks={
         },
         {
             "type": "grass",
-            "perk": "Rooted Strength: Grass Pokémon take 10% less damage if they didn't move last turn."
+            "perk": "Rooted Strength: Grass Pokémon take 5% less damage the longer they stay on the field."
         },
         {
             "type": "grass",
@@ -31,11 +31,11 @@ perks={
         },
         {
             "type": "electric",
-            "perk": "Charge Up: If an Electric Pokémon doesn’t attack for one turn, its next move deals 20% more damage."
+            "perk": "Charge Up: If an Electric Pokémon doges an attack, its next move deals 20% more damage."
         },
         {
             "type": "ice",
-            "perk": "Frost Armor: Ice Pokémon take 10% less damage from consecutive attacks."
+            "perk": "Frost Armor: Ice Pokémon take 5% less damage from attacks."
         },
         {
             "type": "ice",
@@ -87,7 +87,7 @@ perks={
         },
         {
             "type": "bug",
-            "perk": "Exoskeleton: Bug Pokémon take 10% less damage from attacks that would deal neutral damage."
+            "perk": "Exoskeleton: Bug Pokémon take 10% less damage from attacks."
         },
         {
             "type": "rock",
@@ -99,7 +99,7 @@ perks={
         },
         {
             "type": "ghost",
-            "perk": "Ethereal Step: Ghost Pokémon ignore the first status effect inflicted upon them."
+            "perk": "Ethereal Step: Ghost Pokémon ignore the first attack."
         },
         {
             "type": "ghost",
@@ -123,7 +123,7 @@ perks={
         },
         {
             "type": "steel",
-            "perk": "Metal Core: Steel Pokémon take 10% less damage from attacks that hit them twice or more."
+            "perk": "Metal Core: Steel Pokémon take 10% less damage from super effective attacks."
         },
         {
             "type": "steel",
@@ -135,11 +135,11 @@ perks={
         },
         {
             "type": "fairy",
-            "perk": "Pixie Trick: Fairy Pokémon's attacks have a 10% chance to confuse the opponent."
+            "perk": "Pixie Trick: Fairy Pokémon's attacks have a 10% chance to lower the oppenents speed."
         },
         {
             "type": "normal",
-            "perk": "Adaptability: Normal Pokémon can ignore type resistances once per battle."
+            "perk": "Adaptability: Normal Pokémon take no damage from the first super effective hit."
         },
         {
             "type": "normal",

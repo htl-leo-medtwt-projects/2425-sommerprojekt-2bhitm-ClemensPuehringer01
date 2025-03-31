@@ -102,13 +102,13 @@ function loadSelectorP1(){
             Choose your Team
         </div>
         <div id = "pokeSelectorMini">
-            <div class="pokeBox" onclick="selectPoke(${player1.team[0].poke.name.toLocaleLowerCase()})">
+            <div class="pokeBox" onclick="selectPoke(0)">
                 <img src="./media/img/pokémon/${player1.team[0].poke.name.toLocaleLowerCase()}.png" alt="">
             </div>
-            <div class="pokeBox" onclick="selectPoke(${player1.team[1].poke.name.toLocaleLowerCase()})">
+            <div class="pokeBox" onclick="selectPoke(1)">
                 <img src="./media/img/pokémon/${player1.team[1].poke.name.toLocaleLowerCase()}.png" alt="">
             </div>
-            <div class="pokeBox" onclick="selectPoke(${player1.team[2].poke.name.toLocaleLowerCase()})">
+            <div class="pokeBox" onclick="selectPoke(2)">
                 <img src="./media/img/pokémon/${player1.team[2].poke.name.toLocaleLowerCase()}.png" alt="">
             </div>
         </div>
@@ -150,6 +150,9 @@ function selectTrainer1(){
         <div id = "trainerPerk">
             <img src="./media/img/types/${player1.trainer.type}.png" alt=""> ${player1.trainer.perk}
         </div>
+        <div id = "saveTrainer" onclick="saveTrainer1()">
+            Save
+        </div>
     </div>
     `
     document.getElementById("selectionDetail").style.display = "block"
@@ -164,4 +167,63 @@ function changeTrainer1(num){
         player1.trainer = trainer.trainers[trainer.trainers.indexOf(player1.trainer)+num]
     }
     selectTrainer1();
+}
+function saveTrainer1(){
+    player1.trainer = trainer.trainers[trainer.trainers.indexOf(player1.trainer)]
+    document.getElementById("selectionDetail").style.display = "none"
+    document.getElementById("trainerSelector").innerHTML = `<img src="./media/img/trainer/${player1.trainer.type}.png" alt="">`
+}
+
+function selectPoke(pokemonTeamNum){
+    let tempstring = ""
+    //A function to open the detail selector and choose the pokemon
+    if(player1.team[pokemonTeamNum].poke.type.length>1){
+        tempstring = `
+    <div id = "pokeDetailInfo">
+        <div id = "pokeDetailInfoImg" onclick="changePoke(${pokemonTeamNum})">
+            <img src="./media/img/pokémon/${player1.team[pokemonTeamNum].poke.name.toLocaleLowerCase()}.png" alt="">
+        </div>
+        <div id = "pokeDetailInfoLower">
+            <div id = "pokeDetailInfoName">${player1.team[pokemonTeamNum].poke.name}</div>
+            <div id = "pokeDetailInfoType2">
+                <img src="./media/img/types/${player1.team[pokemonTeamNum].poke.type[0]}.png" alt="">
+                <img src="./media/img/types/${player1.team[pokemonTeamNum].poke.type[1]}.png" alt="">
+            </div>
+            <div id = "pokeDetailInfoHP">${player1.team[pokemonTeamNum].hp} HP</div>
+            <div id = "pokeDetailInfoStamina">${player1.team[pokemonTeamNum].poke.stamina} Stamina</div>
+    </div>
+    <div id = "pokeDetailAttacks">
+    </div>
+    <div id = "pokeDetailPerk">
+    </div>
+    <div id = "savePoke" onclick="savePoke1()">
+        Save
+    </div>
+    `
+    }else{
+        tempstring = `
+    <div id = "pokeDetailInfo">
+        <div id = "pokeDetailInfoImg" onclick="changePoke(${pokemonTeamNum})">
+            <img src="./media/img/pokémon/${player1.team[pokemonTeamNum].poke.name.toLocaleLowerCase()}.png" alt="">
+        </div>
+        <div id = "pokeDetailInfoLower">
+        <div id = "pokeDetailInfoName">${player1.team[pokemonTeamNum].poke.name}</div>
+            <div id = "pokeDetailInfoType1">
+                <img src="./media/img/types/${player1.team[pokemonTeamNum].poke.type[0]}.png" alt="">
+            </div>
+            <div id = "pokeDetailInfoHP">${player1.team[pokemonTeamNum].hp} HP</div>
+            <div id = "pokeDetailInfoStamina">${player1.team[pokemonTeamNum].poke.stamina} Stamina</div>
+    </div>
+    <div id = "pokeDetailAttacks">
+    </div>
+    <div id = "pokeDetailPerk">
+    </div>
+    <div id = "savePoke" onclick="savePoke1()">
+        Save
+    </div>
+    `
+    }
+    
+    document.getElementById("selectionDetail").style.display = "block"
+    document.getElementById("selectionDetail").innerHTML = tempstring;
 }

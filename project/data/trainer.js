@@ -33,7 +33,7 @@ let trainer ={
         {
             "name": "Poison-Trainer",
             "type": "poison",
-            "perk": "Toxic Aura: Poison Pokémon have a 30% chance to poison opponents when hit with a contact move."
+            "perk": "Venomous Precision: Poison Pokémon have a 10% higher chance to land a critical hit."
         },
         {
             "name": "Flying-Trainer",
@@ -83,7 +83,7 @@ let trainer ={
         {
             "name": "Psychic-Trainer",
             "type": "psychic",
-            "perk": "Clairvoyant Guard: Psychic Pokémon have a 30% chance to reflect status conditions back to the opponent."
+            "perk": "Mind over Matter: Psychic Pokémon have a 10% increased chance to evade a opponents move."
         },
         {
             "name": "Normal-Trainer",
