@@ -337,3 +337,23 @@ body{
     background-color: var(--secondColor);
     border: var(--mainColor) solid 3px;
 }
+#pokeDetailInfo{
+    position: absolute;
+    left: 2%;
+    top: 2%;
+    width: 30%;
+}
+#pokeDetailInfoImg>img{
+    width: 90%;
+    transform: scaleX(-1);
+    padding: 1%;
+    border: solid 3px var(--secondColor);
+    border-radius: 10px;
+    box-shadow: -5px 1px 7px 5px rgba(0, 0, 0, 0.25) inset;
+    cursor: pointer;
+}
+#pokeDetailAttacks{
+    position: absolute;
+    left: 120%;
+    top: 10%;
+}

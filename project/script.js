@@ -64,6 +64,7 @@ let player2 = {
     ],
     trainer: trainer.trainers[0]
 }
+audio.lobbyMusic.loop = true;
 function mute(){
     audio.lobbyMusic.currentTime = 0;
     if(!audio.musicOn){
@@ -193,6 +194,12 @@ function selectPoke(pokemonTeamNum){
             <div id = "pokeDetailInfoStamina">${player1.team[pokemonTeamNum].poke.stamina} Stamina</div>
     </div>
     <div id = "pokeDetailAttacks">
+            <div class="pokeDetailAttack" onclick="selectAttack1(${pokemonTeamNum},0)">
+            <div class="pokeDetailAttackTxt"> <img src="./media/img/types/${player1.team[pokemonTeamNum].moves[0].type}.png" alt=""> ${player1.team[pokemonTeamNum].moves[0].name} <br> Pow: ${player1.team[pokemonTeamNum].moves[0].power} Acc: ${player1.team[pokemonTeamNum].moves[0].acc}</div>
+        </div>
+        <div class="pokeDetailAttack" onclick="selectAttack1(${pokemonTeamNum},1)">
+            <div class="pokeDetailAttackTxt"><img src="./media/img/types/${player1.team[pokemonTeamNum].moves[1].type}.png" alt=""> ${player1.team[pokemonTeamNum].moves[1].name} <br> Pow: ${player1.team[pokemonTeamNum].moves[1].power} Acc: ${player1.team[pokemonTeamNum].moves[1].acc}</div>
+        </div>
     </div>
     <div id = "pokeDetailPerk">
     </div>
@@ -203,7 +210,7 @@ function selectPoke(pokemonTeamNum){
     }else{
         tempstring = `
     <div id = "pokeDetailInfo">
-        <div id = "pokeDetailInfoImg" onclick="changePoke(${pokemonTeamNum})">
+        <div id = "pokeDetailInfoImg" onclick="changePoke1(${pokemonTeamNum})">
             <img src="./media/img/pokémon/${player1.team[pokemonTeamNum].poke.name.toLocaleLowerCase()}.png" alt="">
         </div>
         <div id = "pokeDetailInfoLower">
@@ -215,6 +222,12 @@ function selectPoke(pokemonTeamNum){
             <div id = "pokeDetailInfoStamina">${player1.team[pokemonTeamNum].poke.stamina} Stamina</div>
     </div>
     <div id = "pokeDetailAttacks">
+            <div class="pokeDetailAttack" onclick="selectAttack1(${pokemonTeamNum},0)">
+            <div class="pokeDetailAttackTxt"> <img src="./media/img/types/${player1.team[pokemonTeamNum].moves[0].type}.png" alt=""> ${player1.team[pokemonTeamNum].moves[0].name} <br> Pow: ${player1.team[pokemonTeamNum].moves[0].power} Acc: ${player1.team[pokemonTeamNum].moves[0].acc}</div>
+        </div>
+        <div class="pokeDetailAttack" onclick="selectAttack1(${pokemonTeamNum},1)">
+            <div class="pokeDetailAttackTxt"><img src="./media/img/types/${player1.team[pokemonTeamNum].moves[1].type}.png" alt=""> ${player1.team[pokemonTeamNum].moves[1].name} <br> Pow: ${player1.team[pokemonTeamNum].moves[1].power} Acc: ${player1.team[pokemonTeamNum].moves[1].acc}</div>
+        </div>
     </div>
     <div id = "pokeDetailPerk">
     </div>
