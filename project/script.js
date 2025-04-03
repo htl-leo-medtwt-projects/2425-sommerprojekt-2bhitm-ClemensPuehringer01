@@ -95,8 +95,8 @@ function multiplayer(){
 
 }
 function loadSelectorP1(){
-   
-    document.getElementById("forestBG").innerHTML = `
+    if(!audio.musicOn){
+        document.getElementById("forestBG").innerHTML = `
     <div id = "selectionScreen">
         <div id = "headPlayerSelection">
             Player 1 <br>
@@ -128,6 +128,42 @@ function loadSelectorP1(){
         <div id="mute" onclick="mute()"><img src="./media/img/muteOn.png" alt=""></div>
         </div>
         `
+    }else{
+        document.getElementById("forestBG").innerHTML = `
+    <div id = "selectionScreen">
+        <div id = "headPlayerSelection">
+            Player 1 <br>
+            Choose your Team
+        </div>
+        <div id = "pokeSelectorMini">
+            <div class="pokeBox" onclick="selectPoke(0)">
+                <img src="./media/img/pokémon/${player1.team[0].poke.name.toLocaleLowerCase()}.png" alt="">
+            </div>
+            <div class="pokeBox" onclick="selectPoke(1)">
+                <img src="./media/img/pokémon/${player1.team[1].poke.name.toLocaleLowerCase()}.png" alt="">
+            </div>
+            <div class="pokeBox" onclick="selectPoke(2)">
+                <img src="./media/img/pokémon/${player1.team[2].poke.name.toLocaleLowerCase()}.png" alt="">
+            </div>
+        </div>
+        <div id = "back" onclick="homescreen()">
+            Back
+        </div>
+        <div id = "trainerSelector" onclick="selectTrainer1()">
+            <img src="./media/img/trainer/${player1.trainer.type.toLocaleLowerCase()}.png" alt="">
+        </div>
+        <div id = "selectionDetail">   
+        </div>
+            <input type="text" placeholder="Name..." id="player1Name" class = "nameSelector">
+        <div id = "finish" onclick="loadSelectorP2()">
+            Finish
+        </div>
+        <div id="mute" onclick="mute()"><img src="./media/img/muteOff.png" alt=""></div>
+        </div>
+        `
+    }
+     
+   
         setTimeout(function(){
         document.getElementById("selectionScreen").style.display = "block"
         document.getElementById("selectionScreen").style.animation= "none"
