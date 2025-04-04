@@ -71,7 +71,7 @@ body{
 #mute{
     position: absolute;
     top: 85%;
-    left: 0%;
+    left: 0.5%;
     background-color: var(--mainColor);
     border-radius: 10px;
     border: 3px solid var(--secondColor);
@@ -137,7 +137,7 @@ body{
 #back{
     position: absolute;
     top: 5%;
-    left: 90%;
+    left: 87.8%;
     transform: translate(-50%, -50%);
     background-color: var(--mainColor);
     border-radius: 10px;
@@ -184,7 +184,7 @@ body{
     font-family: poke;
     position: absolute;
     top: 92%;
-    left: 80%;
+    left: 85%;
     transform: translate(-50%, -50%);
     width: 20%;
     background-color: var(--mainColor);
@@ -343,17 +343,51 @@ body{
     top: 2%;
     width: 30%;
 }
+
 #pokeDetailInfoImg>img{
     width: 90%;
     transform: scaleX(-1);
     padding: 1%;
+    background-color: var(--mainColor);
     border: solid 3px var(--secondColor);
     border-radius: 10px;
     box-shadow: -5px 1px 7px 5px rgba(0, 0, 0, 0.25) inset;
     cursor: pointer;
+    transition: .3s;
+}
+#pokeDetailInfoImg>img:hover{
+    background-color: var(--secondColor);
+    border: var(--mainColor) solid 3px;
 }
 #pokeDetailAttacks{
     position: absolute;
     left: 120%;
     top: 10%;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 2%;
+    width: 200%;
+}
+.pokeDetailAttack{
+    width: 90%;
+    height: 100%;
+    background-color: var(--mainColor);
+    border: solid 3px var(--secondColor);
+    border-radius: 10px;
+    padding: 1%;
+    box-shadow: -5px 1px 7px 5px rgba(0, 0, 0, 0.25) inset;
+    margin-top: 3%;
+    transition: .3s;
+    cursor: pointer;
+}
+.pokeDetailAttack:hover{
+    background-color: var(--secondColor);
+    border: var(--mainColor) solid 3px;
+}
+.pokeDetailAttack>img{
+    width: 100%;
+    transform: scaleX(-1);
+}
+.pokeDetailAttackTxt{
+
 }
