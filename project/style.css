@@ -388,6 +388,90 @@ body{
     width: 100%;
     transform: scaleX(-1);
 }
-.pokeDetailAttackTxt{
-
+#pokeDetailPerk{
+    display: grid;
+    grid-template-columns: auto 70% auto;
+    position: absolute;
+    left: 120%;
+    top: 60%;
+    width: 200%;
+}
+#PokePerkBox{
+    display: grid;
+    grid-template-columns: 20% auto;
+    width: 90%;
+    background-color: var(--mainColor);
+    border: solid 3px var(--secondColor);
+    border-radius: 10px;
+    padding: 1%;
+    box-shadow: -5px 1px 7px 5px rgba(0, 0, 0, 0.25) inset;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 60%;
+}
+#PokePerkBox>img{
+    width: 100%;
+}
+#PokePerkArrowL{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    padding: 2%;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: var(--mainColor);
+    border: 3px solid var(--secondColor);
+    transition: 0.3s;
+    box-shadow: -5px 1px 7px 5px rgba(0, 0, 0, 0.25) inset;
+}
+#PokePerkArrowL:hover{
+    background-color: var(--secondColor);
+    border: var(--mainColor) solid 3px;
+}
+#PokePerkArrowL>img{
+    width: 100%;
+    scale: -1;
+}
+#PokePerkArrowR{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    padding: 2%;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: var(--mainColor);
+    border: 3px solid var(--secondColor);
+    transition: 0.3s;
+    box-shadow: -5px 1px 7px 5px rgba(0, 0, 0, 0.25) inset;
+}
+#PokePerkArrowR:hover{
+    background-color: var(--secondColor);
+    border: var(--mainColor) solid 3px;
+}
+#PokePerkArrowR>img{
+    width: 100%;
+}
+#savePoke{
+    position: absolute;
+    top: 90%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    background-color: var(--mainColor);
+    border-radius: 10px;
+    border: 3px solid var(--secondColor);
+    width: 40%;
+    height: 10%;
+    padding: 1%;
+    box-shadow: -5px 1px 7px 5px rgba(0, 0, 0, 0.25) inset;
+    transition: .3s;
+    font-size: 200%;
+    cursor: pointer;
+    scale: 0.6;
+    transition: .3s;
+}
+#savePoke:hover{
+    background-color: var(--secondColor);
+    border: var(--mainColor) solid 3px;
 }

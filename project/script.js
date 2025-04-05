@@ -198,20 +198,24 @@ function selectPoke(pokemonTeamNum){
         </div>
     </div>
     <div id = "pokeDetailPerk">
-        
+        <div id = "PokePerkArrowL" onclick="changePokePerk1(${pokemonTeamNum},-1)"> <img src="./media/img/pokearrow.png" alt=""></div>
+            <div id = "PokePerkBox"><img src="./media/img/types/${player1.team[pokemonTeamNum].perk.type}.png" alt=""><div id="pokePerkTxt">${player1.team[pokemonTeamNum].perk.perk}</div></div>
+        <div id = "PokePerkArrowR" onclick="changePokePerk1(${pokemonTeamNum},1)"> <img src="./media/img/pokearrow.png" alt=""></div>
+    </div>
     </div>
     <div id = "savePoke" onclick="savePoke1()">
         Save
+    </div>
     </div>
     `
     }else{
         tempstring = `
     <div id = "pokeDetailInfo">
-        <div id = "pokeDetailInfoImg" onclick="changePoke1(${pokemonTeamNum})">
+        <div id = "pokeDetailInfoImg" onclick="changePoke(${pokemonTeamNum})">
             <img src="./media/img/pokémon/${player1.team[pokemonTeamNum].poke.name.toLocaleLowerCase()}.png" alt="">
         </div>
         <div id = "pokeDetailInfoLower">
-        <div id = "pokeDetailInfoName">${player1.team[pokemonTeamNum].poke.name}</div>
+            <div id = "pokeDetailInfoName">${player1.team[pokemonTeamNum].poke.name}</div>
             <div id = "pokeDetailInfoType1">
                 <img src="./media/img/types/${player1.team[pokemonTeamNum].poke.type[0]}.png" alt="">
             </div>
@@ -227,13 +231,42 @@ function selectPoke(pokemonTeamNum){
         </div>
     </div>
     <div id = "pokeDetailPerk">
+        <div id = "PokePerkArrowL" onclick="changePokePerk1(${pokemonTeamNum},-1)"> <img src="./media/img/pokearrow.png" alt=""></div>
+            <div id = "PokePerkBox"><img src="./media/img/types/${player1.team[pokemonTeamNum].perk.type}.png" alt=""><div id="pokePerkTxt">${player1.team[pokemonTeamNum].perk.perk}</div></div>
+        <div id = "PokePerkArrowR" onclick="changePokePerk1(${pokemonTeamNum},1)"> <img src="./media/img/pokearrow.png" alt=""></div>
     </div>
-    <div id = "savePoke" onclick="savePoke1()">
+    </div>
+    <div id = "savePoke" onclick="savePoke1(${pokemonTeamNum})">
         Save
+    </div>
     </div>
     `
     }
     
     document.getElementById("selectionDetail").style.display = "block"
     document.getElementById("selectionDetail").innerHTML = tempstring;
+}
+function changePokePerk1(pokemonTeamNum, num) {
+    const pokemonTypes = player1.team[pokemonTeamNum].poke.type;
+    const filteredPerks = perks.pokemon_perks.filter(perk => pokemonTypes.includes(perk.type));
+    let currentIndex = filteredPerks.indexOf(player1.team[pokemonTeamNum].perk);
+    if (currentIndex === -1) {
+        currentIndex = 0; 
+    }
+    currentIndex = (currentIndex + num + filteredPerks.length) % filteredPerks.length;
+    player1.team[pokemonTeamNum].perk = filteredPerks[currentIndex];
+    selectPoke(pokemonTeamNum);
+}
+function savePoke1(pokemonTeamNum){
+    document.getElementById("selectionDetail").style.display = "none"
+    document.getElementById("pokeSelectorMini").innerHTML = `
+    <div class="pokeBox" onclick="selectPoke(0)">
+        <img src="./media/img/pokémon/${player1.team[0].poke.name.toLocaleLowerCase()}.png" alt="">
+    </div>
+    <div class="pokeBox" onclick="selectPoke(1)">
+        <img src="./media/img/pokémon/${player1.team[1].poke.name.toLocaleLowerCase()}.png" alt="">
+    </div>
+    <div class="pokeBox" onclick="selectPoke(2)">
+        <img src="./media/img/pokémon/${player1.team[2].poke.name.toLocaleLowerCase()}.png" alt="">
+    </div>`
 }
