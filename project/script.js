@@ -173,7 +173,6 @@ function saveTrainer1(){
 
 function selectPoke(pokemonTeamNum){
     let tempstring = ""
-    //A function to open the detail selector and choose the pokemon
     if(player1.team[pokemonTeamNum].poke.type.length>1){
         tempstring = `
     <div id = "pokeDetailInfo">
@@ -362,4 +361,73 @@ function savePokeOver1(pokemonTeamNum){
     <div class="pokeBox" onclick="selectPoke(2)">
         <img src="./media/img/pokémon/${player1.team[2].poke.name.toLocaleLowerCase()}.png" alt="">
     </div>`
+}
+function selectAttack1(pokemonTeamNum, attackNum) {
+    const pokemonTypes = player1.team[pokemonTeamNum].poke.type;
+    const availableMoves = [];
+    for (let i = 0; i < attacks.moves.length; i++) {
+        const move = attacks.moves[i];
+        if (pokemonTypes.includes(move.type)) {
+            availableMoves.push(move);
+        }
+    }
+    for (let i = 0; i < attacks.special_moves.length; i++) {
+        const specialMove = attacks.special_moves[i];
+        if (specialMove.exclusive_to.includes(player1.team[pokemonTeamNum].poke.name.toLocaleLowerCase())) {
+            availableMoves.push(specialMove);
+        }
+    }
+    let moveListHTML = '';
+    for (let i = 0; i < availableMoves.length; i++) {
+        const move = availableMoves[i];
+        moveListHTML += `
+            <div class="moveItem" onclick="selectMove(${pokemonTeamNum}, ${i}, ${attackNum})">
+                <div class="moveItemType"><img src="./media/img/types/${move.type}.png" alt=""></div>
+                <div class="moveItemName">${move.name}</div>
+            </div>
+        `;
+    }
+    const selectedMove = player1.team[pokemonTeamNum].moves[attackNum];
+    const moveDetailsHTML = `
+        <div class="moveDetails">
+            <div class="moveDetailsName">${selectedMove.name}</div>
+            <div class="moveDetailsType"><img src="./media/img/types/${selectedMove.type}.png" alt=""></div>
+            <div class="moveDetailsPower">Power: ${selectedMove.power}</div>
+            <div class="moveDetailsAccuracy">Accuracy: ${selectedMove.acc}</div>
+            <div class="moveDetailsStamina">Stamina Cost: ${selectedMove.stamina_cost}</div>
+            <div class="moveDetailsDescription">${selectedMove.description}</div>
+        </div>
+    `;
+    const tempstring = `
+        <div id="attackSelector">
+            <div id="attackList">
+                ${moveListHTML}
+            </div>
+            <div id="attackDetails">
+                ${moveDetailsHTML}
+            </div>
+        </div>
+        <div id="savePoke" onclick="selectPoke(${pokemonTeamNum})">Save</div>
+    `;
+    document.getElementById("selectionDetail").style.display = "block";
+    document.getElementById("selectionDetail").innerHTML = tempstring;
+    console.log(player1.team[pokemonTeamNum].moves);
+}
+function selectMove(pokemonTeamNum, moveIndex, attackNum) {
+    const pokemonTypes = player1.team[pokemonTeamNum].poke.type;
+    const availableMoves = [];
+    for (let i = 0; i < attacks.moves.length; i++) {
+        const move = attacks.moves[i];
+        if (pokemonTypes.includes(move.type)) {
+            availableMoves.push(move);
+        }
+    }
+    for (let i = 0; i < attacks.special_moves.length; i++) {
+        const specialMove = attacks.special_moves[i];
+        if (specialMove.exclusive_to.includes(player1.team[pokemonTeamNum].poke.name.toLocaleLowerCase())) {
+            availableMoves.push(specialMove);
+        }
+    }
+    player1.team[pokemonTeamNum].moves[attackNum] = availableMoves[moveIndex];
+    selectAttack1(pokemonTeamNum, attackNum);
 }

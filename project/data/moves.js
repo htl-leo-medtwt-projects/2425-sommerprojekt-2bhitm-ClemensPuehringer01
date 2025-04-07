@@ -441,7 +441,7 @@ let attacks={
             "power": 100,
             "acc": 100,
             "stamina_cost": 30,
-            "effect": "Ignores enemy resistances when used",
+            "description": "Ignores enemy resistances when used",
             "exclusive_to": ["aegislash", "gengar", "haunter"]
         },
         {
@@ -450,7 +450,7 @@ let attacks={
             "power": 110,
             "acc": 90,
             "stamina_cost": 31,
-            "effect": "If the user is flying-type, it deals additional burn damage",
+            "description": "If the user is flying-type, it deals additional burn damage",
             "exclusive_to": ["charizard", "blaziken"]
         },
         {
@@ -459,7 +459,7 @@ let attacks={
             "power": 120,
             "acc": 85,
             "stamina_cost": 32,
-            "effect": "Hits all opponents on the battlefield",
+            "description": "Hits all opponents on the battlefield",
             "exclusive_to": ["geodude", "onix", "steelix", "rhyhorn"]
         },
         {
@@ -468,7 +468,7 @@ let attacks={
             "power": 90,
             "acc": 100,
             "stamina_cost": 29,
-            "effect": "Speed increases by one stage after use",
+            "description": "Speed increases by one stage after use",
             "exclusive_to": ["gardevoir", "mewtwo", "wobbuffet"]
         },
         {
@@ -477,7 +477,7 @@ let attacks={
             "power": 85,
             "acc": 100,
             "stamina_cost": 28,
-            "effect": "Always poisons the target",
+            "description": "Always poisons the target",
             "exclusive_to": ["drapion", "skuntank", "haunter"]
         },
         {
@@ -486,7 +486,7 @@ let attacks={
             "power": 100,
             "acc": 95,
             "stamina_cost": 30,
-            "effect": "Has a 30% chance to freeze",
+            "description": "Has a 30% chance to freeze",
             "exclusive_to": ["articuno", "glaceon"]
         },
         {
@@ -495,7 +495,7 @@ let attacks={
             "power": 90,
             "acc": 100,
             "stamina_cost": 29,
-            "effect": "If the user attacks first, the move deals 50% extra damage",
+            "description": "If the user attacks first, the move deals 50% extra damage",
             "exclusive_to": ["pikachu", "electrike"]
         },
         {
@@ -504,7 +504,7 @@ let attacks={
             "power": 120,
             "acc": 80,
             "stamina_cost": 32,
-            "effect": "Breaks through Protect and similar moves",
+            "description": "Breaks through Protect and similar moves",
             "exclusive_to": ["rayquaza", "tornadus", "yveltal"]
         },
         {
@@ -513,7 +513,7 @@ let attacks={
             "power": 0,
             "acc": 100,
             "stamina_cost": 20,
-            "effect": "For one turn, the user takes half damage and cannot be critically hit",
+            "description": "For one turn, the user takes half damage and cannot be critically hit",
             "exclusive_to": ["zamazenta", "metagross", "aegislash"]
         },
         {
@@ -522,7 +522,7 @@ let attacks={
             "power": 80,
             "acc": 100,
             "stamina_cost": 28,
-            "effect": "Changes type based on the user's primary type",
+            "description": "Changes type based on the user's primary type",
             "exclusive_to": ["ditto", "eevee", "togetic"]
         },
         {
@@ -531,7 +531,7 @@ let attacks={
             "power": 130,
             "acc": 85,
             "stamina_cost": 33,
-            "effect": "User's speed decreases after use",
+            "description": "User's speed decreases after use",
             "exclusive_to": ["dragonite", "dragapult", "rayquaza"]
         },
         {
@@ -540,7 +540,7 @@ let attacks={
             "power": 100,
             "acc": 95,
             "stamina_cost": 30,
-            "effect": "Has a 50% chance to lower the opponent’s defense",
+            "description": "Has a 50% chance to lower the opponent’s defense",
             "exclusive_to": ["machamp", "flamigo", "lucario"]
         }
     ]
