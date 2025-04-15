@@ -1,40 +1,226 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		<link rel="icon" type="image/x-icon" href="../media/img/pokéball.png">
-		<title>reveal.js</title>
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="icon" type="image/x-icon" href="../media/img/pokéball.png">
+	<title>reveal.js</title>
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/moon.css">
+
+	<link rel="stylesheet" href="styletut.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<h2>Welcome to the Battle System Tutorial</h2>
+				<p>This tutorial will guide you through the mechanics of the battle system. Use the arrows in the bottom
+					right to navigate through the slides.</p>
+				<img src="../media/img/logo.png" alt="Game Logo" style="width: 600px; margin-top: 20px;">
+			</section>
+
+			<section>
+				<h2>Battle System Overview</h2>
+				<p>In the battle system, players take turns selecting moves for their Pokémon to attack the opponent.
+				</p>
+				<ul>
+					<li>Each Pokémon has a set of moves based on its type.</li>
+					<li>Moves consume stamina, so manage your resources wisely.</li>
+					<li>Special moves are exclusive to certain Pokémon and can turn the tide of battle.</li>
+					<li>Victory is achieved when all of the opponent's Pokémon are defeated.</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>How to Select Moves</h2>
+				<p>Follow these steps to select a move during your turn:</p>
+				<ol>
+					<li>Choose a move from the list displayed on your side of the Battlefield.</li>
+					<li>Confirm your selection to execute the move.</li>
+				</ol>
+				<p>Tip: Pay attention to move types and stamina costs to maximize your strategy!</p>
+			</section>
+
+
+			<section>
+				<h2>Pokémon Types and Advantages</h2>
+				<p>Understanding type advantages is crucial for success in battles:</p>
+				<div
+					style="background-color: #ffca02; border-radius: 10px; margin-top: 1%; margin-bottom: 1%; box-shadow: -5px 1px 7px 5px rgba(0, 0, 0, 0.25) inset; border: 3px solid #3561ac;">
+					<img src="../media/img/types/fire.png" alt="Trainer fire" style="width: 10%; margin-top: 20px;">
+					<img src="../media/img/types/water.png" alt="Trainer water" style="width: 10%; margin-top: 20px;">
+					<img src="../media/img/types/grass.png" alt="Trainer grass" style="width: 10%; margin-top: 20px;">
+				</div>
+				<ul>
+					<li><strong>Fire</strong> is strong against Grass but weak against Water.</li>
+					<li><strong>Water</strong> is strong against Fire but weak against Grass.</li>
+					<li><strong>Grass</strong> is strong against Water but weak against Fire.</li>
+				</ul>
+				<p>Tip: Use type advantages to deal extra damage to your opponent's Pokémon! Look up the Type Advantages
+					<a href="https://pokemondb.net/type">here!</a>
+				</p>
+			</section>
+
+			<section>
+				<h2>Special Moves</h2>
+				<p>Special moves are exclusive to certain Pokémon and can provide a significant advantage:</p>
+				<ul>
+					<li><strong>Phantom Slash:</strong> A Ghost-type move exclusive to Aegislash, Gengar, and Haunter.
+					</li>
+					<li><strong>Molten Sky Strike:</strong> A Fire-type move exclusive to Charizard and Blaziken.</li>
+					<li><strong>Titanic Tremor:</strong> A Rock-type move exclusive to Geodude, Onix, Steelix, and
+						Rhyhorn.</li>
+				</ul>
+				<p>Tip: Build your team around Pokémon with powerful special moves!</p>
+			</section>
+
+			<section>
+				<h2>Stamina Management</h2>
+				<p>Each move consumes stamina. If your Pokémon runs out of stamina, it won't be able to attack:</p>
+				<ul>
+					<li>Weaker moves consume less stamina and can be used more frequently.</li>
+					<li>Powerful moves consume more stamina but deal higher damage.</li>
+					<li>Plan your stamina usage carefully to avoid running out during critical moments.</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Building Your Team</h2>
+				<p>When building your team, consider the following:</p>
+				<ul>
+					<li>Choose Pokémon with complementary types to cover weaknesses.</li>
+					<li>Include a mix of offensive and defensive Pokémon.</li>
+					<li>Take advantage of trainer perks to enhance your strategy.</li>
+				</ul>
+				<p>Tip: Experiment with different team compositions to find what works best for you!</p>
+			</section>
+
+			<section>
+				<h2>Pokémon Selector</h2>
+				<p>The Pokémon Selector allows you to choose the Pokémon for your team. Follow these steps:</p>
+				<ol>
+					<li>Click on a Pokémon from the list to view its details.</li>
+					<li>Review its stats, type, and available moves.</li>
+					<li>Click on the image of the Pokémon to open its detailed Selector</li>
+					<li>Use the arrows to switch between Pokémon options.</li>
+					<li>Click "Save" to confirm your selection.</li>
+				</ol>
+				<p>Tip: Build a balanced team with complementary types to cover weaknesses!</p>
+			</section>
+
+			<section>
+				<h2>Pokémon Details</h2>
+				<p>When selecting a Pokémon, you can view its detailed stats:</p>
+				<ul>
+					<li><strong>HP:</strong> The Pokémon's health points.</li>
+					<li><strong>Stamina:</strong> Determines how many moves the Pokémon can use.</li>
+					<li><strong>Might:</strong> The Pokémon's attack power.</li>
+					<li><strong>Resistance:</strong> The Pokémon's defense against attacks.</li>
+					<li><strong>Speed:</strong> Determines which Pokémon attacks first.</li>
+				</ul>
+				<p>Tip: Choose Pokémon with high stats that match your strategy!</p>
+			</section>
+
+			<section>
+				<h2>Move Selector</h2>
+				<p>The Move Selector allows you to customize your Pokémon's moves. Here's how it works:</p>
+				<ol>
+					<li>Select a Pokémon to view its available moves.</li>
+					<li>Click on a move to see its details, including power, accuracy, and stamina cost.</li>
+					<li>Choose a move slot and assign the selected move to it.</li>
+					<li>Click "Save" to confirm your move selection.</li>
+				</ol>
+				<p>Tip: Use moves that complement your Pokémon's type and strategy!</p>
+			</section>
+
+			<section>
+				<h2>Move Details</h2>
+				<p>When selecting a move, you can view its detailed stats:</p>
+				<ul>
+					<li><strong>Power:</strong> The damage the move deals.</li>
+					<li><strong>Accuracy:</strong> The chance of the move hitting the opponent.</li>
+					<li><strong>Stamina Cost:</strong> The stamina required to use the move.</li>
+					<li><strong>Description:</strong> Special effects or conditions of the move.</li>
+				</ul>
+				<p>Tip: Balance powerful moves with low-cost moves to manage stamina effectively!</p>
+			</section>
+
+			<section>
+				<h2>Trainer Selector</h2>
+				<p>The Trainer Selector lets you choose a trainer with unique perks to enhance your strategy:</p>
+				<ol>
+					<li>Click on a trainer to view their perk.</li>
+					<li>Use the arrows to switch between trainers.</li>
+					<li>Choose a trainer that complements your team's strengths and weaknesses.</li>
+					<li>Click "Save" to confirm your trainer selection.</li>
+				</ol>
+				<p>Tip: Trainer perks can turn the tide of battle, so choose wisely!</p>
+			</section>
+
+			<section>
+				<h2>Trainer Perks</h2>
+				<p>Each trainer has a unique perk that can influence the battle:</p>
+				<div
+					style="background-color: #ffca02; border-radius: 10px; padding: 1%; margin-top: 1%; margin-bottom: 1%; box-shadow: -5px 1px 7px 5px rgba(0, 0, 0, 0.25) inset; border: 3px solid #3561ac;">
+					<img src="../media/img/trainer/fire.png" alt="Trainer fire" style="width: 10%; margin-top: 20px;">
+					<img src="../media/img/trainer/water.png" alt="Trainer water" style="width: 10%; margin-top: 20px;">
+					<img src="../media/img/trainer/grass.png" alt="Trainer grass" style="width: 10%; margin-top: 20px;">
+				</div>
+				<ul>
+					<li><strong>Fire-Trainer:</strong> Fiery Rebirth - Revives the first fainted Fire Pokémon at half
+						health.</li>
+					<li><strong>Water-Trainer:</strong> Torrential Boost - Water moves gain 20% power when HP is below
+						50%.</li>
+					<li><strong>Grass-Trainer:</strong> Verdant Recovery - Grass Pokémon regain 5% HP at the end of each
+						turn.</li>
+				</ul>
+				<p>Choose your trainer wisely to complement your team!</p>
+			</section>
+
+			<section>
+				<h2>Victory Conditions</h2>
+				<p>To win a battle, you must defeat all of your opponent's Pokémon:</p>
+				<ul>
+					<li>Use type advantages to deal extra damage.</li>
+					<li>Manage your stamina and resources effectively.</li>
+					<li>Adapt your strategy based on your opponent's moves.</li>
+				</ul>
+				<p>Good luck, Trainer! Hope to see you at the Elite 4 one day!</p>
+			</section>
+
+			<section>
+				<h2>Thank You for Playing!</h2>
+				<p>I hope you enjoy the game! If you have any questions, refer to this tutorial or this general website:
+					<br> <a href="https://pokemondb.net">Pokemon Database</a> <br>
+					<a href="../Index.html">Or Click here to return to the Titlescreen</a>
+				</p>
+			</section>
 		</div>
+	</div>
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+		});
+	</script>
+</body>
+
 </html>
