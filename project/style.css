@@ -774,3 +774,14 @@ body{
 .player2TrainerBattleImg{
     transform: scaleX(-1);
 }
+.currentPokemonStats{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 15%;
+    text-align: center;
+    padding: 1%;
+    background-color: var(--mainColor);
+    border: 3px solid var(--secondColor);
+    border-radius: 10px;
+}

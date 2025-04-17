@@ -10,6 +10,7 @@ let player1 = {
             poke: pokémon.list[4],
             perk: perks.pokemon_perks[0],
             hp: pokémon.list[4].hp,
+            st: pokémon.list[4].stamina,
             moves: [
                 attacks.moves[0],
                 attacks.special_moves[1],
@@ -19,6 +20,7 @@ let player1 = {
             poke: pokémon.list[7],
             perk: perks.pokemon_perks[0],
             hp: pokémon.list[7].hp,
+            st: pokémon.list[7].stamina,
             moves: [
                 attacks.moves[3],
                 attacks.special_moves[1],
@@ -28,6 +30,7 @@ let player1 = {
             poke: pokémon.list[26],
             perk: perks.pokemon_perks[0],
             hp: pokémon.list[26].hp,
+            st: pokémon.list[26].stamina,
             moves: [
                 attacks.moves[0],
                 attacks.moves[2]
@@ -43,6 +46,7 @@ let player2 = {
             poke: pokémon.list[4],
             perk: perks.pokemon_perks[0],
             hp: pokémon.list[4].hp,
+            st: pokémon.list[4].stamina,
             moves: [
                 attacks.moves[0],
                 attacks.special_moves[1],
@@ -52,6 +56,7 @@ let player2 = {
             poke: pokémon.list[7],
             perk: perks.pokemon_perks[0],
             hp: pokémon.list[7].hp,
+            st: pokémon.list[7].stamina,
             moves: [
                 attacks.moves[3],
                 attacks.special_moves[1],
@@ -61,6 +66,7 @@ let player2 = {
             poke: pokémon.list[26],
             perk: perks.pokemon_perks[0],
             hp: pokémon.list[26].hp,
+            st: pokémon.list[26].stamina,
             moves: [
                 attacks.moves[0],
                 attacks.moves[2]
@@ -340,6 +346,7 @@ function changePokeOver1(pokemonTeamNum, num) {
     currentIndex = (currentIndex + num + pokemonList.length) % pokemonList.length;
     player1.team[pokemonTeamNum].poke = pokemonList[currentIndex];
     player1.team[pokemonTeamNum].hp = player1.team[pokemonTeamNum].poke.hp;
+    player1.team[pokemonTeamNum].st = player1.team[pokemonTeamNum].poke.stamina;
     for (let i = 0; i < perks.pokemon_perks.length; i++) {
         if (perks.pokemon_perks[i].type == player1.team[pokemonTeamNum].poke.type[0]) {
             player1.team[pokemonTeamNum].perk = perks.pokemon_perks[i];
@@ -349,7 +356,7 @@ function changePokeOver1(pokemonTeamNum, num) {
     player1.team[pokemonTeamNum].moves = [];
     let movesselected = 0;
     for (let i = 0; i < attacks.moves.length; i++) {
-        if(movesselected == 2){
+        if (movesselected == 2) {
             break;
         }
         if (attacks.moves[i].type == player1.team[pokemonTeamNum].poke.type[0] || attacks.moves[i].type == player1.team[pokemonTeamNum].poke.type[1]) {
@@ -688,6 +695,7 @@ function changePokeOver2(pokemonTeamNum, num) {
     currentIndex = (currentIndex + num + pokemonList.length) % pokemonList.length;
     player2.team[pokemonTeamNum].poke = pokemonList[currentIndex];
     player2.team[pokemonTeamNum].hp = player2.team[pokemonTeamNum].poke.hp;
+    player2.team[pokemonTeamNum].st = player2.team[pokemonTeamNum].poke.stamina;
     for (let i = 0; i < perks.pokemon_perks.length; i++) {
         if (perks.pokemon_perks[i].type == player2.team[pokemonTeamNum].poke.type[0]) {
             player2.team[pokemonTeamNum].perk = perks.pokemon_perks[i];
@@ -697,7 +705,7 @@ function changePokeOver2(pokemonTeamNum, num) {
     player2.team[pokemonTeamNum].moves = [];
     let movesselected = 0;
     for (let i = 0; i < attacks.moves.length; i++) {
-        if(movesselected == 2){
+        if (movesselected == 2) {
             break;
         }
         if (attacks.moves[i].type == player2.team[pokemonTeamNum].poke.type[0] || attacks.moves[i].type == player2.team[pokemonTeamNum].poke.type[1]) {
@@ -790,9 +798,9 @@ function selectMove2(pokemonTeamNum, moveIndex, attackNum) {
     player2.team[pokemonTeamNum].moves[attackNum] = availableMoves[moveIndex];
     selectAttack2(pokemonTeamNum, attackNum);
 }
-function battleMPStart(){
+function battleMPStart() {
     player2.playerName = document.getElementById("player2Name").value
-    document.getElementById("mute").style.display ="none";
+    document.getElementById("mute").style.display = "none";
     audio.lobbyMusic.pause()
     audio.battleMusic.play()
     audio.battleMusic.loop = true
@@ -823,6 +831,16 @@ function loadBattleSite() {
                         <img class="player1PokeImg" src="./media/img/pokémon/${pokemon.poke.name.toLocaleLowerCase()}.png" alt="${pokemon.poke.name}">
                     `).join('')}
                 </div>
+            </div>
+            <div class="currentPokemonStats" id="player1CurrentStats">
+                <div class="currentPokemonName">${player1.team[0].poke.name}</div> <br>
+                <div class="currentPokemonHP"> ${player1.team[0].hp}/${player1.team[0].poke.hp} HP</div> <br>
+                <div class="currentPokemonStamina"> ${player1.team[0].st}/${player1.team[0].poke.stamina} ST</div> <br>
+            </div>
+            <div class="currentPokemonStats" id="player2CurrentStats">
+                <div class="currentPokemonName">${player2.team[0].poke.name}</div> <br>
+                <div class="currentPokemonHP"> ${player2.team[0].hp}/${player2.team[0].poke.hp} HP</div> <br>
+                <div class="currentPokemonStamina"> ${player2.team[0].st}/${player2.team[0].poke.stamina} ST</div> <br>
             </div>
             <div class="playerInfoBox" id="player2Info">
              <div class="playerTrainerBox" id="player2Trainer">
