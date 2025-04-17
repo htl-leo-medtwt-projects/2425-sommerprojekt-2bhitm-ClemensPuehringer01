@@ -1,6 +1,7 @@
 let audio = {
     musicOn: false,
-    lobbyMusic: new Audio('media/sound/lobby.mp3')
+    lobbyMusic: new Audio('media/sound/lobby.mp3'),
+    battleMusic: new Audio('media/sound/battle03.mp3')
 }
 let player1 = {
     playerName: "Player 1",
@@ -346,9 +347,14 @@ function changePokeOver1(pokemonTeamNum, num) {
         }
     }
     player1.team[pokemonTeamNum].moves = [];
+    let movesselected = 0;
     for (let i = 0; i < attacks.moves.length; i++) {
+        if(movesselected == 2){
+            break;
+        }
         if (attacks.moves[i].type == player1.team[pokemonTeamNum].poke.type[0] || attacks.moves[i].type == player1.team[pokemonTeamNum].poke.type[1]) {
             player1.team[pokemonTeamNum].moves.push(attacks.moves[i]);
+            movesselected++;
         }
     }
     changePoke1(pokemonTeamNum);
@@ -544,9 +550,9 @@ function selectPoke2(pokemonTeamNum) {
         </div>
     </div>
     <div id = "pokeDetailPerk">
-        <div id = "PokePerkArrowL" onclick="changePokePerk1(${pokemonTeamNum},-1)"> <img src="./media/img/pokearrow.png" alt=""></div>
+        <div id = "PokePerkArrowL" onclick="changePokePerk2(${pokemonTeamNum},-1)"> <img src="./media/img/pokearrow.png" alt=""></div>
             <div id = "PokePerkBox"><img src="./media/img/types/${player2.team[pokemonTeamNum].perk.type}.png" alt=""><div id="pokePerkTxt">${player2.team[pokemonTeamNum].perk.perk}</div></div>
-        <div id = "PokePerkArrowR" onclick="changePokePerk1(${pokemonTeamNum},1)"> <img src="./media/img/pokearrow.png" alt=""></div>
+        <div id = "PokePerkArrowR" onclick="changePokePerk2(${pokemonTeamNum},1)"> <img src="./media/img/pokearrow.png" alt=""></div>
     </div>
     </div>
     <div id = "savePoke" onclick="savePoke2()">
@@ -577,9 +583,9 @@ function selectPoke2(pokemonTeamNum) {
         </div>
     </div>
     <div id = "pokeDetailPerk">
-        <div id = "PokePerkArrowL" onclick="changePokePerk1(${pokemonTeamNum},-1)"> <img src="./media/img/pokearrow.png" alt=""></div>
+        <div id = "PokePerkArrowL" onclick="changePokePerk2(${pokemonTeamNum},-1)"> <img src="./media/img/pokearrow.png" alt=""></div>
             <div id = "PokePerkBox"><img src="./media/img/types/${player2.team[pokemonTeamNum].perk.type}.png" alt=""><div id="pokePerkTxt">${player2.team[pokemonTeamNum].perk.perk}</div></div>
-        <div id = "PokePerkArrowR" onclick="changePokePerk1(${pokemonTeamNum},1)"> <img src="./media/img/pokearrow.png" alt=""></div>
+        <div id = "PokePerkArrowR" onclick="changePokePerk2(${pokemonTeamNum},1)"> <img src="./media/img/pokearrow.png" alt=""></div>
     </div>
     </div>
     <div id = "savePoke" onclick="savePoke2()">
@@ -689,11 +695,17 @@ function changePokeOver2(pokemonTeamNum, num) {
         }
     }
     player2.team[pokemonTeamNum].moves = [];
+    let movesselected = 0;
     for (let i = 0; i < attacks.moves.length; i++) {
+        if(movesselected == 2){
+            break;
+        }
         if (attacks.moves[i].type == player2.team[pokemonTeamNum].poke.type[0] || attacks.moves[i].type == player2.team[pokemonTeamNum].poke.type[1]) {
             player2.team[pokemonTeamNum].moves.push(attacks.moves[i]);
+            movesselected++;
         }
     }
+    console.log(player2.team[pokemonTeamNum].moves);
     changePoke2(pokemonTeamNum);
 }
 function savePokeOver2(pokemonTeamNum) {
@@ -776,5 +788,82 @@ function selectMove2(pokemonTeamNum, moveIndex, attackNum) {
         }
     }
     player2.team[pokemonTeamNum].moves[attackNum] = availableMoves[moveIndex];
-    selectAttack1(pokemonTeamNum, attackNum);
+    selectAttack2(pokemonTeamNum, attackNum);
+}
+function battleMPStart(){
+    player2.playerName = document.getElementById("player2Name").value
+    document.getElementById("mute").style.display ="none";
+    audio.lobbyMusic.pause()
+    audio.battleMusic.play()
+    audio.battleMusic.loop = true
+    audio.battleMusic.volume = 0.4
+    document.getElementById("forestBG").style.animation = "none"
+    document.getElementById("forestBG").offsetHeight;
+    document.getElementById("forestBG").style.animation = "moveUp 1s"
+    loadBattleSite();
+    setTimeout(function () {
+        document.getElementById("forestBG").style.display = "none"
+    }, 900);
+}
+function loadBattleSite() {
+    const battleContainer = document.getElementById("battleBG");
+    battleContainer.style.display = "flex";
+    battleContainer.style.flexDirection = "column";
+    //.Map und .join durch ki herausgefunden und eingesetzt
+    const topSection = `
+        <div id="topSection">
+            <div class="playerInfoBox" id="player1Info">
+                <div class="playerName">${player1.playerName}</div>
+                <div class="playerTeam">
+                    ${player1.team.map(pokemon => `
+                        <img src="./media/img/pokémon/${pokemon.poke.name.toLocaleLowerCase()}.png" alt="${pokemon.poke.name}">
+                    `).join('')}
+                </div>
+            </div>
+            <div class="playerInfoBox" id="player2Info">
+                <div class="playerName">${player2.playerName}</div>
+                <div class="playerTeam">
+                    ${player2.team.map(pokemon => `
+                        <img src="./media/img/pokémon/${pokemon.poke.name.toLocaleLowerCase()}.png" alt="${pokemon.poke.name}">
+                    `).join('')}
+                </div>
+            </div>
+        </div>
+    `;
+    const middleSection = `
+        <div id="middleSection">
+            <img class="currentPokemon" src="./media/img/pokémon/${player1.team[0].poke.name.toLocaleLowerCase()}.png" alt="${player1.team[0].poke.name}">
+            <img class="currentPokemon" src="./media/img/pokémon/${player2.team[0].poke.name.toLocaleLowerCase()}.png" alt="${player2.team[0].poke.name}">
+        </div>
+    `;
+    const bottomSection = `
+        <div id="bottomSection">
+            <div id="player1Controls">
+                ${player1.team[0].moves.map((move) => `
+                    <div class="actionButton" onclick="attack1()">
+                        ${move.name}
+                    </div>
+                `).join('')}
+                <div class="actionButton" onclick="switchPokemon1()">Change Pokémon</div>
+            </div>
+            <div id="battleLog">
+                <p>Battle log will appear here...</p>
+            </div>
+            <div id="player2Controls">
+                ${player2.team[0].moves.map((move) => `
+                    <div class="actionButton" onclick="attack2()">
+                        ${move.name}
+                    </div>
+                `).join('')}
+                <div class="actionButton" onclick="switchPokemon2()">Change Pokémon</div>
+            </div>
+        </div>
+    `;
+
+    // Combine all sections and inject into the battle screen
+    battleContainer.innerHTML = `
+        ${topSection}
+        ${middleSection}
+        ${bottomSection}
+    `;
 }
