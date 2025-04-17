@@ -678,12 +678,10 @@ body{
     width: 100vw;
     padding: 20px;
 }
-
-/* Top section: Player info */
 #topSection {
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    width: 90%;
 }
 
 .playerInfoBox {
@@ -691,6 +689,9 @@ body{
     flex-direction: column;
     align-items: center;
     width: 20%;
+    background-color: var(--mainColor);
+    border: 3px solid var(--secondColor);
+    border-radius: 10px;
 }
 
 .playerName {
@@ -706,10 +707,9 @@ body{
     margin: 0 5px;
 }
 
-/* Middle section: Current Pokémon */
 #middleSection {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
     margin: 20px 0;
@@ -721,12 +721,12 @@ body{
     margin: 0 50px;
 }
 
-/* Bottom section: Battle log and controls */
 #bottomSection {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    margin-bottom: 5%;
 }
 
 #battleLog {
@@ -764,4 +764,13 @@ body{
 .actionButton:hover {
     background-color: var(--secondColor);
     color: white;
+}
+.player1PokeImg{
+    transform: scaleX(-1);
+}
+#player1PokeImg{
+    transform: scaleX(-1);
+}
+.player2TrainerBattleImg{
+    transform: scaleX(-1);
 }

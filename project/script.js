@@ -812,15 +812,22 @@ function loadBattleSite() {
     //.Map und .join durch ki herausgefunden und eingesetzt
     const topSection = `
         <div id="topSection">
-            <div class="playerInfoBox" id="player1Info">
+   
+            <div class="playerInfoBox" id="player1Info"> 
+                <div class="playerTrainerBox" id="player1Trainer">
+                <img src="./media/img/trainer/${player1.trainer.type.toLocaleLowerCase()}.png" alt="${player1.trainer.type}">
+                </div>
                 <div class="playerName">${player1.playerName}</div>
                 <div class="playerTeam">
                     ${player1.team.map(pokemon => `
-                        <img src="./media/img/pokémon/${pokemon.poke.name.toLocaleLowerCase()}.png" alt="${pokemon.poke.name}">
+                        <img class="player1PokeImg" src="./media/img/pokémon/${pokemon.poke.name.toLocaleLowerCase()}.png" alt="${pokemon.poke.name}">
                     `).join('')}
                 </div>
             </div>
             <div class="playerInfoBox" id="player2Info">
+             <div class="playerTrainerBox" id="player2Trainer">
+                <img class="player2TrainerBattleImg" src="./media/img/trainer/${player2.trainer.type.toLocaleLowerCase()}.png" alt="${player1.trainer.type}">
+                </div>
                 <div class="playerName">${player2.playerName}</div>
                 <div class="playerTeam">
                     ${player2.team.map(pokemon => `
@@ -832,7 +839,7 @@ function loadBattleSite() {
     `;
     const middleSection = `
         <div id="middleSection">
-            <img class="currentPokemon" src="./media/img/pokémon/${player1.team[0].poke.name.toLocaleLowerCase()}.png" alt="${player1.team[0].poke.name}">
+            <img id="player1PokeImg" class="currentPokemon" src="./media/img/pokémon/${player1.team[0].poke.name.toLocaleLowerCase()}.png" alt="${player1.team[0].poke.name}">
             <img class="currentPokemon" src="./media/img/pokémon/${player2.team[0].poke.name.toLocaleLowerCase()}.png" alt="${player2.team[0].poke.name}">
         </div>
     `;
@@ -859,8 +866,6 @@ function loadBattleSite() {
             </div>
         </div>
     `;
-
-    // Combine all sections and inject into the battle screen
     battleContainer.innerHTML = `
         ${topSection}
         ${middleSection}
