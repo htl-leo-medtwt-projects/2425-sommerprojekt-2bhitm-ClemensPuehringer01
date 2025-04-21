@@ -1,3 +1,4 @@
+//Einige der Verwendeten funktionen(.map; .join; .unshift etc.) wurden durch KI, Internetseiten und Tutorials herausgefunden und für einen bessern Code verwendet, die Logik wurde immer noch von mir selbst kreiert.
 let audio = {
     musicOn: false,
     lobbyMusic: new Audio('media/sound/lobby.mp3'),
@@ -37,7 +38,9 @@ let player1 = {
             ]
         }
     ],
-    trainer: trainer.trainers[0]
+    trainer: trainer.trainers[0],
+    madeTurn: false,
+    selectedSwitch: undefined
 }
 let player2 = {
     playerName: "Player 2",
@@ -73,7 +76,9 @@ let player2 = {
             ]
         }
     ],
-    trainer: trainer.trainers[0]
+    trainer: trainer.trainers[0],
+    madeTurn: false,
+    selectedSwitch: undefined
 }
 audio.lobbyMusic.loop = true;
 function mute() {
@@ -817,7 +822,6 @@ function loadBattleSite() {
     const battleContainer = document.getElementById("battleBG");
     battleContainer.style.display = "flex";
     battleContainer.style.flexDirection = "column";
-    //.Map und .join durch ki herausgefunden und eingesetzt
     const topSection = `
         <div id="topSection">
    
@@ -865,7 +869,7 @@ function loadBattleSite() {
         <div id="bottomSection">
             <div id="player1Controls">
                 ${player1.team[0].moves.map((move) => `
-                    <div class="actionButton" onclick="attack1()">
+                    <div class="actionButton" onclick="attack1(${move})">
                         ${move.name}
                     </div>
                 `).join('')}
@@ -876,7 +880,7 @@ function loadBattleSite() {
             </div>
             <div id="player2Controls">
                 ${player2.team[0].moves.map((move) => `
-                    <div class="actionButton" onclick="attack2()">
+                    <div class="actionButton" onclick="attack2(${move})">
                         ${move.name}
                     </div>
                 `).join('')}
@@ -889,4 +893,90 @@ function loadBattleSite() {
         ${middleSection}
         ${bottomSection}
     `;
+}
+function switchPokemon1() {
+    const selectorHTML = `
+        <div id="pokemonSwitchSelector">
+            ${player1.team.map((pokemon, index) => `
+                <div class="pokeBox" onclick="selectPokemon1(${index})">
+                    <img src="./media/img/pokémon/${pokemon.poke.name.toLocaleLowerCase()}.png" alt="${pokemon.poke.name}">
+                </div>
+            `).join('')}
+        </div>
+    `;
+
+    const battleContainer = document.getElementById("battleBG");
+    const selectorContainer = document.createElement("div");
+    selectorContainer.id = "pokemonSwitchOverlay";
+    selectorContainer.innerHTML = selectorHTML;
+    battleContainer.appendChild(selectorContainer);
+}
+
+
+function selectPokemon1(selectedIndex) {
+    player1.selectedSwitch = selectedIndex;
+
+    const selectorOverlay = document.getElementById("pokemonSwitchOverlay");
+    if (selectorOverlay) {
+        selectorOverlay.remove();
+    }
+
+    console.log(`Player 1 selected ${player1.team[selectedIndex].poke.name} to switch.`);
+    player1.madeTurn = true;
+    if (player1.madeTurn && player2.madeTurn) {
+        executeTurn();
+    }
+}
+function switchPokemon2() {
+    const selectorHTML = `
+        <div id="pokemonSwitchSelector">
+            ${player2.team.map((pokemon, index) => `
+                <div class="pokeBox" onclick="selectPokemon2(${index})">
+                    <img src="./media/img/pokémon/${pokemon.poke.name.toLocaleLowerCase()}.png" alt="${pokemon.poke.name}">
+                </div>
+            `).join('')}
+        </div>
+    `;
+
+    const battleContainer = document.getElementById("battleBG");
+    const selectorContainer = document.createElement("div");
+    selectorContainer.id = "pokemonSwitchOverlay";
+    selectorContainer.innerHTML = selectorHTML;
+    battleContainer.appendChild(selectorContainer);
+}
+
+
+function selectPokemon2(selectedIndex) {
+    player2.selectedSwitch = selectedIndex;
+
+    const selectorOverlay = document.getElementById("pokemonSwitchOverlay");
+    if (selectorOverlay) {
+        selectorOverlay.remove();
+    }
+
+    console.log(`Player 2 selected ${player2.team[selectedIndex].poke.name} to switch.`);
+    player2.madeTurn = true;
+    if (player1.madeTurn && player2.madeTurn) {
+        executeTurn();
+    }
+}
+
+function executeTurn() {
+    if (player1.selectedSwitch !== undefined) {
+        const selectedPokemon = player1.team[player1.selectedSwitch];
+        player1.team.unshift(player1.team.splice(player1.selectedSwitch, 1)[0]);
+        console.log(`Player 1 switched to ${selectedPokemon.poke.name}.`);
+        player1.selectedSwitch = undefined;
+    }
+
+    if (player2.selectedSwitch !== undefined) {
+        const selectedPokemon = player2.team[player2.selectedSwitch];
+        player2.team.unshift(player2.team.splice(player2.selectedSwitch, 1)[0]);
+        console.log(`Player 2 switched to ${selectedPokemon.poke.name}.`);
+        player2.selectedSwitch = undefined;
+    }
+
+    player1.madeTurn = false;
+    player2.madeTurn = false;
+    loadBattleSite();
 }
