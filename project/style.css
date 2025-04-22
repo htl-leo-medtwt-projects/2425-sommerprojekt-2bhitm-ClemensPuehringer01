@@ -823,3 +823,11 @@ body{
     background-color: var(--secondColor);
     border: var(--mainColor) solid 3px;
 }
+.turnFin{
+    background-color: var(--mainColor);
+    border: 3px solid var(--secondColor);
+    border-radius: 10px;
+    padding: 10px;
+    width: 90%;
+    box-shadow: -5px 1px 7px 5px rgba(0, 0, 0, 0.25) inset;
+}

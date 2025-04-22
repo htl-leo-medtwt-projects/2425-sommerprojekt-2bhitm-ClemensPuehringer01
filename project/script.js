@@ -460,6 +460,9 @@ function loadSelectorP2() {
     document.getElementById("selectionScreen").style.animation = "moveUp 1s"
 
     player1.playerName = document.getElementById("player1Name").value
+    if(player1.playerName == ""){
+        player1.playerName = "Player 1"
+    }
 
     setTimeout(function () {
         document.getElementById("forestBG").innerHTML = `
@@ -805,6 +808,9 @@ function selectMove2(pokemonTeamNum, moveIndex, attackNum) {
 }
 function battleMPStart() {
     player2.playerName = document.getElementById("player2Name").value
+    if(player2.playerName == ""){
+        player2.playerName = "Player 2"
+    }
     document.getElementById("mute").style.display = "none";
     audio.lobbyMusic.pause()
     audio.battleMusic.play()
@@ -923,9 +929,7 @@ function selectPokemon1(selectedIndex) {
 
     console.log(`Player 1 selected ${player1.team[selectedIndex].poke.name} to switch.`);
     player1.madeTurn = true;
-    if (player1.madeTurn && player2.madeTurn) {
-        executeTurn();
-    }
+    TurnFinPlayer1();
 }
 function switchPokemon2() {
     const selectorHTML = `
@@ -956,13 +960,29 @@ function selectPokemon2(selectedIndex) {
 
     console.log(`Player 2 selected ${player2.team[selectedIndex].poke.name} to switch.`);
     player2.madeTurn = true;
-    if (player1.madeTurn && player2.madeTurn) {
+    TurnFinPlayer2();
+}
+function TurnFinPlayer1(){
+    document.getElementById("player1Controls").innerHTML = `
+    <div class="turnFin"> ${player1.playerName} finished their Turn!</div>
+    `
+    if(player1.madeTurn && player2.madeTurn){
+        executeTurn();
+    }
+}
+
+function TurnFinPlayer2(){
+    document.getElementById("player2Controls").innerHTML = `
+    <div class="turnFin"> ${player2.playerName} finished their Turn!</div>
+    `
+    if(player1.madeTurn && player2.madeTurn){
         executeTurn();
     }
 }
 
 function executeTurn() {
-    if (player1.selectedSwitch !== undefined) {
+    setTimeout(function () {
+        if (player1.selectedSwitch !== undefined) {
         const selectedPokemon = player1.team[player1.selectedSwitch];
         player1.team.unshift(player1.team.splice(player1.selectedSwitch, 1)[0]);
         console.log(`Player 1 switched to ${selectedPokemon.poke.name}.`);
@@ -979,4 +999,5 @@ function executeTurn() {
     player1.madeTurn = false;
     player2.madeTurn = false;
     loadBattleSite();
+    }, 1100);
 }
