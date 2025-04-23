@@ -737,9 +737,15 @@ body{
     padding: 10px;
     box-shadow: -5px 1px 7px 5px rgba(0, 0, 0, 0.25) inset;
     font-size: 1em;
-    text-align: center;
+    text-align: left;
     overflow-y: auto;
-    max-height: 100px;
+    max-height: 150px;
+}
+
+#battleLog p {
+    margin: 5px 0;
+    font-size: 0.9em;
+    color: black;
 }
 
 #player1Controls, #player2Controls {

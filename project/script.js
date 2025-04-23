@@ -40,7 +40,8 @@ let player1 = {
     ],
     trainer: trainer.trainers[0],
     madeTurn: false,
-    selectedSwitch: undefined
+    selectedSwitch: undefined,
+    moveMade: undefined
 }
 let player2 = {
     playerName: "Player 2",
@@ -78,9 +79,11 @@ let player2 = {
     ],
     trainer: trainer.trainers[0],
     madeTurn: false,
-    selectedSwitch: undefined
+    selectedSwitch: undefined,
+    moveMade: undefined
 }
 audio.lobbyMusic.loop = true;
+audio.lobbyMusic.volume = 0.3;
 function mute() {
     audio.lobbyMusic.currentTime = 0;
     if (!audio.musicOn) {
@@ -874,22 +877,22 @@ function loadBattleSite() {
     const bottomSection = `
         <div id="bottomSection">
             <div id="player1Controls">
-                ${player1.team[0].moves.map((move) => `
-                    <div class="actionButton" onclick="attack1(${move})">
-                        ${move.name}
-                    </div>
-                `).join('')}
+            ${player1.team[0].moves.map((move) => `
+                <div class="actionButton" onclick='attack1(${JSON.stringify(move)})'>
+                    ${move.name}
+                </div>
+            `).join('')}
                 <div class="actionButton" onclick="switchPokemon1()">Change Pokémon</div>
             </div>
             <div id="battleLog">
                 <p>Battle log will appear here...</p>
             </div>
             <div id="player2Controls">
-                ${player2.team[0].moves.map((move) => `
-                    <div class="actionButton" onclick="attack2(${move})">
-                        ${move.name}
-                    </div>
-                `).join('')}
+            ${player2.team[0].moves.map((move) => `
+                <div class="actionButton" onclick='attack2(${JSON.stringify(move)})'>
+                    ${move.name}
+                </div>
+            `).join('')}
                 <div class="actionButton" onclick="switchPokemon2()">Change Pokémon</div>
             </div>
         </div>
@@ -962,6 +965,31 @@ function selectPokemon2(selectedIndex) {
     player2.madeTurn = true;
     TurnFinPlayer2();
 }
+
+function attack1(move) {
+    move = typeof move === "string" ? JSON.parse(move) : move;
+
+    if (player1.team[0].st >= move.stamina_cost) {
+        player1.madeTurn = true;
+        player1.moveMade = move;
+        TurnFinPlayer1();
+    } else {
+        alert("Not enough stamina!");
+    }
+}
+
+function attack2(move) {
+    move = typeof move === "string" ? JSON.parse(move) : move;
+
+    if (player2.team[0].st >= move.stamina_cost) {
+        player2.madeTurn = true;
+        player2.moveMade = move;
+        TurnFinPlayer2();
+    } else {
+        alert("Not enough stamina!");
+    }
+}
+
 function TurnFinPlayer1(){
     document.getElementById("player1Controls").innerHTML = `
     <div class="turnFin"> ${player1.playerName} finished their Turn!</div>
@@ -979,25 +1007,138 @@ function TurnFinPlayer2(){
         executeTurn();
     }
 }
+function logPlayer1Action(action) {
+    const battleLog = document.getElementById("battleLog");
+    battleLog.innerHTML += `<p>${player1.playerName}: ${action}</p>`;
+}
+
+function logPlayer2Action(action) {
+    const battleLog = document.getElementById("battleLog");
+    battleLog.innerHTML += `<p>${player2.playerName}: ${action}</p>`;
+}
 
 function executeTurn() {
     setTimeout(function () {
-        if (player1.selectedSwitch !== undefined) {
-        const selectedPokemon = player1.team[player1.selectedSwitch];
-        player1.team.unshift(player1.team.splice(player1.selectedSwitch, 1)[0]);
-        console.log(`Player 1 switched to ${selectedPokemon.poke.name}.`);
-        player1.selectedSwitch = undefined;
-    }
 
-    if (player2.selectedSwitch !== undefined) {
-        const selectedPokemon = player2.team[player2.selectedSwitch];
-        player2.team.unshift(player2.team.splice(player2.selectedSwitch, 1)[0]);
-        console.log(`Player 2 switched to ${selectedPokemon.poke.name}.`);
-        player2.selectedSwitch = undefined;
-    }
+        const player1Speed = player1.team[0].poke.speed;
+        const player2Speed = player2.team[0].poke.speed;
 
-    player1.madeTurn = false;
-    player2.madeTurn = false;
-    loadBattleSite();
-    }, 1100);
+        const firstPlayer = player1Speed >= player2Speed ? player1 : player2;
+        const secondPlayer = player1Speed >= player2Speed ? player2 : player1;
+
+        if (player1.selectedSwitch == undefined && player2.selectedSwitch == undefined) {
+            processPlayerAction(firstPlayer, secondPlayer);
+            processPlayerAction(secondPlayer, firstPlayer);
+        }
+
+        if (player1.selectedSwitch !== undefined && player2.selectedSwitch !== undefined) {
+            const selectedPokemon = player1.team[player1.selectedSwitch];
+            player1.team.unshift(player1.team.splice(player1.selectedSwitch, 1)[0]);
+            console.log(`Player 1 switched to ${selectedPokemon.poke.name}.`);
+            player1.selectedSwitch = undefined;
+            logPlayer1Action(`${player1.playerName} switched to ${selectedPokemon.poke.name}.`);
+
+            const selectedPokemon2 = player2.team[player2.selectedSwitch];
+            player2.team.unshift(player2.team.splice(player2.selectedSwitch, 1)[0]);
+            console.log(`Player 2 switched to ${selectedPokemon2.poke.name}.`);
+            player2.selectedSwitch = undefined;
+            logPlayer2Action(`${player2.playerName} switched to ${selectedPokemon2.poke.name}.`)
+        }
+
+        if (player1.selectedSwitch !== undefined && player2.selectedSwitch == undefined) {
+            const selectedPokemon = player1.team[player1.selectedSwitch];
+            player1.team.unshift(player1.team.splice(player1.selectedSwitch, 1)[0]);
+            console.log(`Player 1 switched to ${selectedPokemon.poke.name}.`);
+            player1.selectedSwitch = undefined;
+            logPlayer1Action(`${player1.playerName} switched to ${selectedPokemon.poke.name}.`);
+
+            processPlayerAction(player2, player1);
+        }
+
+        if (player1.selectedSwitch == undefined && player2.selectedSwitch !== undefined) {
+            const selectedPokemon = player2.team[player2.selectedSwitch];
+            player2.team.unshift(player2.team.splice(player2.selectedSwitch, 1)[0]);
+            console.log(`Player 2 switched to ${selectedPokemon.poke.name}.`);
+            player2.selectedSwitch = undefined;
+            logPlayer1Action(`${player2.playerName} switched to ${selectedPokemon.poke.name}.`);
+
+            processPlayerAction(player1, player2);
+        }
+
+        player1.madeTurn = false;
+        player2.madeTurn = false;
+
+        player1.team[0].st = Math.min(player1.team[0].poke.stamina, player1.team[0].st + Math.floor(player1.team[0].poke.stamina * 0.05));
+        player2.team[0].st = Math.min(player2.team[0].poke.stamina, player2.team[0].st + Math.floor(player2.team[0].poke.stamina * 0.05));
+
+        document.getElementById("topSection").innerHTML = `
+        <div class="playerInfoBox" id="player1Info"> 
+                <div class="playerTrainerBox" id="player1Trainer">
+                <img src="./media/img/trainer/${player1.trainer.type.toLocaleLowerCase()}.png" alt="${player1.trainer.type}">
+                </div>
+                <div class="playerName">${player1.playerName}</div>
+                <div class="playerTeam">
+                    ${player1.team.map(pokemon => `
+                        <img class="player1PokeImg" src="./media/img/pokémon/${pokemon.poke.name.toLocaleLowerCase()}.png" alt="${pokemon.poke.name}">
+                    `).join('')}
+                </div>
+            </div>
+            <div class="currentPokemonStats" id="player1CurrentStats">
+                <div class="currentPokemonName">${player1.team[0].poke.name}</div> <br>
+                <div class="currentPokemonHP"> ${player1.team[0].hp}/${player1.team[0].poke.hp} HP</div> <br>
+                <div class="currentPokemonStamina"> ${player1.team[0].st}/${player1.team[0].poke.stamina} ST</div> <br>
+            </div>
+            <div class="currentPokemonStats" id="player2CurrentStats">
+                <div class="currentPokemonName">${player2.team[0].poke.name}</div> <br>
+                <div class="currentPokemonHP"> ${player2.team[0].hp}/${player2.team[0].poke.hp} HP</div> <br>
+                <div class="currentPokemonStamina"> ${player2.team[0].st}/${player2.team[0].poke.stamina} ST</div> <br>
+            </div>
+            <div class="playerInfoBox" id="player2Info">
+             <div class="playerTrainerBox" id="player2Trainer">
+                <img class="player2TrainerBattleImg" src="./media/img/trainer/${player2.trainer.type.toLocaleLowerCase()}.png" alt="${player1.trainer.type}">
+                </div>
+                <div class="playerName">${player2.playerName}</div>
+                <div class="playerTeam">
+                    ${player2.team.map(pokemon => `
+                        <img src="./media/img/pokémon/${pokemon.poke.name.toLocaleLowerCase()}.png" alt="${pokemon.poke.name}">
+                    `).join('')}
+                </div>
+            </div>
+        `
+        document.getElementById("middleSection").innerHTML = `
+        <img id="player1PokeImg" class="currentPokemon" src="./media/img/pokémon/${player1.team[0].poke.name.toLocaleLowerCase()}.png" alt="${player1.team[0].poke.name}">
+            <img class="currentPokemon" src="./media/img/pokémon/${player2.team[0].poke.name.toLocaleLowerCase()}.png" alt="${player2.team[0].poke.name}">
+        
+        `
+
+        setTimeout(function () {
+            loadBattleSite();
+        }, 5000);
+    }, 500);
+}
+
+function processPlayerAction(attacker, defender) {
+    const accuracyRoll = Math.random() * 100;
+    const move = attacker.moveMade;
+    attacker.team[0].st -= move.stamina_cost;
+
+    if (accuracyRoll <= move.acc) {
+
+        const damage = Math.floor(10*(move.power * (attacker.team[0].poke.might / defender.team[0].poke.resistance)) / 50) + 2;
+        defender.team[0].hp = Math.max(0, defender.team[0].hp - damage);
+
+
+        if (attacker === player1) {
+            logPlayer1Action(`${move.name} hit! ${defender.team[0].poke.name} lost ${damage} HP.`);
+        } else {
+            logPlayer2Action(`${move.name} hit! ${defender.team[0].poke.name} lost ${damage} HP.`);
+        }
+    } else {
+
+        if (attacker === player1) {
+            logPlayer1Action(`${move.name} missed!`);
+        } else {
+            logPlayer2Action(`${move.name} missed!`);
+        }
+    }
 }
