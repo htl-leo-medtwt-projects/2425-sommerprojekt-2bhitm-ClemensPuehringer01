@@ -891,7 +891,7 @@ function loadBattleSite() {
         <div id="bottomSection">
             <div id="player1Controls">
             ${player1.team[0].moves.map((move) => `
-                <div class="actionButton" onclick='attack1(${JSON.stringify(move)})'>
+                <div class="actionButton" style="opacity: ${player1.team[0].hp > 0 ? 1 : 0.5}; ${player1.team[0].hp > 0 ? 'cursor: pointer;' : 'cursor: not-allowed;'}" ${player1.team[0].hp > 0 ? `onclick='attack1(${JSON.stringify(move)})'` : ''}>
                     ${move.name}
                 </div>
             `).join('')}
@@ -902,7 +902,7 @@ function loadBattleSite() {
             </div>
             <div id="player2Controls">
             ${player2.team[0].moves.map((move) => `
-                <div class="actionButton" onclick='attack2(${JSON.stringify(move)})'>
+                <div class="actionButton" style="opacity: ${player2.team[0].hp > 0 ? 1 : 0.5}; ${player2.team[0].hp > 0 ? 'cursor: pointer;' : 'cursor: not-allowed;'}" ${player2.team[0].hp > 0 ? `onclick='attack2(${JSON.stringify(move)})'` : ''}>
                     ${move.name}
                 </div>
             `).join('')}
@@ -933,11 +933,12 @@ function switchBattleMusic(selectedMusic) {
 function switchPokemon1() {
     const selectorHTML = `
         <div id="pokemonSwitchSelector">
-            ${player1.team.map((pokemon, index) => `
-                <div class="pokeBox" onclick="selectPokemon1(${index})">
+            ${player1.team.map((pokemon, index) => 
+                `<div class="pokeBox" style="opacity: ${pokemon.hp > 0 ? 1 : 0.5}; ${pokemon.hp > 0 ? 'cursor: pointer;' : 'cursor: not-allowed;'}" 
+                    ${pokemon.hp > 0 ? `onclick="selectPokemon1(${index})"` : ''}>
                     <img src="./media/img/pokémon/${pokemon.poke.name.toLocaleLowerCase()}.png" alt="${pokemon.poke.name}">
-                </div>
-            `).join('')}
+                </div>`
+            ).join('')}
         </div>
     `;
 
@@ -964,11 +965,12 @@ function selectPokemon1(selectedIndex) {
 function switchPokemon2() {
     const selectorHTML = `
         <div id="pokemonSwitchSelector">
-            ${player2.team.map((pokemon, index) => `
-                <div class="pokeBox" onclick="selectPokemon2(${index})">
+            ${player2.team.map((pokemon, index) => 
+                `<div class="pokeBox" style="opacity: ${pokemon.hp > 0 ? 1 : 0.5}; ${pokemon.hp > 0 ? 'cursor: pointer;' : 'cursor: not-allowed;'}" 
+                    ${pokemon.hp > 0 ? `onclick="selectPokemon2(${index})"` : ''}>
                     <img src="./media/img/pokémon/${pokemon.poke.name.toLocaleLowerCase()}.png" alt="${pokemon.poke.name}">
-                </div>
-            `).join('')}
+                </div>`
+            ).join('')}
         </div>
     `;
 
@@ -1092,6 +1094,13 @@ function executeTurn() {
             processPlayerAction(player1, player2);
         }
 
+        if (player1.team[0].hp <= 0) {
+            logPlayer1Action(`${player1.team[0].poke.name} fainted!`);
+        } 
+        if (player2.team[0].hp <= 0) {
+            logPlayer2Action(`${player2.team[0].poke.name} fainted!`);
+        }
+
         player1.madeTurn = false;
         player2.madeTurn = false;
 
@@ -1115,6 +1124,16 @@ function executeTurn() {
                 <div class="currentPokemonHP"> ${player1.team[0].hp}/${player1.team[0].poke.hp} HP</div> <br>
                 <div class="currentPokemonStamina"> ${player1.team[0].st}/${player1.team[0].poke.stamina} ST</div> <br>
             </div>
+            <div id="ingameButtons">
+            <div id="battleMusicSwitch">
+                <select id="musicSelector" onchange="switchBattleMusic(this.value)">
+                    <option value="battleMusic">Elite 4 Theme</option>
+                    <option value="battleMusic2">Team Aqua/Magma Team Leader</option>
+                    <option value="battleMusic3">Gym Leader Battle</option>
+                </select>
+            </div>
+            <div id="ingameBack" onclick="homescreen()">Back</div>
+            </div>
             <div class="currentPokemonStats" id="player2CurrentStats">
                 <div class="currentPokemonName">${player2.team[0].poke.name}</div> <br>
                 <div class="currentPokemonHP"> ${player2.team[0].hp}/${player2.team[0].poke.hp} HP</div> <br>
@@ -1137,7 +1156,6 @@ function executeTurn() {
             <img class="currentPokemon" src="./media/img/pokémon/${player2.team[0].poke.name.toLocaleLowerCase()}.png" alt="${player2.team[0].poke.name}">
         
         `
-
         setTimeout(function () {
             loadBattleSite();
         }, 5000);
