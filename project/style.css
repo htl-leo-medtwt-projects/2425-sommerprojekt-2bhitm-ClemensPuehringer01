@@ -837,3 +837,59 @@ body{
     width: 90%;
     box-shadow: -5px 1px 7px 5px rgba(0, 0, 0, 0.25) inset;
 }
+#ingameButtons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+    margin: 10px;
+    font-family: poke;
+}
+
+#ingameBack {
+    margin: 5px 0;
+    padding: 10px;
+    background-color: var(--mainColor);
+    border: 2px solid var(--secondColor);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    text-align: center;
+    font-size: 1em;
+}
+
+#ingameBack:hover {
+    background-color: var(--secondColor);
+    border: var(--mainColor) solid 2px;
+    color: white;
+}
+
+    #battleMusicSwitch {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: poke;
+        color: black;
+    }
+    
+    #battleMusicSwitch select {
+        width: 100%;
+        color: black;
+        background-color: var(--mainColor);
+        border: 2px solid var(--secondColor);
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-family: normal;
+        font-size: 100%;
+        cursor: pointer;
+        font-family: poke;
+        transition: 0.3s ease;
+        text-align: center;
+    }
+    
+    #battleMusicSwitch select:hover {
+        background-color: var(--secondColor);
+        color: #000;
+        border: 2px solid var(--mainColor);
+    }

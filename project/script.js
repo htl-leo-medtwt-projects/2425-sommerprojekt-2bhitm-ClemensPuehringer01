@@ -2,7 +2,9 @@
 let audio = {
     musicOn: false,
     lobbyMusic: new Audio('media/sound/lobby.mp3'),
-    battleMusic: new Audio('media/sound/battle03.mp3')
+    battleMusic: new Audio('media/sound/battle03.mp3'),
+    battleMusic2: new Audio('media/sound/battle02.mp3'),
+    battleMusic3: new Audio('media/sound/battle01.mp3')
 }
 let player1 = {
     playerName: "Player 1",
@@ -822,8 +824,8 @@ function battleMPStart() {
     document.getElementById("forestBG").style.animation = "none"
     document.getElementById("forestBG").offsetHeight;
     document.getElementById("forestBG").style.animation = "moveUp 1s"
-    loadBattleSite();
     setTimeout(function () {
+        loadBattleSite();
         document.getElementById("forestBG").style.display = "none"
     }, 900);
 }
@@ -850,6 +852,17 @@ function loadBattleSite() {
                 <div class="currentPokemonHP"> ${player1.team[0].hp}/${player1.team[0].poke.hp} HP</div> <br>
                 <div class="currentPokemonStamina"> ${player1.team[0].st}/${player1.team[0].poke.stamina} ST</div> <br>
             </div>
+            <div id="ingameButtons">
+            <div id="battleMusicSwitch">
+                <select id="musicSelector" onchange="switchBattleMusic(this.value)">
+                    <option value="battleMusic">Elite 4 Theme</option>
+                    <option value="battleMusic2">Team Aqua/Magma Team Leader</option>
+                    <option value="battleMusic3">Gym Leader Battle</option>
+                </select>
+            </div>
+            <div id="ingameBack" onclick="homescreen()">Back</div>
+            </div>
+
             <div class="currentPokemonStats" id="player2CurrentStats">
                 <div class="currentPokemonName">${player2.team[0].poke.name}</div> <br>
                 <div class="currentPokemonHP"> ${player2.team[0].hp}/${player2.team[0].poke.hp} HP</div> <br>
@@ -903,6 +916,20 @@ function loadBattleSite() {
         ${bottomSection}
     `;
 }
+function switchBattleMusic(selectedMusic) {
+    audio.battleMusic.pause();
+    audio.battleMusic2.pause();
+    audio.battleMusic3.pause();
+
+    audio.battleMusic.currentTime = 0;
+    audio.battleMusic2.currentTime = 0;
+    audio.battleMusic3.currentTime = 0;
+
+    audio[selectedMusic].play();
+    audio[selectedMusic].loop = true;
+    audio[selectedMusic].volume = 0.4;
+}
+
 function switchPokemon1() {
     const selectorHTML = `
         <div id="pokemonSwitchSelector">
