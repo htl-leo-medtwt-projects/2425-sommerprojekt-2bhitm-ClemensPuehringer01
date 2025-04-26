@@ -1168,18 +1168,49 @@ function processPlayerAction(attacker, defender) {
     attacker.team[0].st -= move.stamina_cost;
 
     if (accuracyRoll <= move.acc) {
+        let effectiveness = 1; 
 
-        const damage = Math.floor(10*(move.power * (attacker.team[0].poke.might / defender.team[0].poke.resistance)) / 50) + 2;
+        defender.team[0].poke.type.forEach((type) => {
+            if (move.double.includes(type)) {
+                effectiveness *= 2;
+            } else if (move.half.includes(type)) {
+                effectiveness *= 0.5;
+            } else if (move.zero.includes(type)) {
+                effectiveness = 0;
+            }
+        });
+
+
+        const rndmMultiplier = Math.random() * (1.2 - 0.8) + 0.8;
+        const damage = Math.floor((10 * (move.power * (attacker.team[0].poke.might / defender.team[0].poke.resistance)) / 50 + 2) * rndmMultiplier * effectiveness);
         defender.team[0].hp = Math.max(0, defender.team[0].hp - damage);
 
-
-        if (attacker === player1) {
-            logPlayer1Action(`${move.name} hit! ${defender.team[0].poke.name} lost ${damage} HP.`);
+        if (effectiveness > 1) {
+            if (attacker === player1) {
+                logPlayer1Action(`${move.name} was super effective! ${defender.team[0].poke.name} lost ${damage} HP.`);
+            } else {
+                logPlayer2Action(`${move.name} was super effective! ${defender.team[0].poke.name} lost ${damage} HP.`);
+            }
+        } else if (effectiveness < 1 && effectiveness > 0) {
+            if (attacker === player1) {
+                logPlayer1Action(`${move.name} was not very effective. ${defender.team[0].poke.name} lost ${damage} HP.`);
+            } else {
+                logPlayer2Action(`${move.name} was not very effective. ${defender.team[0].poke.name} lost ${damage} HP.`);
+            }
+        } else if (effectiveness === 0) {
+            if (attacker === player1) {
+                logPlayer1Action(`${move.name} had no effect on ${defender.team[0].poke.name}.`);
+            } else {
+                logPlayer2Action(`${move.name} had no effect on ${defender.team[0].poke.name}.`);
+            }
         } else {
-            logPlayer2Action(`${move.name} hit! ${defender.team[0].poke.name} lost ${damage} HP.`);
+            if (attacker === player1) {
+                logPlayer1Action(`${move.name} hit! ${defender.team[0].poke.name} lost ${damage} HP.`);
+            } else {
+                logPlayer2Action(`${move.name} hit! ${defender.team[0].poke.name} lost ${damage} HP.`);
+            }
         }
     } else {
-
         if (attacker === player1) {
             logPlayer1Action(`${move.name} missed!`);
         } else {

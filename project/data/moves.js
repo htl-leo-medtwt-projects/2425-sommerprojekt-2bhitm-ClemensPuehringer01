@@ -7,7 +7,23 @@ let attacks={
             "power": 40,
             "acc": 100,
             "stamina_cost": 14,
-            "description": "A small burst of flames that lightly scorches the foe."
+            "description": "A small burst of flames that lightly scorches the foe.",
+            double: [
+                "grass",
+                "ice",
+                "bug",
+                "steel"
+            ],
+            half:[
+                "fire",
+               "water",
+                "rock",
+              "dragon",
+
+            ],
+            zero:[
+
+            ]
         },
         {
             "name": "Flame Burst",
@@ -15,7 +31,23 @@ let attacks={
             "power": 70,
             "acc": 100,
             "stamina_cost": 17,
-            "description": "A fiery explosion that spreads upon impact."
+            "description": "A fiery explosion that spreads upon impact.",
+            double: [
+                "grass",
+                "ice",
+                "bug",
+                "steel"
+            ],
+            half:[
+                "fire",
+               "water",
+                "rock",
+              "dragon",
+
+            ],
+            zero:[
+
+            ]
         },
         {
             "name": "Inferno",
@@ -23,7 +55,23 @@ let attacks={
             "power": 100,
             "acc": 85,
             "stamina_cost": 20,
-            "description": "A raging fire engulfs the enemy in searing flames."
+            "description": "A raging fire engulfs the enemy in searing flames.",
+            double: [
+                "grass",
+                "ice",
+                "bug",
+                "steel"
+            ],
+            half:[
+                "fire",
+               "water",
+                "rock",
+              "dragon",
+
+            ],
+            zero:[
+
+            ]
         },
         {
             "name": "Aerial Slash",
@@ -31,7 +79,21 @@ let attacks={
             "power": 50,
             "acc": 100,
             "stamina_cost": 15,
-            "description": "A sharp gust of wind slices through the enemy."
+            "description": "A sharp gust of wind slices through the enemy.",
+            double: [
+                "grass",
+                "fighting",
+                "bug"
+            ],
+            half:[
+                "electric",
+                "rock",
+                "steel"
+
+            ],
+            zero:[
+                
+            ]
         },
         {
             "name": "Hurricane",
@@ -39,7 +101,21 @@ let attacks={
             "power": 90,
             "acc": 85,
             "stamina_cost": 19,
-            "description": "A powerful storm hurls enemies into the air."
+            "description": "A powerful storm hurls enemies into the air.",
+            double: [
+                "grass",
+                "fighting",
+                "bug"
+            ],
+            half:[
+                "electric",
+                "rock",
+                "steel"
+
+            ],
+            zero:[
+                
+            ]
         },
         {
             "name": "Sky Assault",
@@ -47,7 +123,21 @@ let attacks={
             "power": 120,
             "acc": 75,
             "stamina_cost": 22,
-            "description": "A devastating dive-bomb attack from above."
+            "description": "A devastating dive-bomb attack from above.",
+            double: [
+                "grass",
+                "fighting",
+                "bug"
+            ],
+            half:[
+                "electric",
+                "rock",
+                "steel"
+
+            ],
+            zero:[
+                
+            ]
         },
         {
             "name": "Iron Claw",
@@ -55,7 +145,22 @@ let attacks={
             "power": 60,
             "acc": 100,
             "stamina_cost": 16,
-            "description": "A razor-sharp metal claw slashes through defenses."
+            "description": "A razor-sharp metal claw slashes through defenses.",
+            double: [
+                "ice",
+                "rock",
+                "fairy"
+            ],
+            half:[
+                "fire",
+                "water",
+                "electric",
+                "steel"
+
+            ],
+            zero:[
+                
+            ]
         },
         {
             "name": "Steel Crash",
@@ -63,7 +168,22 @@ let attacks={
             "power": 80,
             "acc": 100,
             "stamina_cost": 18,
-            "description": "A full-force metallic slam."
+            "description": "A full-force metallic slam.",
+            double: [
+                "ice",
+                "rock",
+                "fairy"
+            ],
+            half:[
+                "fire",
+                "water",
+                "electric",
+                "steel"
+
+            ],
+            zero:[
+                
+            ]
         },
         {
             "name": "Titan Bash",
@@ -71,7 +191,22 @@ let attacks={
             "power": 110,
             "acc": 85,
             "stamina_cost": 21,
-            "description": "An unstoppable strike with the weight of a titan."
+            "description": "An unstoppable strike with the weight of a titan.",
+            double: [
+                "ice",
+                "rock",
+                "fairy"
+            ],
+            half:[
+                "fire",
+                "water",
+                "electric",
+                "steel"
+
+            ],
+            zero:[
+                
+            ]
         },
         {
             "name": "Rock Throw",
@@ -79,7 +214,22 @@ let attacks={
             "power": 50,
             "acc": 90,
             "stamina_cost": 15,
-            "description": "Hurls small rocks at the foe."
+            "description": "Hurls small rocks at the foe.",
+            double: [
+                "fire",
+                "ice",
+                "flying",
+                "bug"
+            ],
+            half:[
+                "fighting",
+                "ground",
+                "steel"
+
+            ],
+            zero:[
+                
+            ]
         },
         {
             "name": "Stone Edge",
@@ -87,7 +237,22 @@ let attacks={
             "power": 100,
             "acc": 80,
             "stamina_cost": 20,
-            "description": "Jagged stones cut through the enemy."
+            "description": "Jagged stones cut through the enemy.",
+            double: [
+                "fire",
+                "ice",
+                "flying",
+                "bug"
+            ],
+            half:[
+                "fighting",
+                "ground",
+                "steel"
+
+            ],
+            zero:[
+                
+            ]
         },
         {
             "name": "Boulder Crush",
@@ -95,7 +260,22 @@ let attacks={
             "power": 120,
             "acc": 75,
             "stamina_cost": 22,
-            "description": "A massive boulder is dropped on the target."
+            "description": "A massive boulder is dropped on the target.",
+            double: [
+                "fire",
+                "ice",
+                "flying",
+                "bug"
+            ],
+            half:[
+                "fighting",
+                "ground",
+                "steel"
+
+            ],
+            zero:[
+                
+            ]
         },
         {
             "name": "Aqua Jet",
@@ -103,7 +283,21 @@ let attacks={
             "power": 40,
             "acc": 100,
             "stamina_cost": 14,
-            "description": "A quick burst of water propels the attacker forward."
+            "description": "A quick burst of water propels the attacker forward.",
+            double: [
+                "fire",
+                "rock",
+                "ground"
+            ],
+            half:[
+                "water",
+                "grass",
+                "dragon"
+
+            ],
+            zero:[
+                
+            ]
         },
         {
             "name": "Waterfall",
@@ -111,7 +305,21 @@ let attacks={
             "power": 80,
             "acc": 100,
             "stamina_cost": 18,
-            "description": "A fierce wave crashes into the opponent."
+            "description": "A fierce wave crashes into the opponent.",
+            double: [
+                "fire",
+                "rock",
+                "ground"
+            ],
+            half:[
+                "water",
+                "grass",
+                "dragon"
+
+            ],
+            zero:[
+                
+            ]
         },
         {
             "name": "Hydro Cannon",
@@ -119,7 +327,21 @@ let attacks={
             "power": 120,
             "acc": 85,
             "stamina_cost": 22,
-            "description": "An ultra-powerful blast of water."
+            "description": "An ultra-powerful blast of water.",
+            double: [
+                "fire",
+                "rock",
+                "ground"
+            ],
+            half:[
+                "water",
+                "grass",
+                "dragon"
+
+            ],
+            zero:[
+                
+            ]
         },
         {
             "name": "Thunder Shock",
@@ -127,7 +349,20 @@ let attacks={
             "power": 40,
             "acc": 100,
             "stamina_cost": 14,
-            "description": "A weak jolt of electricity zaps the opponent."
+            "description": "A weak jolt of electricity zaps the opponent.",
+            double: [
+                "water",
+                "flying"
+            ],
+            half:[
+                "grass",
+                "electric",
+                "dragon"
+
+            ],
+            zero:[
+                "ground"
+            ]
         },
         {
             "name": "Thunderbolt",
@@ -135,7 +370,20 @@ let attacks={
             "power": 90,
             "acc": 100,
             "stamina_cost": 19,
-            "description": "A strong electric bolt strikes the foe."
+            "description": "A strong electric bolt strikes the foe.",
+            double: [
+                "water",
+                "flying"
+            ],
+            half:[
+                "grass",
+                "electric",
+                "dragon"
+
+            ],
+            zero:[
+                "ground"
+            ]
         },
         {
             "name": "Volt Crash",
@@ -143,7 +391,20 @@ let attacks={
             "power": 120,
             "acc": 85,
             "stamina_cost": 22,
-            "description": "A shocking surge of electricity slams into the enemy."
+            "description": "A shocking surge of electricity slams into the enemy.",
+            double: [
+                "water",
+                "flying"
+            ],
+            half:[
+                "grass",
+                "electric",
+                "dragon"
+
+            ],
+            zero:[
+                "ground"
+            ]
         },
         {
             "name": "Leaf Slash",
@@ -151,7 +412,25 @@ let attacks={
             "power": 50,
             "acc": 100,
             "stamina_cost": 15,
-            "description": "A sharp leaf slices through the foe."
+            "description": "A sharp leaf slices through the foe.",
+            double: [
+                "water",
+                "ground",
+                "rock"
+            ],
+            half:[
+                "fire",
+                "grass",
+                "poison",
+                "flying",
+                "bug",
+                "dragon",
+                "steel"
+
+            ],
+            zero:[
+                
+            ]
         },
         {
             "name": "Solar Beam",
@@ -159,7 +438,25 @@ let attacks={
             "power": 120,
             "acc": 100,
             "stamina_cost": 22,
-            "description": "A beam of sunlight is gathered and unleashed."
+            "description": "A beam of sunlight is gathered and unleashed.",
+            double: [
+                "water",
+                "ground",
+                "rock"
+            ],
+            half:[
+                "fire",
+                "grass",
+                "poison",
+                "flying",
+                "bug",
+                "dragon",
+                "steel"
+
+            ],
+            zero:[
+                
+            ]
         },
         {
             "name": "Vine Whip",
@@ -167,7 +464,25 @@ let attacks={
             "power": 40,
             "acc": 100,
             "stamina_cost": 14,
-            "description": "Vines lash out at the opponent."
+            "description": "Vines lash out at the opponent.",
+            double: [
+                "water",
+                "ground",
+                "rock"
+            ],
+            half:[
+                "fire",
+                "grass",
+                "poison",
+                "flying",
+                "bug",
+                "dragon",
+                "steel"
+
+            ],
+            zero:[
+                
+            ]
         },
         {
             "name": "Shadow Claw",
@@ -175,7 +490,18 @@ let attacks={
             "power": 70,
             "acc": 100,
             "stamina_cost": 17,
-            "description": "A shadowy claw slashes at the enemy."
+            "description": "A shadowy claw slashes at the enemy.",
+            double: [
+                "psychic",
+                "ghost"
+            ],
+            half:[
+                "dark"
+
+            ],
+            zero:[
+                "normal"
+            ]
         },
         {
             "name": "Phantom Strike",
@@ -183,7 +509,18 @@ let attacks={
             "power": 90,
             "acc": 85,
             "stamina_cost": 19,
-            "description": "A spectral attack phases through defenses."
+            "description": "A spectral attack phases through defenses.",
+            double: [
+                "psychic",
+                "ghost"
+            ],
+            half:[
+                "dark"
+
+            ],
+            zero:[
+                "normal"
+            ]
         },
         {
             "name": "Spirit Crush",
@@ -191,7 +528,18 @@ let attacks={
             "power": 110,
             "acc": 80,
             "stamina_cost": 21,
-            "description": "A powerful blow that saps the target’s will."
+            "description": "A powerful blow that saps the target’s will.",
+            double: [
+                "psychic",
+                "ghost"
+            ],
+            half:[
+                "dark"
+
+            ],
+            zero:[
+                "normal"
+            ]
         },
         {
             "name": "Tackle",
@@ -199,7 +547,18 @@ let attacks={
             "power": 40,
             "acc": 100,
             "stamina_cost": 14,
-            "description": "A simple but effective full-body charge."
+            "description": "A simple but effective full-body charge.",
+            double: [
+                
+            ],
+            half:[
+                "rock",
+                "steel"
+
+            ],
+            zero:[
+                "ghost"
+            ]
         },
         {
             "name": "Body Slam",
@@ -207,7 +566,18 @@ let attacks={
             "power": 80,
             "acc": 100,
             "stamina_cost": 18,
-            "description": "A heavy slam crushes the opponent."
+            "description": "A heavy slam crushes the opponent.",
+            double: [
+                
+            ],
+            half:[
+                "rock",
+                "steel"
+
+            ],
+            zero:[
+                "ghost"
+            ]
         },
         {
             "name": "Giga Impact",
@@ -215,7 +585,18 @@ let attacks={
             "power": 120,
             "acc": 90,
             "stamina_cost": 22,
-            "description": "A full-force charge that leaves the user exhausted."
+            "description": "A full-force charge that leaves the user exhausted.",
+            double: [
+                
+            ],
+            half:[
+                "rock",
+                "steel"
+
+            ],
+            zero:[
+                "ghost"
+            ]
         },
         {
             "name": "Brick Break",
@@ -223,7 +604,25 @@ let attacks={
             "power": 75,
             "acc": 100,
             "stamina_cost": 17,
-            "description": "A powerful strike that shatters barriers."
+            "description": "A powerful strike that shatters barriers.",
+            double: [
+                "normal",
+                "ice",
+                "rock",
+                "dark",
+                "steel"
+            ],
+            half:[
+                "poison",
+                "flying",
+                "psychic",
+                "bug",
+                "fairy"
+
+            ],
+            zero:[
+                "ghost"
+            ]
         },
         {
             "name": "Mach Punch",
@@ -231,7 +630,25 @@ let attacks={
             "power": 40,
             "acc": 100,
             "stamina_cost": 14,
-            "description": "A quick punch delivered with blinding speed."
+            "description": "A quick punch delivered with blinding speed.",
+            double: [
+                "normal",
+                "ice",
+                "rock",
+                "dark",
+                "steel"
+            ],
+            half:[
+                "poison",
+                "flying",
+                "psychic",
+                "bug",
+                "fairy"
+
+            ],
+            zero:[
+                "ghost"
+            ]
         },
         {
             "name": "Close Combat",
@@ -239,7 +656,25 @@ let attacks={
             "power": 120,
             "acc": 100,
             "stamina_cost": 22,
-            "description": "A relentless flurry of attacks at close range."
+            "description": "A relentless flurry of attacks at close range.",
+            double: [
+                "normal",
+                "ice",
+                "rock",
+                "dark",
+                "steel"
+            ],
+            half:[
+                "poison",
+                "flying",
+                "psychic",
+                "bug",
+                "fairy"
+
+            ],
+            zero:[
+                "ghost"
+            ]
         },
         {
             "name": "Poison Fang",
@@ -247,7 +682,21 @@ let attacks={
             "power": 50,
             "acc": 100,
             "stamina_cost": 15,
-            "description": "A vicious bite laced with toxins."
+            "description": "A vicious bite laced with toxins.",
+            double: [
+                "grass",
+                "fairy"
+            ],
+            half:[
+                "poison",
+                "rock",
+                "ground",
+                "ghost"
+
+            ],
+            zero:[
+                "steel"
+            ]
         },
         {
             "name": "Sludge Bomb",
@@ -255,7 +704,21 @@ let attacks={
             "power": 90,
             "acc": 100,
             "stamina_cost": 19,
-            "description": "A blast of poisonous sludge is hurled at the foe."
+            "description": "A blast of poisonous sludge is hurled at the foe.",
+            double: [
+                "grass",
+                "fairy"
+            ],
+            half:[
+                "poison",
+                "rock",
+                "ground",
+                "ghost"
+
+            ],
+            zero:[
+                "steel"
+            ]
         },
         {
             "name": "Venom Strike",
@@ -263,7 +726,21 @@ let attacks={
             "power": 110,
             "acc": 85,
             "stamina_cost": 21,
-            "description": "A deadly lunge infused with toxic energy."
+            "description": "A deadly lunge infused with toxic energy.",
+            double: [
+                "grass",
+                "fairy"
+            ],
+            half:[
+                "poison",
+                "rock",
+                "ground",
+                "ghost"
+
+            ],
+            zero:[
+                "steel"
+            ]
         },
         {
             "name": "Earth Spike",
@@ -271,7 +748,22 @@ let attacks={
             "power": 60,
             "acc": 100,
             "stamina_cost": 16,
-            "description": "Jagged spikes of earth rise up to strike the enemy."
+            "description": "Jagged spikes of earth rise up to strike the enemy.",
+            double: [
+                "fire",
+                "electric",
+                "poison",
+                "rock",
+                "steel"
+            ],
+            half:[
+                "grass",
+                "bug"
+
+            ],
+            zero:[
+                "flying"
+            ]
         },
         {
             "name": "Bulldoze",
@@ -279,7 +771,22 @@ let attacks={
             "power": 80,
             "acc": 100,
             "stamina_cost": 18,
-            "description": "The ground shakes violently underfoot."
+            "description": "The ground shakes violently underfoot.",
+            double: [
+                "fire",
+                "electric",
+                "poison",
+                "rock",
+                "steel"
+            ],
+            half:[
+                "grass",
+                "bug"
+
+            ],
+            zero:[
+                "flying"
+            ]
         },
         {
             "name": "Quake Crash",
@@ -287,7 +794,22 @@ let attacks={
             "power": 120,
             "acc": 85,
             "stamina_cost": 22,
-            "description": "A devastating seismic attack that shakes everything."
+            "description": "A devastating seismic attack that shakes everything.",
+             double: [
+                "fire",
+                "electric",
+                "poison",
+                "rock",
+                "steel"
+            ],
+            half:[
+                "grass",
+                "bug"
+
+            ],
+            zero:[
+                "flying"
+            ]
         },
         {
             "name": "Mind Shock",
@@ -295,7 +817,19 @@ let attacks={
             "power": 50,
             "acc": 100,
             "stamina_cost": 15,
-            "description": "A mental blast rattles the opponent’s brain."
+            "description": "A mental blast rattles the opponent’s brain.",
+            double: [
+                "fighting",
+                "poison"
+            ],
+            half:[
+                "psychic",
+                "steel"
+
+            ],
+            zero:[
+                "dark"
+            ]
         },
         {
             "name": "Psybeam",
@@ -303,7 +837,19 @@ let attacks={
             "power": 80,
             "acc": 100,
             "stamina_cost": 18,
-            "description": "A focused psychic beam strikes the enemy."
+            "description": "A focused psychic beam strikes the enemy.",
+            double: [
+                "fighting",
+                "poison"
+            ],
+            half:[
+                "psychic",
+                "steel"
+
+            ],
+            zero:[
+                "dark"
+            ]
         },
         {
             "name": "Psionic Crush",
@@ -311,7 +857,19 @@ let attacks={
             "power": 110,
             "acc": 90,
             "stamina_cost": 21,
-            "description": "A crushing force overwhelms the target’s mind."
+            "description": "A crushing force overwhelms the target’s mind.",
+            double: [
+                "fighting",
+                "poison"
+            ],
+            half:[
+                "psychic",
+                "steel"
+
+            ],
+            zero:[
+                "dark"
+            ]
         },
         {
             "name": "Icicle Spear",
@@ -319,7 +877,23 @@ let attacks={
             "power": 40,
             "acc": 100,
             "stamina_cost": 14,
-            "description": "Sharp icicles pierce through the enemy."
+            "description": "Sharp icicles pierce through the enemy.",
+            double: [
+                "grass",
+                "ground",
+                "flying",
+                "dragon"
+            ],
+            half:[
+                "fire",
+                "water",
+                "ice",
+                "steel"
+
+            ],
+            zero:[
+                
+            ]
         },
         {
             "name": "Blizzard",
@@ -327,7 +901,23 @@ let attacks={
             "power": 100,
             "acc": 85,
             "stamina_cost": 20,
-            "description": "A freezing storm engulfs everything in sight."
+            "description": "A freezing storm engulfs everything in sight.",
+            double: [
+                "grass",
+                "ground",
+                "flying",
+                "dragon"
+            ],
+            half:[
+                "fire",
+                "water",
+                "ice",
+                "steel"
+
+            ],
+            zero:[
+                
+            ]            
         },
         {
             "name": "Glacial Impact",
@@ -335,7 +925,23 @@ let attacks={
             "power": 120,
             "acc": 80,
             "stamina_cost": 22,
-            "description": "A massive chunk of ice crashes down on the opponent."
+            "description": "A massive chunk of ice crashes down on the opponent.",
+            double: [
+                "grass",
+                "ground",
+                "flying",
+                "dragon"
+            ],
+            half:[
+                "fire",
+                "water",
+                "ice",
+                "steel"
+
+            ],
+            zero:[
+                
+            ]
         },
         {
             "name": "Dark Claw",
@@ -343,7 +949,20 @@ let attacks={
             "power": 70,
             "acc": 100,
             "stamina_cost": 17,
-            "description": "A sharp, shadowy slash strikes from the darkness."
+            "description": "A sharp, shadowy slash strikes from the darkness.",
+            double: [
+                "psychic",
+                "ghost"
+            ],
+            half:[
+                "fighting",
+                "dark",
+                "fairy"
+
+            ],
+            zero:[
+                
+            ]
         },
         {
             "name": "Night Slash",
@@ -351,7 +970,20 @@ let attacks={
             "power": 90,
             "acc": 100,
             "stamina_cost": 19,
-            "description": "A swift attack cloaked in darkness."
+            "description": "A swift attack cloaked in darkness.",
+            double: [
+                "psychic",
+                "ghost"
+            ],
+            half:[
+                "fighting",
+                "dark",
+                "fairy"
+
+            ],
+            zero:[
+                
+            ]
         },
         {
             "name": "Abyssal Strike",
@@ -359,7 +991,20 @@ let attacks={
             "power": 120,
             "acc": 85,
             "stamina_cost": 22,
-            "description": "A powerful attack born from the shadows."
+            "description": "A powerful attack born from the shadows.",
+            double: [
+                "psychic",
+                "ghost"
+            ],
+            half:[
+                "fighting",
+                "dark",
+                "fairy"
+
+            ],
+            zero:[
+                
+            ]
         },
         {
             "name": "Fairy Spark",
@@ -367,7 +1012,21 @@ let attacks={
             "power": 50,
             "acc": 100,
             "stamina_cost": 15,
-            "description": "A twinkling burst of magical energy."
+            "description": "A twinkling burst of magical energy.",
+            double: [
+                "fighting",
+                "dragon",
+                "dark"
+            ],
+            half:[
+                "fire",
+                "poison",
+                "steel"
+
+            ],
+            zero:[
+                
+            ]
         },
         {
             "name": "Moonblast",
@@ -375,7 +1034,21 @@ let attacks={
             "power": 90,
             "acc": 100,
             "stamina_cost": 19,
-            "description": "A mystical beam of lunar energy."
+            "description": "A mystical beam of lunar energy.",
+            double: [
+                "fighting",
+                "dragon",
+                "dark"
+            ],
+            half:[
+                "fire",
+                "poison",
+                "steel"
+
+            ],
+            zero:[
+                
+            ]
         },
         {
             "name": "Enchanting Blow",
@@ -383,7 +1056,21 @@ let attacks={
             "power": 110,
             "acc": 90,
             "stamina_cost": 21,
-            "description": "A beautifully devastating attack imbued with charm."
+            "description": "A beautifully devastating attack imbued with charm.",
+            double: [
+                "fighting",
+                "dragon",
+                "dark"
+            ],
+            half:[
+                "fire",
+                "poison",
+                "steel"
+
+            ],
+            zero:[
+                
+            ]
         },
         {
             "name": "Bug Bite",
@@ -391,7 +1078,26 @@ let attacks={
             "power": 40,
             "acc": 100,
             "stamina_cost": 14,
-            "description": "A sharp bite drains the enemy’s energy."
+            "description": "A sharp bite drains the enemy’s energy.",
+            double: [
+                "grass",
+                "psychic",
+                "dark"
+            ],
+            half:[
+                "fire",
+                "fighting",
+                "poison",
+                "ground",
+                "flying",
+                "ghost",
+                "steel",
+                "fairy"
+
+            ],
+            zero:[
+                
+            ]
         },
         {
             "name": "X-Scissor",
@@ -399,7 +1105,26 @@ let attacks={
             "power": 80,
             "acc": 100,
             "stamina_cost": 18,
-            "description": "A precise double slash from sharp claws."
+            "description": "A precise double slash from sharp claws.",
+            double: [
+                "grass",
+                "psychic",
+                "dark"
+            ],
+            half:[
+                "fire",
+                "fighting",
+                "poison",
+                "ground",
+                "flying",
+                "ghost",
+                "steel",
+                "fairy"
+
+            ],
+            zero:[
+                
+            ]
         },
         {
             "name": "Swarm Frenzy",
@@ -407,7 +1132,26 @@ let attacks={
             "power": 110,
             "acc": 85,
             "stamina_cost": 21,
-            "description": "A frenzied assault from countless tiny strikes."
+            "description": "A frenzied assault from countless tiny strikes.",
+            double: [
+                "grass",
+                "psychic",
+                "dark"
+            ],
+            half:[
+                "fire",
+                "fighting",
+                "poison",
+                "ground",
+                "flying",
+                "ghost",
+                "steel",
+                "fairy"
+
+            ],
+            zero:[
+                
+            ]
         },
         {
             "name": "Dragon Fang",
@@ -415,7 +1159,17 @@ let attacks={
             "power": 60,
             "acc": 100,
             "stamina_cost": 16,
-            "description": "A powerful bite imbued with draconic energy."
+            "description": "A powerful bite imbued with draconic energy.",
+            double: [
+                "dragon"
+            ],
+            half:[
+                "steel"
+
+            ],
+            zero:[
+                "fairy"
+            ]
         },
         {
             "name": "Dragon Pulse",
@@ -423,7 +1177,17 @@ let attacks={
             "power": 90,
             "acc": 100,
             "stamina_cost": 19,
-            "description": "A mystical wave of draconic power surges forward."
+            "description": "A mystical wave of draconic power surges forward.",
+            double: [
+                "dragon"
+            ],
+            half:[
+                "steel"
+
+            ],
+            zero:[
+                "fairy"
+            ]
         },
         {
             "name": "Eternal Roar",
@@ -431,9 +1195,21 @@ let attacks={
             "power": 120,
             "acc": 85,
             "stamina_cost": 22,
-            "description": "A devastating roar shatters everything in its path."
+            "description": "A devastating roar shatters everything in its path.",
+            double: [
+                "dragon"
+            ],
+            half:[
+                "steel"
+
+            ],
+            zero:[
+                "fairy"
+            ]
         }
     ],
+
+
     "special_moves": [
         {
             "name": "Phantom Slash",
@@ -442,7 +1218,18 @@ let attacks={
             "acc": 100,
             "stamina_cost": 30,
             "description": "Ignores enemy resistances when used",
-            "exclusive_to": ["aegislash", "gengar", "haunter"]
+            "exclusive_to": ["aegislash", "gengar", "haunter"],
+            double: [
+                "psychic",
+                "ghost"
+            ],
+            half:[
+                "dark"
+
+            ],
+            zero:[
+                "normal"
+            ]
         },
         {
             "name": "Molten Sky Strike",
@@ -451,7 +1238,23 @@ let attacks={
             "acc": 90,
             "stamina_cost": 31,
             "description": "If the user is flying-type, it deals additional burn damage",
-            "exclusive_to": ["charizard", "blaziken"]
+            "exclusive_to": ["charizard", "blaziken"],
+            double: [
+                "grass",
+                "ice",
+                "bug",
+                "steel"
+            ],
+            half:[
+                "fire",
+               "water",
+                "rock",
+              "dragon",
+
+            ],
+            zero:[
+
+            ]
         },
         {
             "name": "Titanic Tremor",
@@ -460,7 +1263,22 @@ let attacks={
             "acc": 85,
             "stamina_cost": 32,
             "description": "Hits all opponents on the battlefield",
-            "exclusive_to": ["geodude", "onix", "steelix", "rhyhorn"]
+            "exclusive_to": ["geodude", "onix", "steelix", "rhyhorn"],
+            double: [
+                "fire",
+                "ice",
+                "flying",
+                "bug"
+            ],
+            half:[
+                "fighting",
+                "ground",
+                "steel"
+
+            ],
+            zero:[
+                
+            ]
         },
         {
             "name": "Mystic Mirage",
@@ -469,7 +1287,19 @@ let attacks={
             "acc": 100,
             "stamina_cost": 29,
             "description": "Speed increases by one stage after use",
-            "exclusive_to": ["gardevoir", "mewtwo", "wobbuffet"]
+            "exclusive_to": ["gardevoir", "mewtwo", "wobbuffet"],
+            double: [
+                "fighting",
+                "poison"
+            ],
+            half:[
+                "psychic",
+                "steel"
+
+            ],
+            zero:[
+                "dark"
+            ]
         },
         {
             "name": "Toxic Barrage",
@@ -478,7 +1308,21 @@ let attacks={
             "acc": 100,
             "stamina_cost": 28,
             "description": "Always poisons the target",
-            "exclusive_to": ["drapion", "skuntank", "haunter"]
+            "exclusive_to": ["drapion", "skuntank", "haunter"],
+            double: [
+                "grass",
+                "fairy"
+            ],
+            half:[
+                "poison",
+                "rock",
+                "ground",
+                "ghost"
+
+            ],
+            zero:[
+                "steel"
+            ]
         },
         {
             "name": "Glacial Spear",
@@ -487,7 +1331,23 @@ let attacks={
             "acc": 95,
             "stamina_cost": 30,
             "description": "Has a 30% chance to freeze",
-            "exclusive_to": ["articuno", "glaceon"]
+            "exclusive_to": ["articuno", "glaceon"],
+            double: [
+                "grass",
+                "ground",
+                "flying",
+                "dragon"
+            ],
+            half:[
+                "fire",
+                "water",
+                "ice",
+                "steel"
+
+            ],
+            zero:[
+                
+            ]
         },
         {
             "name": "Lightning Blitz",
@@ -496,7 +1356,20 @@ let attacks={
             "acc": 100,
             "stamina_cost": 29,
             "description": "If the user attacks first, the move deals 50% extra damage",
-            "exclusive_to": ["pikachu", "electrike"]
+            "exclusive_to": ["pikachu", "electrike"],
+            double: [
+                "water",
+                "flying"
+            ],
+            half:[
+                "grass",
+                "electric",
+                "dragon"
+
+            ],
+            zero:[
+                "ground"
+            ]
         },
         {
             "name": "Sky Rupture",
@@ -505,7 +1378,21 @@ let attacks={
             "acc": 80,
             "stamina_cost": 32,
             "description": "Breaks through Protect and similar moves",
-            "exclusive_to": ["rayquaza", "tornadus", "yveltal"]
+            "exclusive_to": ["rayquaza", "tornadus", "yveltal"],
+            double: [
+                "grass",
+                "fighting",
+                "bug"
+            ],
+            half:[
+                "electric",
+                "rock",
+                "steel"
+
+            ],
+            zero:[
+                
+            ]
         },
         {
             "name": "Royal Guard",
@@ -514,7 +1401,22 @@ let attacks={
             "acc": 100,
             "stamina_cost": 20,
             "description": "For one turn, the user takes half damage and cannot be critically hit",
-            "exclusive_to": ["zamazenta", "metagross", "aegislash"]
+            "exclusive_to": ["zamazenta", "metagross", "aegislash"],
+            double: [
+                "ice",
+                "rock",
+                "fairy"
+            ],
+            half:[
+                "fire",
+                "water",
+                "electric",
+                "steel"
+
+            ],
+            zero:[
+                
+            ]
         },
         {
             "name": "Adaptive Form",
@@ -523,7 +1425,18 @@ let attacks={
             "acc": 100,
             "stamina_cost": 28,
             "description": "Changes type based on the user's primary type",
-            "exclusive_to": ["ditto", "eevee", "togetic"]
+            "exclusive_to": ["ditto", "eevee", "togetic", "snorlax"],
+            double: [
+                
+            ],
+            half:[
+                "rock",
+                "steel"
+
+            ],
+            zero:[
+                "ghost"
+            ]
         },
         {
             "name": "Draconic Onslaught",
@@ -532,7 +1445,17 @@ let attacks={
             "acc": 85,
             "stamina_cost": 33,
             "description": "User's speed decreases after use",
-            "exclusive_to": ["dragonite", "dragapult", "rayquaza"]
+            "exclusive_to": ["dragonite", "dragapult", "rayquaza"],
+            double: [
+                "dragon"
+            ],
+            half:[
+                "steel"
+
+            ],
+            zero:[
+                "fairy"
+            ]
         },
         {
             "name": "Feral Beatdown",
@@ -541,7 +1464,25 @@ let attacks={
             "acc": 95,
             "stamina_cost": 30,
             "description": "Has a 50% chance to lower the opponent’s defense",
-            "exclusive_to": ["machamp", "flamigo", "lucario"]
+            "exclusive_to": ["machamp", "flamigo", "lucario"],
+            double: [
+                "normal",
+                "ice",
+                "rock",
+                "dark",
+                "steel"
+            ],
+            half:[
+                "poison",
+                "flying",
+                "psychic",
+                "bug",
+                "fairy"
+
+            ],
+            zero:[
+                "ghost"
+            ]
         }
     ]
 }
