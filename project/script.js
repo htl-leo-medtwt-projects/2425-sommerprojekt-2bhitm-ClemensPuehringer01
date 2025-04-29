@@ -465,7 +465,7 @@ function loadSelectorP2() {
     document.getElementById("selectionScreen").style.animation = "moveUp 1s"
 
     player1.playerName = document.getElementById("player1Name").value
-    if(player1.playerName == ""){
+    if (player1.playerName == "") {
         player1.playerName = "Player 1"
     }
 
@@ -813,7 +813,7 @@ function selectMove2(pokemonTeamNum, moveIndex, attackNum) {
 }
 function battleMPStart() {
     player2.playerName = document.getElementById("player2Name").value
-    if(player2.playerName == ""){
+    if (player2.playerName == "") {
         player2.playerName = "Player 2"
     }
     document.getElementById("mute").style.display = "none";
@@ -933,12 +933,12 @@ function switchBattleMusic(selectedMusic) {
 function switchPokemon1() {
     const selectorHTML = `
         <div id="pokemonSwitchSelector">
-            ${player1.team.map((pokemon, index) => 
-                `<div class="pokeBox" style="opacity: ${pokemon.hp > 0 ? 1 : 0.5}; ${pokemon.hp > 0 ? 'cursor: pointer;' : 'cursor: not-allowed;'}" 
+            ${player1.team.map((pokemon, index) =>
+        `<div class="pokeBox" style="opacity: ${pokemon.hp > 0 ? 1 : 0.5}; ${pokemon.hp > 0 ? 'cursor: pointer;' : 'cursor: not-allowed;'}" 
                     ${pokemon.hp > 0 ? `onclick="selectPokemon1(${index})"` : ''}>
                     <img src="./media/img/pokémon/${pokemon.poke.name.toLocaleLowerCase()}.png" alt="${pokemon.poke.name}">
                 </div>`
-            ).join('')}
+    ).join('')}
         </div>
     `;
 
@@ -965,12 +965,12 @@ function selectPokemon1(selectedIndex) {
 function switchPokemon2() {
     const selectorHTML = `
         <div id="pokemonSwitchSelector">
-            ${player2.team.map((pokemon, index) => 
-                `<div class="pokeBox" style="opacity: ${pokemon.hp > 0 ? 1 : 0.5}; ${pokemon.hp > 0 ? 'cursor: pointer;' : 'cursor: not-allowed;'}" 
+            ${player2.team.map((pokemon, index) =>
+        `<div class="pokeBox" style="opacity: ${pokemon.hp > 0 ? 1 : 0.5}; ${pokemon.hp > 0 ? 'cursor: pointer;' : 'cursor: not-allowed;'}" 
                     ${pokemon.hp > 0 ? `onclick="selectPokemon2(${index})"` : ''}>
                     <img src="./media/img/pokémon/${pokemon.poke.name.toLocaleLowerCase()}.png" alt="${pokemon.poke.name}">
                 </div>`
-            ).join('')}
+    ).join('')}
         </div>
     `;
 
@@ -1019,20 +1019,20 @@ function attack2(move) {
     }
 }
 
-function TurnFinPlayer1(){
+function TurnFinPlayer1() {
     document.getElementById("player1Controls").innerHTML = `
     <div class="turnFin"> ${player1.playerName} finished their Turn!</div>
     `
-    if(player1.madeTurn && player2.madeTurn){
+    if (player1.madeTurn && player2.madeTurn) {
         executeTurn();
     }
 }
 
-function TurnFinPlayer2(){
+function TurnFinPlayer2() {
     document.getElementById("player2Controls").innerHTML = `
     <div class="turnFin"> ${player2.playerName} finished their Turn!</div>
     `
-    if(player1.madeTurn && player2.madeTurn){
+    if (player1.madeTurn && player2.madeTurn) {
         executeTurn();
     }
 }
@@ -1057,49 +1057,66 @@ function executeTurn() {
 
         if (player1.selectedSwitch == undefined && player2.selectedSwitch == undefined) {
             processPlayerAction(firstPlayer, secondPlayer);
-            processPlayerAction(secondPlayer, firstPlayer);
+            if (secondPlayer.team[0].hp > 0) {
+                processPlayerAction(secondPlayer, firstPlayer);
+            } else {
+                if (secondPlayer == player2) {
+                    logPlayer2Action(`${player2.team[0].poke.name} fainted!`);
+                } else {
+                    logPlayer1Action(`${player1.team[0].poke.name} fainted!`);
+                }
+            }
+
+        } else {
+            if (player1.selectedSwitch !== undefined && player2.selectedSwitch !== undefined) {
+                const selectedPokemon = player1.team[player1.selectedSwitch];
+                player1.team.unshift(player1.team.splice(player1.selectedSwitch, 1)[0]);
+                console.log(`Player 1 switched to ${selectedPokemon.poke.name}.`);
+                player1.selectedSwitch = undefined;
+                logPlayer1Action(`${player1.playerName} switched to ${selectedPokemon.poke.name}.`);
+
+                const selectedPokemon2 = player2.team[player2.selectedSwitch];
+                player2.team.unshift(player2.team.splice(player2.selectedSwitch, 1)[0]);
+                console.log(`Player 2 switched to ${selectedPokemon2.poke.name}.`);
+                player2.selectedSwitch = undefined;
+                logPlayer2Action(`${player2.playerName} switched to ${selectedPokemon2.poke.name}.`)
+            } else {
+                if (player1.selectedSwitch !== undefined && player2.selectedSwitch == undefined) {
+                    const selectedPokemon = player1.team[player1.selectedSwitch];
+                    player1.team.unshift(player1.team.splice(player1.selectedSwitch, 1)[0]);
+                    console.log(`Player 1 switched to ${selectedPokemon.poke.name}.`);
+                    player1.selectedSwitch = undefined;
+                    logPlayer1Action(`${player1.playerName} switched to ${selectedPokemon.poke.name}.`);
+
+                    processPlayerAction(player2, player1);
+
+                    if (player1.team[0].hp <= 0) {
+                        logPlayer1Action(`${player1.team[0].poke.name} fainted!`);
+                    }
+                } else {
+                    if (player1.selectedSwitch == undefined && player2.selectedSwitch !== undefined) {
+                        const selectedPokemon = player2.team[player2.selectedSwitch];
+                        player2.team.unshift(player2.team.splice(player2.selectedSwitch, 1)[0]);
+                        console.log(`Player 2 switched to ${selectedPokemon.poke.name}.`);
+                        player2.selectedSwitch = undefined;
+                        logPlayer1Action(`${player2.playerName} switched to ${selectedPokemon.poke.name}.`);
+
+                        processPlayerAction(player1, player2);
+                        if (player2.team[0].hp <= 0) {
+                            logPlayer2Action(`${player2.team[0].poke.name} fainted!`);
+                        }
+                    }
+                }
+            }
         }
 
-        if (player1.selectedSwitch !== undefined && player2.selectedSwitch !== undefined) {
-            const selectedPokemon = player1.team[player1.selectedSwitch];
-            player1.team.unshift(player1.team.splice(player1.selectedSwitch, 1)[0]);
-            console.log(`Player 1 switched to ${selectedPokemon.poke.name}.`);
-            player1.selectedSwitch = undefined;
-            logPlayer1Action(`${player1.playerName} switched to ${selectedPokemon.poke.name}.`);
 
-            const selectedPokemon2 = player2.team[player2.selectedSwitch];
-            player2.team.unshift(player2.team.splice(player2.selectedSwitch, 1)[0]);
-            console.log(`Player 2 switched to ${selectedPokemon2.poke.name}.`);
-            player2.selectedSwitch = undefined;
-            logPlayer2Action(`${player2.playerName} switched to ${selectedPokemon2.poke.name}.`)
-        }
 
-        if (player1.selectedSwitch !== undefined && player2.selectedSwitch == undefined) {
-            const selectedPokemon = player1.team[player1.selectedSwitch];
-            player1.team.unshift(player1.team.splice(player1.selectedSwitch, 1)[0]);
-            console.log(`Player 1 switched to ${selectedPokemon.poke.name}.`);
-            player1.selectedSwitch = undefined;
-            logPlayer1Action(`${player1.playerName} switched to ${selectedPokemon.poke.name}.`);
 
-            processPlayerAction(player2, player1);
-        }
 
-        if (player1.selectedSwitch == undefined && player2.selectedSwitch !== undefined) {
-            const selectedPokemon = player2.team[player2.selectedSwitch];
-            player2.team.unshift(player2.team.splice(player2.selectedSwitch, 1)[0]);
-            console.log(`Player 2 switched to ${selectedPokemon.poke.name}.`);
-            player2.selectedSwitch = undefined;
-            logPlayer1Action(`${player2.playerName} switched to ${selectedPokemon.poke.name}.`);
 
-            processPlayerAction(player1, player2);
-        }
 
-        if (player1.team[0].hp <= 0) {
-            logPlayer1Action(`${player1.team[0].poke.name} fainted!`);
-        } 
-        if (player2.team[0].hp <= 0) {
-            logPlayer2Action(`${player2.team[0].poke.name} fainted!`);
-        }
+
 
         player1.madeTurn = false;
         player2.madeTurn = false;
@@ -1168,7 +1185,7 @@ function processPlayerAction(attacker, defender) {
     attacker.team[0].st -= move.stamina_cost;
 
     if (accuracyRoll <= move.acc) {
-        let effectiveness = 1; 
+        let effectiveness = 1;
 
         defender.team[0].poke.type.forEach((type) => {
             if (move.double.includes(type)) {
