@@ -4,8 +4,13 @@ let audio = {
     lobbyMusic: new Audio('media/sound/lobby.mp3'),
     battleMusic: new Audio('media/sound/battle03.mp3'),
     battleMusic2: new Audio('media/sound/battle02.mp3'),
-    battleMusic3: new Audio('media/sound/battle01.mp3')
+    battleMusic3: new Audio('media/sound/battle01.mp3'),
+    attackSound: new Audio('media/sound/soundingame/attaksound.mp3'),
+    switchSound: new Audio('media/sound/soundingame/pokeSwitch.mp3'),
+    faintSound: new Audio('media/sound/soundingame/faint.mp3'),
 }
+audio.switchSound.volume = 0.5;
+
 let player1 = {
     playerName: "Player 1",
     team: [
@@ -884,7 +889,7 @@ function loadBattleSite() {
     const middleSection = `
         <div id="middleSection">
             <img id="player1PokeImg" class="currentPokemon" src="./media/img/pokémon/${player1.team[0].poke.name.toLocaleLowerCase()}.png" alt="${player1.team[0].poke.name}">
-            <img class="currentPokemon" src="./media/img/pokémon/${player2.team[0].poke.name.toLocaleLowerCase()}.png" alt="${player2.team[0].poke.name}">
+            <img id="player2PokeImg" class="currentPokemon" src="./media/img/pokémon/${player2.team[0].poke.name.toLocaleLowerCase()}.png" alt="${player2.team[0].poke.name}">
         </div>
     `;
     const bottomSection = `
@@ -1056,67 +1061,125 @@ function executeTurn() {
         const secondPlayer = player1Speed >= player2Speed ? player2 : player1;
 
         if (player1.selectedSwitch == undefined && player2.selectedSwitch == undefined) {
-            processPlayerAction(firstPlayer, secondPlayer);
-            if (secondPlayer.team[0].hp > 0) {
-                processPlayerAction(secondPlayer, firstPlayer);
-            } else {
-                if (secondPlayer == player2) {
-                    logPlayer2Action(`${player2.team[0].poke.name} fainted!`);
+            setTimeout(function () {
+                processPlayerAction(firstPlayer, secondPlayer);
+            }, 100)
+            setTimeout(function () {
+                if (secondPlayer.team[0].hp > 0) {
+                    processPlayerAction(secondPlayer, firstPlayer);
                 } else {
-                    logPlayer1Action(`${player1.team[0].poke.name} fainted!`);
+                    if (secondPlayer === player2) {
+                        logPlayer2Action(`${player2.team[0].poke.name} fainted!`);
+                        document.getElementById("player2PokeImg").style.animation = "";
+                        document.getElementById("player2PokeImg").offsetHeight;
+                        document.getElementById("player2PokeImg").style.animation = "faint 0.5s forwards";
+                        audio.faintSound.play()
+                    } else {
+                        logPlayer1Action(`${player1.team[0].poke.name} fainted!`);
+                        document.getElementById("player1PokeImg").style.animation = "";
+                        document.getElementById("player1PokeImg").offsetHeight;
+                        document.getElementById("player1PokeImg").style.animation = "faint 0.5s forwards";
+                        audio.faintSound.play()
+                    }
                 }
-            }
-
+            }, 1000)
         } else {
             if (player1.selectedSwitch !== undefined && player2.selectedSwitch !== undefined) {
-                const selectedPokemon = player1.team[player1.selectedSwitch];
-                player1.team.unshift(player1.team.splice(player1.selectedSwitch, 1)[0]);
-                console.log(`Player 1 switched to ${selectedPokemon.poke.name}.`);
-                player1.selectedSwitch = undefined;
-                logPlayer1Action(`${player1.playerName} switched to ${selectedPokemon.poke.name}.`);
-
-                const selectedPokemon2 = player2.team[player2.selectedSwitch];
-                player2.team.unshift(player2.team.splice(player2.selectedSwitch, 1)[0]);
-                console.log(`Player 2 switched to ${selectedPokemon2.poke.name}.`);
-                player2.selectedSwitch = undefined;
-                logPlayer2Action(`${player2.playerName} switched to ${selectedPokemon2.poke.name}.`)
-            } else {
-                if (player1.selectedSwitch !== undefined && player2.selectedSwitch == undefined) {
+                setTimeout(function () {
                     const selectedPokemon = player1.team[player1.selectedSwitch];
                     player1.team.unshift(player1.team.splice(player1.selectedSwitch, 1)[0]);
                     console.log(`Player 1 switched to ${selectedPokemon.poke.name}.`);
                     player1.selectedSwitch = undefined;
                     logPlayer1Action(`${player1.playerName} switched to ${selectedPokemon.poke.name}.`);
+                    document.getElementById("player1PokeImg").style.animation = "";
+                    document.getElementById("player1PokeImg").offsetHeight;
+                    document.getElementById("player1PokeImg").style.animation = "fadeOut 0.5s forwards";
+                    loadTopMidSection();
+                    audio.switchSound.play()
+                    document.getElementById("player1PokeImg").style.animation = "";
+                    document.getElementById("player1PokeImg").offsetHeight;
+                    document.getElementById("player1PokeImg").style.animation = "fadeIn 0.5s forwards";
+                }, 100)
 
-                    processPlayerAction(player2, player1);
+                setTimeout(function () {
+                    const selectedPokemon2 = player2.team[player2.selectedSwitch];
+                    player2.team.unshift(player2.team.splice(player2.selectedSwitch, 1)[0]);
+                    console.log(`Player 2 switched to ${selectedPokemon2.poke.name}.`);
+                    player2.selectedSwitch = undefined;
+                    logPlayer2Action(`${player2.playerName} switched to ${selectedPokemon2.poke.name}.`)
+                    document.getElementById("player2PokeImg").style.animation = "";
+                    document.getElementById("player2PokeImg").offsetHeight;
+                    document.getElementById("player2PokeImg").style.animation = "fadeOut 0.5s forwards";
+                    loadTopMidSection();
+                    audio.switchSound.play()
+                    document.getElementById("player2PokeImg").style.animation = "";
+                    document.getElementById("player2PokeImg").offsetHeight;
+                    document.getElementById("player2PokeImg").style.animation = "fadeIn 0.5s forwards";
+                }, 1000)
+
+
+            } else {
+                if (player1.selectedSwitch !== undefined && player2.selectedSwitch == undefined) {
+                    setTimeout(function () {
+                        const selectedPokemon = player1.team[player1.selectedSwitch];
+                        player1.team.unshift(player1.team.splice(player1.selectedSwitch, 1)[0]);
+                        console.log(`Player 1 switched to ${selectedPokemon.poke.name}.`);
+                        player1.selectedSwitch = undefined;
+                        logPlayer1Action(`${player1.playerName} switched to ${selectedPokemon.poke.name}.`);
+                        document.getElementById("player1PokeImg").style.animation = "";
+                        document.getElementById("player1PokeImg").offsetHeight;
+                        document.getElementById("player1PokeImg").style.animation = "fadeOut 0.5s forwards";
+                        loadTopMidSection();
+                        audio.switchSound.play()
+                        document.getElementById("player1PokeImg").style.animation = "";
+                        document.getElementById("player1PokeImg").offsetHeight;
+                        document.getElementById("player1PokeImg").style.animation = "fadeIn 0.5s forwards";
+                    }, 100)
+
+                    setTimeout(function () {
+                        processPlayerAction(player2, player1);
+                    }, 1000)
 
                     if (player1.team[0].hp <= 0) {
                         logPlayer1Action(`${player1.team[0].poke.name} fainted!`);
+                        document.getElementById("player1PokeImg").style.animation = "";
+                        document.getElementById("player1PokeImg").offsetHeight;
+                        document.getElementById("player1PokeImg").style.animation = "faint 0.5s forwards";
+                        audio.faintSound.play()
                     }
                 } else {
                     if (player1.selectedSwitch == undefined && player2.selectedSwitch !== undefined) {
-                        const selectedPokemon = player2.team[player2.selectedSwitch];
-                        player2.team.unshift(player2.team.splice(player2.selectedSwitch, 1)[0]);
-                        console.log(`Player 2 switched to ${selectedPokemon.poke.name}.`);
-                        player2.selectedSwitch = undefined;
-                        logPlayer1Action(`${player2.playerName} switched to ${selectedPokemon.poke.name}.`);
-
+                        setTimeout(function () {
+                            const selectedPokemon2 = player2.team[player2.selectedSwitch];
+                            player2.team.unshift(player2.team.splice(player2.selectedSwitch, 1)[0]);
+                            console.log(`Player 2 switched to ${selectedPokemon2.poke.name}.`);
+                            player2.selectedSwitch = undefined;
+                            logPlayer2Action(`${player2.playerName} switched to ${selectedPokemon2.poke.name}.`)
+                            document.getElementById("player2PokeImg").style.animation = "";
+                            document.getElementById("player2PokeImg").offsetHeight;
+                            document.getElementById("player2PokeImg").style.animation = "fadeOut 0.5s forwards";
+                            loadTopMidSection();
+                            audio.switchSound.play()
+                            document.getElementById("player2PokeImg").style.animation = "";
+                            document.getElementById("player2PokeImg").offsetHeight;
+                            document.getElementById("player2PokeImg").style.animation = "fadeIn 0.5s forwards";
+                        }, 100
+                    )
+                    setTimeout(function () {
                         processPlayerAction(player1, player2);
+                    }, 1000)
+
                         if (player2.team[0].hp <= 0) {
                             logPlayer2Action(`${player2.team[0].poke.name} fainted!`);
+                            document.getElementById("player2PokeImg").style.animation = "";
+                            document.getElementById("player2PokeImg").offsetHeight;
+                            document.getElementById("player2PokeImg").style.animation = "faint 0.5s forwards";
+                            audio.faintSound.play()
                         }
                     }
                 }
             }
         }
-
-
-
-
-
-
-
-
 
         player1.madeTurn = false;
         player2.madeTurn = false;
@@ -1124,55 +1187,7 @@ function executeTurn() {
         player1.team[0].st = Math.min(player1.team[0].poke.stamina, player1.team[0].st + Math.floor(player1.team[0].poke.stamina * 0.05));
         player2.team[0].st = Math.min(player2.team[0].poke.stamina, player2.team[0].st + Math.floor(player2.team[0].poke.stamina * 0.05));
 
-        document.getElementById("topSection").innerHTML = `
-        <div class="playerInfoBox" id="player1Info"> 
-                <div class="playerTrainerBox" id="player1Trainer">
-                <img src="./media/img/trainer/${player1.trainer.type.toLocaleLowerCase()}.png" alt="${player1.trainer.type}">
-                </div>
-                <div class="playerName">${player1.playerName}</div>
-                <div class="playerTeam">
-                    ${player1.team.map(pokemon => `
-                        <img class="player1PokeImg" src="./media/img/pokémon/${pokemon.poke.name.toLocaleLowerCase()}.png" alt="${pokemon.poke.name}">
-                    `).join('')}
-                </div>
-            </div>
-            <div class="currentPokemonStats" id="player1CurrentStats">
-                <div class="currentPokemonName">${player1.team[0].poke.name}</div> <br>
-                <div class="currentPokemonHP"> ${player1.team[0].hp}/${player1.team[0].poke.hp} HP</div> <br>
-                <div class="currentPokemonStamina"> ${player1.team[0].st}/${player1.team[0].poke.stamina} ST</div> <br>
-            </div>
-            <div id="ingameButtons">
-            <div id="battleMusicSwitch">
-                <select id="musicSelector" onchange="switchBattleMusic(this.value)">
-                    <option value="battleMusic">Elite 4 Theme</option>
-                    <option value="battleMusic2">Team Aqua/Magma Team Leader</option>
-                    <option value="battleMusic3">Gym Leader Battle</option>
-                </select>
-            </div>
-            <div id="ingameBack" onclick="homescreen()">Back</div>
-            </div>
-            <div class="currentPokemonStats" id="player2CurrentStats">
-                <div class="currentPokemonName">${player2.team[0].poke.name}</div> <br>
-                <div class="currentPokemonHP"> ${player2.team[0].hp}/${player2.team[0].poke.hp} HP</div> <br>
-                <div class="currentPokemonStamina"> ${player2.team[0].st}/${player2.team[0].poke.stamina} ST</div> <br>
-            </div>
-            <div class="playerInfoBox" id="player2Info">
-             <div class="playerTrainerBox" id="player2Trainer">
-                <img class="player2TrainerBattleImg" src="./media/img/trainer/${player2.trainer.type.toLocaleLowerCase()}.png" alt="${player1.trainer.type}">
-                </div>
-                <div class="playerName">${player2.playerName}</div>
-                <div class="playerTeam">
-                    ${player2.team.map(pokemon => `
-                        <img src="./media/img/pokémon/${pokemon.poke.name.toLocaleLowerCase()}.png" alt="${pokemon.poke.name}">
-                    `).join('')}
-                </div>
-            </div>
-        `
-        document.getElementById("middleSection").innerHTML = `
-        <img id="player1PokeImg" class="currentPokemon" src="./media/img/pokémon/${player1.team[0].poke.name.toLocaleLowerCase()}.png" alt="${player1.team[0].poke.name}">
-            <img class="currentPokemon" src="./media/img/pokémon/${player2.team[0].poke.name.toLocaleLowerCase()}.png" alt="${player2.team[0].poke.name}">
-        
-        `
+        loadTopMidSection();
         setTimeout(function () {
             loadBattleSite();
         }, 5000);
@@ -1185,6 +1200,19 @@ function processPlayerAction(attacker, defender) {
     attacker.team[0].st -= move.stamina_cost;
 
     if (accuracyRoll <= move.acc) {
+
+        if (attacker === player1) {
+            document.getElementById("player1PokeImg").style.animation = "";
+            document.getElementById("player1PokeImg").offsetHeight;
+            document.getElementById("player1PokeImg").style.animation = "attack 0.5s forwards";
+            audio.attackSound.play()
+        } else {
+            document.getElementById("player2PokeImg").style.animation = "";
+            document.getElementById("player2PokeImg").offsetHeight;
+            document.getElementById("player2PokeImg").style.animation = "attack 0.5s forwards";
+            audio.attackSound.play()
+        }
+
         let effectiveness = 1;
 
         defender.team[0].poke.type.forEach((type) => {
@@ -1234,4 +1262,57 @@ function processPlayerAction(attacker, defender) {
             logPlayer2Action(`${move.name} missed!`);
         }
     }
+    setTimeout(function () {
+        loadTopMidSection();
+    }, 600)
+}
+function loadTopMidSection() {
+    document.getElementById("topSection").innerHTML = `
+        <div class="playerInfoBox" id="player1Info"> 
+                <div class="playerTrainerBox" id="player1Trainer">
+                <img src="./media/img/trainer/${player1.trainer.type.toLocaleLowerCase()}.png" alt="${player1.trainer.type}">
+                </div>
+                <div class="playerName">${player1.playerName}</div>
+                <div class="playerTeam">
+                    ${player1.team.map(pokemon => `
+                        <img class="player1PokeImg" src="./media/img/pokémon/${pokemon.poke.name.toLocaleLowerCase()}.png" alt="${pokemon.poke.name}">
+                    `).join('')}
+                </div>
+            </div>
+            <div class="currentPokemonStats" id="player1CurrentStats">
+                <div class="currentPokemonName">${player1.team[0].poke.name}</div> <br>
+                <div class="currentPokemonHP"> ${player1.team[0].hp}/${player1.team[0].poke.hp} HP</div> <br>
+                <div class="currentPokemonStamina"> ${player1.team[0].st}/${player1.team[0].poke.stamina} ST</div> <br>
+            </div>
+            <div id="ingameButtons">
+            <div id="battleMusicSwitch">
+                <select id="musicSelector" onchange="switchBattleMusic(this.value)">
+                    <option value="battleMusic">Elite 4 Theme</option>
+                    <option value="battleMusic2">Team Aqua/Magma Team Leader</option>
+                    <option value="battleMusic3">Gym Leader Battle</option>
+                </select>
+            </div>
+            <div id="ingameBack" onclick="homescreen()">Back</div>
+            </div>
+            <div class="currentPokemonStats" id="player2CurrentStats">
+                <div class="currentPokemonName">${player2.team[0].poke.name}</div> <br>
+                <div class="currentPokemonHP"> ${player2.team[0].hp}/${player2.team[0].poke.hp} HP</div> <br>
+                <div class="currentPokemonStamina"> ${player2.team[0].st}/${player2.team[0].poke.stamina} ST</div> <br>
+            </div>
+            <div class="playerInfoBox" id="player2Info">
+             <div class="playerTrainerBox" id="player2Trainer">
+                <img class="player2TrainerBattleImg" src="./media/img/trainer/${player2.trainer.type.toLocaleLowerCase()}.png" alt="${player1.trainer.type}">
+                </div>
+                <div class="playerName">${player2.playerName}</div>
+                <div class="playerTeam">
+                    ${player2.team.map(pokemon => `
+                        <img src="./media/img/pokémon/${pokemon.poke.name.toLocaleLowerCase()}.png" alt="${pokemon.poke.name}">
+                    `).join('')}
+                </div>
+            </div>
+        `
+    document.getElementById("middleSection").innerHTML = `
+        <img id="player1PokeImg" class="currentPokemon" src="./media/img/pokémon/${player1.team[0].poke.name.toLocaleLowerCase()}.png" alt="${player1.team[0].poke.name}">
+            <img id="player2PokeImg" class="currentPokemon" src="./media/img/pokémon/${player2.team[0].poke.name.toLocaleLowerCase()}.png" alt="${player2.team[0].poke.name}">
+        `
 }
