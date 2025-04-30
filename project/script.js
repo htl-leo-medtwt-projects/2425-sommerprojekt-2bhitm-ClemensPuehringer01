@@ -1204,12 +1204,12 @@ function processPlayerAction(attacker, defender) {
         if (attacker === player1) {
             document.getElementById("player1PokeImg").style.animation = "";
             document.getElementById("player1PokeImg").offsetHeight;
-            document.getElementById("player1PokeImg").style.animation = "attack 0.5s forwards";
+            document.getElementById("player1PokeImg").style.animation = "attack1 0.5s forwards";
             audio.attackSound.play()
         } else {
             document.getElementById("player2PokeImg").style.animation = "";
             document.getElementById("player2PokeImg").offsetHeight;
-            document.getElementById("player2PokeImg").style.animation = "attack 0.5s forwards";
+            document.getElementById("player2PokeImg").style.animation = "attack2 0.5s forwards";
             audio.attackSound.play()
         }
 
