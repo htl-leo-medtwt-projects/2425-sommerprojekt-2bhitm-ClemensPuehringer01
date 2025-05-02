@@ -23,6 +23,9 @@ let player1 = {
             might: pokémon.list[4].might,
             resistance: pokémon.list[4].resistance,
             speed: pokémon.list[4].speed,
+            dogedAttack: false,
+            knockedOutOpponent: false,
+            lastDamageDealt: 0,
             moves: [
                 attacks.moves[0],
                 attacks.special_moves[1],
@@ -36,6 +39,9 @@ let player1 = {
             might: pokémon.list[7].might,
             resistance: pokémon.list[7].resistance,
             speed: pokémon.list[7].speed,
+            dogedAttack: false,
+            knockedOutOpponent: false,
+            lastDamageDealt: 0,
             moves: [
                 attacks.moves[3],
                 attacks.special_moves[1],
@@ -49,6 +55,9 @@ let player1 = {
             might: pokémon.list[26].might,
             resistance: pokémon.list[26].resistance,
             speed: pokémon.list[26].speed,
+            dogedAttack: false,
+            knockedOutOpponent: false,
+            lastDamageDealt: 0,
             moves: [
                 attacks.moves[0],
                 attacks.moves[2]
@@ -71,6 +80,9 @@ let player2 = {
             might: pokémon.list[4].might,
             resistance: pokémon.list[4].resistance,
             speed: pokémon.list[4].speed,
+            dogedAttack: false,
+            knockedOutOpponent: false,
+            lastDamageDealt: 0,
             moves: [
                 attacks.moves[0],
                 attacks.special_moves[1],
@@ -84,6 +96,9 @@ let player2 = {
             might: pokémon.list[7].might,
             resistance: pokémon.list[7].resistance,
             speed: pokémon.list[7].speed,
+            dogedAttack: false,
+            knockedOutOpponent: false,
+            lastDamageDealt: 0,
             moves: [
                 attacks.moves[3],
                 attacks.special_moves[1],
@@ -97,6 +112,9 @@ let player2 = {
             might: pokémon.list[26].might,
             resistance: pokémon.list[26].resistance,
             speed: pokémon.list[26].speed,
+            dogedAttack: false,
+            knockedOutOpponent: false,
+            lastDamageDealt: 0,
             moves: [
                 attacks.moves[0],
                 attacks.moves[2]
@@ -1107,12 +1125,14 @@ function executeTurn() {
                         document.getElementById("player2PokeImg").offsetHeight;
                         document.getElementById("player2PokeImg").style.animation = "faint 0.5s forwards";
                         audio.faintSound.play()
+                        player1.team[0].knockedOutOpponent = true;
                     } else {
                         logPlayer1Action(`${player1.team[0].poke.name} fainted!`);
                         document.getElementById("player1PokeImg").style.animation = "";
                         document.getElementById("player1PokeImg").offsetHeight;
                         document.getElementById("player1PokeImg").style.animation = "faint 0.5s forwards";
                         audio.faintSound.play()
+                        player2.team[0].knockedOutOpponent = true;
                     }
                 }
             }, 1000)
@@ -1179,6 +1199,7 @@ function executeTurn() {
                         document.getElementById("player1PokeImg").offsetHeight;
                         document.getElementById("player1PokeImg").style.animation = "faint 0.5s forwards";
                         audio.faintSound.play()
+                        player2.team[0].knockedOutOpponent = true;
                     }
                 } else {
                     if (player1.selectedSwitch == undefined && player2.selectedSwitch !== undefined) {
@@ -1208,6 +1229,7 @@ function executeTurn() {
                             document.getElementById("player2PokeImg").offsetHeight;
                             document.getElementById("player2PokeImg").style.animation = "faint 0.5s forwards";
                             audio.faintSound.play()
+                            player1.team[0].knockedOutOpponent = true;
                         }
                     }
                 }
@@ -1236,6 +1258,12 @@ function processPlayerAction(attacker, defender) {
     const accuracyRoll = Math.random() * 100;
     const move = attacker.moveMade;
     attacker.team[0].st -= move.stamina_cost;
+
+    if (defender.team[0].dodgedAttack) {
+        logPlayerAction(defender, `${defender.team[0].poke.name} dodged the attack!`);
+        defender.team[0].dodgedAttack = false; 
+        return; 
+    }
 
     if (accuracyRoll <= move.acc) {
 
@@ -1267,6 +1295,7 @@ function processPlayerAction(attacker, defender) {
         const rndmMultiplier = Math.random() * (1.2 - 0.8) + 0.8;
         const damage = Math.floor((10 * (move.power * (attacker.team[0].might / defender.team[0].resistance)) / 50 + 2) * rndmMultiplier * effectiveness);
         defender.team[0].hp = Math.max(0, defender.team[0].hp - damage);
+        attacker.team[0].lastDamageDealt = damage;
 
         if (effectiveness > 1) {
             if (attacker === player1) {
@@ -1448,37 +1477,245 @@ function applyPerk(player, phase) {
 // Trainer Perk Functions
 
 function fieryRebirth(player) {
-    const firePokemon = player.team.find(pokemon => pokemon.poke.type.includes("fire") && pokemon.hp <= 0);
-    if (firePokemon && !player.trainer.reborn) {
-        firePokemon.hp = Math.floor(firePokemon.poke.hp / 2);
-        if(player==player1){
+    if (player == player1) {
+        const firePokemon = player.team.find(pokemon => pokemon.poke.type.includes("fire") && pokemon.hp <= 0);
+        if (firePokemon && !player.trainer.rebornp1) {
+            firePokemon.hp = Math.floor(firePokemon.poke.hp / 2);
             player.trainer.rebornp1 = true;
-        }else{
-            player.trainer.rebornp2 = true;
+            logPlayerAction(player, `${firePokemon.poke.name} was reborn with half HP!`);
+            console.log(player.playerName + `:${firePokemon.poke.name} was reborn with half HP!`)
         }
-        logPlayerAction(player, `${firePokemon.poke.name} was reborn with half HP!`);
-        console.log(player.playerName+`:${firePokemon.poke.name} was reborn with half HP!`)
+    } else {
+        const firePokemon = player.team.find(pokemon => pokemon.poke.type.includes("fire") && pokemon.hp <= 0);
+        if (firePokemon && !player.trainer.rebornp2) {
+            firePokemon.hp = Math.floor(firePokemon.poke.hp / 2);
+            player.trainer.rebornp2 = true;
+            logPlayerAction(player, `${firePokemon.poke.name} was reborn with half HP!`);
+            console.log(player.playerName + `:${firePokemon.poke.name} was reborn with half HP!`)
+        }
     }
 }
 
 function torrentialBoost(player) {
-    const activePokemon = player.team[0];
-    if (activePokemon.poke.type.includes("water") && activePokemon.hp <= activePokemon.poke.hp / 2) {
-        if(player==player1){
+    if (player == player1) {
+        const activePokemon = player.team[0];
+        if (activePokemon.poke.type.includes("water") && activePokemon.hp <= activePokemon.poke.hp / 2 && !player.trainer.torrentialBoostp1) {
             player.trainer.torrentialBoostp1 = true;
-        }else{
-            player.trainer.torrentialBoostp2 = true;
+            activePokemon.might = Math.floor(activePokemon.poke.might * 1.2);
+            logPlayerAction(player, `${activePokemon.poke.name} gained a Torrential Boost!`);
         }
-        activePokemon.might = Math.floor(activePokemon.poke.might * 1.2);
-        logPlayerAction(player, `${activePokemon.poke.name} gained a Torrential Boost!`);
+    } else {
+        const activePokemon = player.team[0];
+        if (activePokemon.poke.type.includes("water") && activePokemon.hp <= activePokemon.poke.hp / 2 && !player.trainer.torrentialBoostp2) {
+            player.trainer.torrentialBoostp2 = true;
+            activePokemon.might = Math.floor(activePokemon.poke.might * 1.2);
+            logPlayerAction(player, `${activePokemon.poke.name} gained a Torrential Boost!`);
+        }
     }
 }
 
 
 function verdantRecovery(player) {
-        if (player.team[0].poke.type.includes("grass") && player.team[0].hp > 0) {
-            const recoveredHP = Math.floor(player.team[0].poke.hp * 0.05);
-            player.team[0].hp = Math.min(player.team[0].hp + recoveredHP, player.team[0].poke.hp);
-            logPlayerAction(player, `${player.team[0].poke.name} recovered ${recoveredHP} HP!`);
+    if (player.team[0].poke.type.includes("grass") && player.team[0].hp > 0) {
+        const recoveredHP = Math.floor(player.team[0].poke.hp * 0.05);
+        player.team[0].hp = Math.min(player.team[0].hp + recoveredHP, player.team[0].poke.hp);
+        logPlayerAction(player, `${player.team[0].poke.name} recovered ${recoveredHP} HP!`);
+    }
+}
+function overcharge(player) {
+    const activePokemon = player.team[0];
+    if (activePokemon.poke.type.includes("electric")) {
+        activePokemon.might = Math.floor(activePokemon.poke.might * 1.15);
+        logPlayerAction(player, `${activePokemon.poke.name} gained Overcharge, increasing its might!`);
+    }
+}
+function frozenResilience(player) {
+    if (player == player1) {
+        const activePokemon = player.team[0];
+        if (activePokemon.poke.type.includes("ice") && activePokemon.hp <= activePokemon.poke.hp / 2 && !player.trainer.frozenResiliencep1) {
+            activePokemon.resistance = Math.floor(activePokemon.poke.resistance * 1.2);
+            player.trainer.frozenResiliencep1 = true;
+            logPlayerAction(player, `${activePokemon.poke.name} gained Frozen Resilience, reducing damage taken!`);
         }
-}   
+    } else {
+        const activePokemon = player.team[0];
+        if (activePokemon.poke.type.includes("ice") && activePokemon.hp <= activePokemon.poke.hp / 2 && !player.trainer.frozenResiliencep2) {
+            activePokemon.resistance = Math.floor(activePokemon.poke.resistance * 1.2);
+            player.trainer.frozenResiliencep2 = true;
+            logPlayerAction(player, `${activePokemon.poke.name} gained Frozen Resilience, reducing damage taken!`);
+        }
+    }
+}
+
+function unbreakableWill(player) {
+    const activePokemon = player.team[0];
+    if (activePokemon.poke.type.includes("fighting") && activePokemon.knockedOutOpponent) {
+        activePokemon.might = Math.floor(activePokemon.poke.resistance * 1.1);
+        activePokemon.knockedOutOpponent = false;
+        logPlayerAction(player, `${activePokemon.poke.name} gained Unbreakable Will, increasing its might!`);
+    }
+}
+
+function venomousPrecision(player) {
+    const activePokemon = player.team[0];
+    if (activePokemon.poke.type.includes("poison")) {
+        const damageRecovered = Math.floor(activePokemon.lastDamageDealt * 0.15);
+        activePokemon.hp = Math.min(activePokemon.hp + damageRecovered, activePokemon.poke.hp);
+        logPlayerAction(player, `${activePokemon.poke.name} recovered ${damageRecovered} HP with Venomous Precision!`);
+    }
+}
+function skyDancer(player) {
+    const activePokemon = player.team[0];
+    if (activePokemon.poke.type.includes("flying")) {
+        const dodgeChance = Math.random() * 100;
+        if (dodgeChance <= 20) {
+            activePokemon.dodgedAttack = true;
+        }
+    }
+}
+function swarmTactics(player) {
+    if (player == player1) {
+        const bugCount = player.team.filter(pokemon => pokemon.poke.type.includes("bug")).length;
+        if (bugCount > 1 && !player.trainer.swarmTacticsp1) {
+            player.team.forEach(pokemon => {
+                if (pokemon.poke.type.includes("bug")) {
+                    pokemon.might = Math.floor(pokemon.poke.might * 1.2);
+                    logPlayerAction(player, `${pokemon.poke.name} gained Swarm Tactics, increasing its might!`);
+                }
+            });
+            player.trainer.swarmTacticsp1 = true;
+        }
+    } else {
+        const bugCount = player.team.filter(pokemon => pokemon.poke.type.includes("bug")).length;
+        if (bugCount > 1 && !player.trainer.swarmTacticsp2) {
+            player.team.forEach(pokemon => {
+                if (pokemon.poke.type.includes("bug")) {
+                    pokemon.might = Math.floor(pokemon.poke.might * 1.2);
+                    logPlayerAction(player, `${pokemon.poke.name} gained Swarm Tactics, increasing its might!`);
+                }
+            });
+            player.trainer.swarmTacticsp2 = true;
+        }
+    }
+}
+function stoneWall(player) {
+    if (player == player1) {
+        const activePokemon = player.team[0];
+        if (activePokemon.poke.type.includes("rock") && activePokemon.hp <= activePokemon.poke.hp / 2 && !player.trainer.stoneWallp1) {
+            activePokemon.resistance = Math.floor(activePokemon.poke.resistance * 1.2);
+            player.trainer.stoneWallp1 = true;
+            logPlayerAction(player, `${activePokemon.poke.name} gained Stone Wall, increasing its resistance!`);
+        }
+    } else {
+        const activePokemon = player.team[0];
+        if (activePokemon.poke.type.includes("rock") && activePokemon.hp <= activePokemon.poke.hp / 2 && !player.trainer.stoneWallp2) {
+            activePokemon.resistance = Math.floor(activePokemon.poke.resistance * 1.2);
+            player.trainer.stoneWallp2 = true;
+            logPlayerAction(player, `${activePokemon.poke.name} gained Stone Wall, increasing its resistance!`);
+        }
+    }
+}
+
+function phantomEscape(player) {
+    const activePokemon = player.team[0];
+    if (activePokemon.poke.type.includes("ghost")) {
+        const dodgeChance = Math.random() * 100;
+        if (dodgeChance <= 20) {
+            activePokemon.dodgedAttack = true;
+        }
+    }
+}
+function ancientPower(player) {
+    const activePokemon = player.team[0];
+    if (activePokemon.poke.type.includes("dragon") && activePokemon.knockedOutOpponent) {
+        activePokemon.might = Math.floor(activePokemon.poke.might * 1.05);
+        logPlayerAction(player, `${activePokemon.poke.name} gained Ancient Power, increasing its might!`);
+    }
+}
+function shadowStrike(player) {
+    const activePokemon = player.team[0];
+    if (activePokemon.poke.type.includes("dark")) {
+        activePokemon.might = Math.floor(activePokemon.poke.might * 1.1);
+        logPlayerAction(player, `${activePokemon.poke.name} gained Shadow Strike, increasing its might!`);
+    }
+}
+function ironResolve(player) {
+    if (player == player1) {
+        if (!player.trainer.ironResolvep1) {
+            player.trainer.ironResolvep1 = true;
+            const activePokemon = player.team[0];
+            if (activePokemon.poke.type.includes("steel")) {
+                activePokemon.resistance = Math.floor(activePokemon.poke.resistance * 1.1);
+                logPlayerAction(player, `${activePokemon.poke.name} gained Iron Resolve, increasing its resistance!`);
+            }
+        }
+    } else {
+        if (!player.trainer.ironResolvep2) {
+            player.trainer.ironResolvep2 = true;
+            const activePokemon = player.team[0];
+            if (activePokemon.poke.type.includes("steel")) {
+                activePokemon.resistance = Math.floor(activePokemon.poke.resistance * 1.1);
+                logPlayerAction(player, `${activePokemon.poke.name} gained Iron Resolve, increasing its resistance!`);
+            }
+        }
+    }
+}
+
+function quakeMomentum(player) {
+    const activePokemon = player.team[0];
+    if (activePokemon.poke.type.includes("ground") && activePokemon.knockedOutOpponent) {
+        activePokemon.speed = Math.floor(activePokemon.poke.speed * 1.2);
+        logPlayerAction(player, `${activePokemon.poke.name} gained Quake Momentum, increasing its speed!`);
+        activePokemon.knockedOutOpponent = false;
+    }
+}
+function enchantedVeil(player) {
+    if (player == player1) {
+        const activePokemon = player.team[0];
+        if (activePokemon.poke.type.includes("fairy") && activePokemon.hp <= activePokemon.poke.hp / 2 && !player.trainer.enchantedVeilp1) {
+            activePokemon.resistance = Math.floor(activePokemon.poke.resistance * 1.25);
+            logPlayerAction(player, `${activePokemon.poke.name} gained Enchanted Veil, reducing damage taken!`);
+            player.trainer.enchantedVeilp1 = true;
+        }
+    } else {
+        const activePokemon = player.team[0];
+        if (activePokemon.poke.type.includes("fairy") && activePokemon.hp <= activePokemon.poke.hp / 2 && !player.trainer.enchantedVeilp2) {
+            activePokemon.resistance = Math.floor(activePokemon.poke.resistance * 1.25);
+            logPlayerAction(player, `${activePokemon.poke.name} gained Enchanted Veil, reducing damage taken!`);
+            player.trainer.enchantedVeilp2 = true;
+        }
+    }
+}
+
+function mindOverMatter(player) {
+    const activePokemon = player.team[0];
+    if (activePokemon.poke.type.includes("psychic")) {
+        const dodgeChance = Math.random() * 100;
+        if (dodgeChance <= 10) {
+            activePokemon.dodgedAttack = true;
+            logPlayerAction(player, `${activePokemon.poke.name} dodged the attack with Mind over Matter!`);
+        }
+    }
+}
+function underdogSpirit(player) {
+    const activePokemon = player.team[0];
+    const opponentPokemon = player === player1 ? player2.team[0] : player1.team[0];
+
+    const activePokemonStatTotal = activePokemon.poke.hp + activePokemon.poke.might + activePokemon.poke.resistance + activePokemon.poke.speed;
+    const opponentPokemonStatTotal = opponentPokemon.poke.hp + opponentPokemon.poke.might + opponentPokemon.poke.resistance + opponentPokemon.poke.speed;
+
+    if (player == player1) {
+        if (activePokemon.poke.type.includes("normal") && activePokemonStatTotal < opponentPokemonStatTotal && !player.trainer.underdogSpiritp1) {
+            player.trainer.underdogSpiritp1 = true;
+            activePokemon.resistance = Math.floor(activePokemon.poke.resistance * 1.15);
+            logPlayerAction(player, `${activePokemon.poke.name} gained Underdog Spirit, reducing damage taken!`);
+        }
+    } else {
+        if (activePokemon.poke.type.includes("normal") && activePokemonStatTotal < opponentPokemonStatTotal && !player.trainer.underdogSpiritp2) {
+            player.trainer.underdogSpiritp2 = true;
+            activePokemon.resistance = Math.floor(activePokemon.poke.resistance * 1.15);
+            logPlayerAction(player, `${activePokemon.poke.name} gained Underdog Spirit, reducing damage taken!`);
+        }
+    }
+
+}
