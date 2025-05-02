@@ -96,6 +96,24 @@
 }
 
 
+@keyframes fadeInVictory {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleUpVictory {
+    from {
+        transform: scale(0.8);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
 body{
     overflow: hidden;
     margin: 0;
@@ -968,4 +986,54 @@ body{
         background-color: var(--secondColor);
         color: #000;
         border: 2px solid var(--mainColor);
+    }
+    #endScreen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: fadeInVictory 1s ease-in-out;
+        z-index: 1000;
+    }
+    
+    #endScreenContent {
+        text-align: center;
+        background-color: var(--mainColor);
+        border: 3px solid var(--secondColor);
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        animation: scaleUpVictory 0.5s ease-in-out;
+    }
+    
+    #endScreenContent h1 {
+        font-size: 3em;
+        color: var(--secondColor);
+        margin-bottom: 20px;
+    }
+    
+    #endScreenContent p {
+        font-size: 1.5em;
+        color: black;
+        margin-bottom: 30px;
+    }
+    
+    #restartButton {
+        background-color: var(--secondColor);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 10px 20px;
+        font-size: 1.2em;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    
+    #restartButton:hover {
+        background-color: #2a4d8a;
     }

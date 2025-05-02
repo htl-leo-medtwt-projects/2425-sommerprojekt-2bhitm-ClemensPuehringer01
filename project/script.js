@@ -8,6 +8,7 @@ let audio = {
     attackSound: new Audio('media/sound/soundingame/attaksound.mp3'),
     switchSound: new Audio('media/sound/soundingame/pokeSwitch.mp3'),
     faintSound: new Audio('media/sound/soundingame/faint.mp3'),
+    victoryMusic: new Audio('media/sound/victory.mp3'),
 }
 audio.switchSound.volume = 0.5;
 
@@ -1265,6 +1266,10 @@ function processPlayerAction(attacker, defender) {
     setTimeout(function () {
         loadTopMidSection();
     }, 600)
+    setTimeout(function () {
+       checkGameOver(); 
+    }, 2500)
+    
 }
 function loadTopMidSection() {
     document.getElementById("topSection").innerHTML = `
@@ -1315,4 +1320,29 @@ function loadTopMidSection() {
         <img id="player1PokeImg" class="currentPokemon" src="./media/img/pokémon/${player1.team[0].poke.name.toLocaleLowerCase()}.png" alt="${player1.team[0].poke.name}">
             <img id="player2PokeImg" class="currentPokemon" src="./media/img/pokémon/${player2.team[0].poke.name.toLocaleLowerCase()}.png" alt="${player2.team[0].poke.name}">
         `
+}
+function checkGameOver() {
+    const player1AllFainted = player1.team.every(pokemon => pokemon.hp <= 0);
+    const player2AllFainted = player2.team.every(pokemon => pokemon.hp <= 0);
+
+    if (player1AllFainted || player2AllFainted) {
+        const winner = player1AllFainted ? player2.playerName : player1.playerName;
+
+        audio.battleMusic.pause();
+        audio.battleMusic2.pause();
+        audio.battleMusic3.pause();
+        audio.victoryMusic.play();
+        audio.victoryMusic.loop = true;
+        audio.victoryMusic.volume = 0.4;
+
+        document.body.innerHTML = `
+            <div id="endScreen">
+                <div id="endScreenContent">
+                    <h1>Game Over</h1>
+                    <p>${winner} wins!</p>
+                    <div id="restartButton" onclick="location.reload()">Restart</div>
+                </div>
+            </div>
+        `;
+    }
 }
