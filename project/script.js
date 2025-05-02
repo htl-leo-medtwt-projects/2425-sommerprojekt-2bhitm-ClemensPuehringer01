@@ -20,6 +20,9 @@ let player1 = {
             perk: perks.pokemon_perks[0],
             hp: pokémon.list[4].hp,
             st: pokémon.list[4].stamina,
+            might: pokémon.list[4].might,
+            resistance: pokémon.list[4].resistance,
+            speed: pokémon.list[4].speed,
             moves: [
                 attacks.moves[0],
                 attacks.special_moves[1],
@@ -30,6 +33,9 @@ let player1 = {
             perk: perks.pokemon_perks[0],
             hp: pokémon.list[7].hp,
             st: pokémon.list[7].stamina,
+            might: pokémon.list[7].might,
+            resistance: pokémon.list[7].resistance,
+            speed: pokémon.list[7].speed,
             moves: [
                 attacks.moves[3],
                 attacks.special_moves[1],
@@ -40,6 +46,9 @@ let player1 = {
             perk: perks.pokemon_perks[0],
             hp: pokémon.list[26].hp,
             st: pokémon.list[26].stamina,
+            might: pokémon.list[26].might,
+            resistance: pokémon.list[26].resistance,
+            speed: pokémon.list[26].speed,
             moves: [
                 attacks.moves[0],
                 attacks.moves[2]
@@ -59,6 +68,9 @@ let player2 = {
             perk: perks.pokemon_perks[0],
             hp: pokémon.list[4].hp,
             st: pokémon.list[4].stamina,
+            might: pokémon.list[4].might,
+            resistance: pokémon.list[4].resistance,
+            speed: pokémon.list[4].speed,
             moves: [
                 attacks.moves[0],
                 attacks.special_moves[1],
@@ -69,6 +81,9 @@ let player2 = {
             perk: perks.pokemon_perks[0],
             hp: pokémon.list[7].hp,
             st: pokémon.list[7].stamina,
+            might: pokémon.list[7].might,
+            resistance: pokémon.list[7].resistance,
+            speed: pokémon.list[7].speed,
             moves: [
                 attacks.moves[3],
                 attacks.special_moves[1],
@@ -79,6 +94,9 @@ let player2 = {
             perk: perks.pokemon_perks[0],
             hp: pokémon.list[26].hp,
             st: pokémon.list[26].stamina,
+            might: pokémon.list[26].might,
+            resistance: pokémon.list[26].resistance,
+            speed: pokémon.list[26].speed,
             moves: [
                 attacks.moves[0],
                 attacks.moves[2]
@@ -363,6 +381,9 @@ function changePokeOver1(pokemonTeamNum, num) {
     player1.team[pokemonTeamNum].poke = pokemonList[currentIndex];
     player1.team[pokemonTeamNum].hp = player1.team[pokemonTeamNum].poke.hp;
     player1.team[pokemonTeamNum].st = player1.team[pokemonTeamNum].poke.stamina;
+    player1.team[pokemonTeamNum].might = player1.team[pokemonTeamNum].poke.might;
+    player1.team[pokemonTeamNum].resistance = player1.team[pokemonTeamNum].poke.resistance;
+    player1.team[pokemonTeamNum].speed = player1.team[pokemonTeamNum].poke.speed;
     for (let i = 0; i < perks.pokemon_perks.length; i++) {
         if (perks.pokemon_perks[i].type == player1.team[pokemonTeamNum].poke.type[0]) {
             player1.team[pokemonTeamNum].perk = perks.pokemon_perks[i];
@@ -715,6 +736,9 @@ function changePokeOver2(pokemonTeamNum, num) {
     player2.team[pokemonTeamNum].poke = pokemonList[currentIndex];
     player2.team[pokemonTeamNum].hp = player2.team[pokemonTeamNum].poke.hp;
     player2.team[pokemonTeamNum].st = player2.team[pokemonTeamNum].poke.stamina;
+    player2.team[pokemonTeamNum].might = player2.team[pokemonTeamNum].poke.might;
+    player2.team[pokemonTeamNum].resistance = player2.team[pokemonTeamNum].poke.resistance;
+    player2.team[pokemonTeamNum].speed = player2.team[pokemonTeamNum].poke.speed;
     for (let i = 0; i < perks.pokemon_perks.length; i++) {
         if (perks.pokemon_perks[i].type == player2.team[pokemonTeamNum].poke.type[0]) {
             player2.team[pokemonTeamNum].perk = perks.pokemon_perks[i];
@@ -1051,12 +1075,20 @@ function logPlayer2Action(action) {
     const battleLog = document.getElementById("battleLog");
     battleLog.innerHTML += `<p>${player2.playerName}: ${action}</p>`;
 }
+function logPlayerAction(player, message) {
+    const battleLog = document.getElementById("battleLog");
+    battleLog.innerHTML += `<p>${player.playerName}: ${message}</p>`;
+}
 
 function executeTurn() {
+
+    applyPerk(player1, "start");
+    applyPerk(player2, "start");
+
     setTimeout(function () {
 
-        const player1Speed = player1.team[0].poke.speed;
-        const player2Speed = player2.team[0].poke.speed;
+        const player1Speed = player1.team[0].speed;
+        const player2Speed = player2.team[0].speed;
 
         const firstPlayer = player1Speed >= player2Speed ? player1 : player2;
         const secondPlayer = player1Speed >= player2Speed ? player2 : player1;
@@ -1165,10 +1197,10 @@ function executeTurn() {
                             document.getElementById("player2PokeImg").offsetHeight;
                             document.getElementById("player2PokeImg").style.animation = "fadeIn 0.5s forwards";
                         }, 100
-                    )
-                    setTimeout(function () {
-                        processPlayerAction(player1, player2);
-                    }, 1000)
+                        )
+                        setTimeout(function () {
+                            processPlayerAction(player1, player2);
+                        }, 1000)
 
                         if (player2.team[0].hp <= 0) {
                             logPlayer2Action(`${player2.team[0].poke.name} fainted!`);
@@ -1188,11 +1220,16 @@ function executeTurn() {
         player1.team[0].st = Math.min(player1.team[0].poke.stamina, player1.team[0].st + Math.floor(player1.team[0].poke.stamina * 0.05));
         player2.team[0].st = Math.min(player2.team[0].poke.stamina, player2.team[0].st + Math.floor(player2.team[0].poke.stamina * 0.05));
 
+        applyPerk(player1, "end");
+        applyPerk(player2, "end");
+
         loadTopMidSection();
         setTimeout(function () {
             loadBattleSite();
         }, 5000);
     }, 500);
+
+
 }
 
 function processPlayerAction(attacker, defender) {
@@ -1228,7 +1265,7 @@ function processPlayerAction(attacker, defender) {
 
 
         const rndmMultiplier = Math.random() * (1.2 - 0.8) + 0.8;
-        const damage = Math.floor((10 * (move.power * (attacker.team[0].poke.might / defender.team[0].poke.resistance)) / 50 + 2) * rndmMultiplier * effectiveness);
+        const damage = Math.floor((10 * (move.power * (attacker.team[0].might / defender.team[0].resistance)) / 50 + 2) * rndmMultiplier * effectiveness);
         defender.team[0].hp = Math.max(0, defender.team[0].hp - damage);
 
         if (effectiveness > 1) {
@@ -1267,9 +1304,9 @@ function processPlayerAction(attacker, defender) {
         loadTopMidSection();
     }, 600)
     setTimeout(function () {
-       checkGameOver(); 
+        checkGameOver();
     }, 2500)
-    
+
 }
 function loadTopMidSection() {
     document.getElementById("topSection").innerHTML = `
@@ -1346,3 +1383,102 @@ function checkGameOver() {
         `;
     }
 }
+
+function applyPerk(player, phase) {
+    const trainerType = player.trainer.type;
+
+    switch (trainerType) {
+        case "fire":
+            if (phase === "end") fieryRebirth(player);
+            break;
+        case "water":
+            if (phase === "start") torrentialBoost(player);
+            break;
+        case "grass":
+            if (phase === "end") verdantRecovery(player);
+            break;
+        case "electric":
+            if (phase === "start") overcharge(player);
+            break;
+        case "ice":
+            if (phase === "start") frozenResilience(player);
+            break;
+        case "fighting":
+            if (phase === "end") unbreakableWill(player);
+            break;
+        case "poison":
+            if (phase === "start") venomousPrecision(player);
+            break;
+        case "flying":
+            if (phase === "start") skyDancer(player);
+            break;
+        case "bug":
+            if (phase === "end") swarmTactics(player);
+            break;
+        case "rock":
+            if (phase === "start") stoneWall(player);
+            break;
+        case "ghost":
+            if (phase === "start") phantomEscape(player);
+            break;
+        case "dragon":
+            if (phase === "end") ancientPower(player);
+            break;
+        case "dark":
+            if (phase === "start") shadowStrike(player);
+            break;
+        case "steel":
+            if (phase === "start") ironResolve(player);
+            break;
+        case "ground":
+            if (phase === "end") quakeMomentum(player);
+            break;
+        case "fairy":
+            if (phase === "start") enchantedVeil(player);
+            break;
+        case "psychic":
+            if (phase === "start") mindOverMatter(player);
+            break;
+        case "normal":
+            if (phase === "start") underdogSpirit(player);
+            break;
+    }
+}
+
+// Trainer Perk Functions
+
+function fieryRebirth(player) {
+    const firePokemon = player.team.find(pokemon => pokemon.poke.type.includes("fire") && pokemon.hp <= 0);
+    if (firePokemon && !player.trainer.reborn) {
+        firePokemon.hp = Math.floor(firePokemon.poke.hp / 2);
+        if(player==player1){
+            player.trainer.rebornp1 = true;
+        }else{
+            player.trainer.rebornp2 = true;
+        }
+        logPlayerAction(player, `${firePokemon.poke.name} was reborn with half HP!`);
+        console.log(player.playerName+`:${firePokemon.poke.name} was reborn with half HP!`)
+    }
+}
+
+function torrentialBoost(player) {
+    const activePokemon = player.team[0];
+    if (activePokemon.poke.type.includes("water") && activePokemon.hp <= activePokemon.poke.hp / 2) {
+        if(player==player1){
+            player.trainer.torrentialBoostp1 = true;
+        }else{
+            player.trainer.torrentialBoostp2 = true;
+        }
+        activePokemon.might = Math.floor(activePokemon.poke.might * 1.2);
+        logPlayerAction(player, `${activePokemon.poke.name} gained a Torrential Boost!`);
+    }
+}
+
+
+function verdantRecovery(player) {
+        if (player.team[0].poke.type.includes("grass") && player.team[0].hp > 0) {
+            const recoveredHP = Math.floor(player.team[0].poke.hp * 0.05);
+            player.team[0].hp = Math.min(player.team[0].hp + recoveredHP, player.team[0].poke.hp);
+            logPlayerAction(player, `${player.team[0].poke.name} recovered ${recoveredHP} HP!`);
+        }
+}   

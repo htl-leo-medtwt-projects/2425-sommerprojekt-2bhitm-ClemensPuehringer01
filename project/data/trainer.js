@@ -3,12 +3,16 @@ let trainer ={
         {
             "name": "Fire-Trainer",
             "type": "fire",
-            "perk": "Fiery Rebirth: The first fire Pokémon that faints gets reborn at half its health."
+            "perk": "Fiery Rebirth: The first fire Pokémon that faints gets reborn at half its health.",
+            "rebornp1": false,
+            "rebornp2": false
         },
         {
             "name": "Water-Trainer",
             "type": "water",
-            "perk": "Torrential Boost: Water-type moves gain 20% power when the Pokémon's HP is below 50%."
+            "perk": "Torrential Boost: Water-type Pokémon gain 20% might when the Pokémon's HP is below 50%.",
+            "torrentialBoostp1": false,
+            "torrentialBoostp2": false
         },
         {
             "name": "Grass-Trainer",

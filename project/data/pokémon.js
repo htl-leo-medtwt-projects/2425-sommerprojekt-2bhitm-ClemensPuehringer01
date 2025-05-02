@@ -1,5 +1,3 @@
-//The resistance and wealnesses are only from the first type
-
 let 
 pokémon = {
     list: [
