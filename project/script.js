@@ -1273,8 +1273,8 @@ function processPlayerAction(attacker, defender) {
 
     if (defender.team[0].dodgedAttack) {
         logPlayerAction(defender, `${defender.team[0].poke.name} dodged the attack!`);
-        defender.team[0].dodgedAttack = false; 
-        return; 
+        defender.team[0].dodgedAttack = false;
+        return;
     }
 
     if (accuracyRoll <= move.acc) {
@@ -1875,7 +1875,7 @@ function applyPokemonPerk(player, phase) {
 }
 function heatSurge(pokemon, player) {
     if (!pokemon.perkUsed) {
-        pokemon.speed = Math.floor(pokemon.speed * 1.1); 
+        pokemon.speed = Math.floor(pokemon.speed * 1.1);
         pokemon.perkUsed = true;
         logPlayerAction(player, `${pokemon.poke.name} activated Heat Surge, increasing its speed!`);
     }
@@ -1883,7 +1883,7 @@ function heatSurge(pokemon, player) {
 function emberShield(pokemon, player) {
     if (!pokemon.perkUsed) {
         pokemon.resistance = Math.floor(pokemon.resistance * 1.05);
-        pokemon.perkUsed = true; 
+        pokemon.perkUsed = true;
         logPlayerAction(player, `${pokemon.poke.name} activated Ember Shield, increasing its resistance!`);
     }
 }
@@ -1898,10 +1898,10 @@ function waveCrash(pokemon, player) {
         pokemon.perkUsed = true;
         logPlayerAction(player, `${pokemon.poke.name} activated Wave Crash, increasing its damage!`);
     }
-}   
+}
 function rootedStrength(pokemon, player) {
-        pokemon.resistance = Math.floor(pokemon.resistance * 1.05);
-        logPlayerAction(player, `${pokemon.poke.name} activated Rooted Strength, increasing its resistance!`);
+    pokemon.resistance = Math.floor(pokemon.resistance * 1.05);
+    logPlayerAction(player, `${pokemon.poke.name} activated Rooted Strength, increasing its resistance!`);
 }
 function vineSnare(pokemon, player) {
     const chance = Math.random() * 100;
@@ -1916,5 +1916,214 @@ function electricSpeed(pokemon, player) {
     if (dodgeChance <= 5) {
         pokemon.dodgedAttack = true;
         logPlayerAction(player, `${pokemon.poke.name} activated Electric Speed and is ready to dodge the next attack!`);
+    }
+}
+function chargeUp(pokemon, player) {
+    if (!pokemon.perkUsed) {
+        pokemon.resistance = Math.floor(pokemon.resistance * 1.05);
+        pokemon.perkUsed = true;
+        logPlayerAction(player, `${pokemon.poke.name} activated Charge Up, increasing its resistance!`);
+    }
+}
+function frostArmor(pokemon, player) {
+    if (!pokemon.perkUsed) {
+        pokemon.resistance = Math.floor(pokemon.resistance * 1.05);
+        pokemon.perkUsed = true;
+        logPlayerAction(player, `${pokemon.poke.name} activated Frost Armor, increasing its resistance!`);
+    }
+}
+function chillingTouch(pokemon, player) {
+    const chance = Math.random() * 100;
+    if (chance <= 15) {
+        const opponent = player === player1 ? player2.team[0] : player1.team[0];
+        opponent.speed = Math.floor(opponent.speed * 0.95);
+        logPlayerAction(player, `${pokemon.poke.name} activated Chilling Touch, reducing ${opponent.poke.name}'s speed!`);
+    }
+}
+function secondWind(pokemon, player) {
+    if (pokemon.knockedOutOpponent) {
+        const recoveredHP = Math.floor(pokemon.poke.hp * 0.1);
+        pokemon.hp = Math.min(pokemon.hp + recoveredHP, pokemon.poke.hp);
+        pokemon.knockedOutOpponent = false;
+        logPlayerAction(player, `${pokemon.poke.name} activated Second Wind, recovering ${recoveredHP} HP!`);
+    }
+}
+function unyielding(pokemon, player) {
+    if (pokemon.hp <= pokemon.poke.hp * 0.3 && !pokemon.perkUsed) {
+        pokemon.resistance = Math.floor(pokemon.resistance * 1.15);
+        pokemon.perkUsed = true;
+        logPlayerAction(player, `${pokemon.poke.name} activated Unyielding, reducing damage taken!`);
+    }
+}
+function firmFooting(pokemon, player) {
+    if (!pokemon.perkUsed) {
+        pokemon.speed = Math.floor(pokemon.speed * 1.05);
+        pokemon.perkUsed = true;
+        logPlayerAction(player, `${pokemon.poke.name} activated Firm Footing, increasing its speed!`);
+    }
+}
+function dustCloud(pokemon, player) {
+    const chance = Math.random() * 100;
+    if (chance <= 10) {
+        const opponent = player === player1 ? player2.team[0] : player1.team[0];
+        opponent.speed = Math.floor(opponent.speed * 0.95);
+        logPlayerAction(player, `${pokemon.poke.name} activated Dust Cloud, reducing ${opponent.poke.name}'s speed!`);
+    }
+}
+function lingeringToxins(pokemon, player) {
+    if (pokemon.hp <= 0) {
+        const opponent = player === player1 ? player2.team[0] : player1.team[0];
+        opponent.hp = Math.max(0, opponent.hp - Math.floor(opponent.poke.hp * 0.1));
+        logPlayerAction(player, `${pokemon.poke.name} activated Lingering Toxins, damaging ${opponent.poke.name}!`);
+    }
+}
+function corrosiveTouch(pokemon, player) {
+    if (pokemon.hp <= 0) {
+        const opponent = player === player1 ? player2.team[0] : player1.team[0];
+        opponent.resistance = Math.floor(opponent.resistance * 0.8);
+        logPlayerAction(player, `${pokemon.poke.name} activated Corrosive Touch, reducing ${opponent.poke.name}'s resistance!`);
+    }
+}
+function windRider(pokemon, player) {
+    const opponent = player === player1 ? player2.team[0] : player1.team[0];
+    if (pokemon.speed > opponent.speed && !pokemon.perkUsed) {
+        pokemon.perkUsed = true;
+        pokemon.resistance = Math.floor(pokemon.resistance * 1.1);
+        logPlayerAction(player, `${pokemon.poke.name} activated Wind Rider, reducing damage taken!`);
+    }
+}
+function aerialControl(pokemon, player) {
+    const dodgeChance = Math.random() * 100;
+    if (dodgeChance <= 5) {
+        pokemon.dodgedAttack = true;
+        logPlayerAction(player, `${pokemon.poke.name} activated Aerial Control and is ready to dodge the next attack!`);
+    }
+}
+function mentalClarity(pokemon, player) {
+    if (!pokemon.perkUsed) {
+        pokemon.resistance = Math.floor(pokemon.resistance * 1.05);
+        pokemon.perkUsed = true
+        logPlayerAction(player, `${pokemon.poke.name} activated Mental Clarity, increasing its resistance!`);
+    }
+}
+function telekineticEvasion(pokemon, player) {
+    const dodgeChance = Math.random() * 100;
+    if (dodgeChance <= 5) {
+        pokemon.dodgedAttack = true;
+        logPlayerAction(player, `${pokemon.poke.name} activated Telekinetic Evasion and is ready to dodge the next attack!`);
+    }
+}
+function swarmFormation(pokemon, player) {
+    const bugCount = player.team.filter(p => p.poke.type.includes("bug")).length;
+    if (bugCount > 1 && !pokemon.perkUsed) {
+        pokemon.might = Math.floor(pokemon.might * 1.05);
+        pokemon.perkUsed = true;
+        logPlayerAction(player, `${pokemon.poke.name} activated Swarm Formation, increasing its damage!`);
+    }
+}
+function exoskeleton(pokemon, player) {
+    if (!pokemon.perkUsed) {
+        pokemon.resistance = Math.floor(pokemon.resistance * 1.1);
+        pokemon.perkUsed = true;
+        logPlayerAction(player, `${pokemon.poke.name} activated Exoskeleton, reducing damage taken!`);
+    }
+}
+function hardenedDefense(pokemon, player) {
+    if (pokemon.hp <= pokemon.poke.hp * 0.75 && !pokemon.perkUsed) {
+        pokemon.resistance = Math.floor(pokemon.resistance * 1.15);
+        pokemon.perkUsed = true;
+        logPlayerAction(player, `${pokemon.poke.name} activated Hardened Defense, reducing damage taken!`);
+    }
+}
+function rollingMomentum(pokemon, player) {
+        pokemon.might = Math.floor(pokemon.might * 1.05);
+        logPlayerAction(player, `${pokemon.poke.name} activated Rolling Momentum, increasing its damage!`);
+}
+function etherealStep(pokemon, player) {
+    const dodgeChance = Math.random() * 100;
+    if (dodgeChance <= 5) {
+        pokemon.dodgedAttack = true;
+        logPlayerAction(player, `${pokemon.poke.name} activated Ethereal Step and is ready to dodge the next attack!`);
+    }
+}
+function hauntedAura(pokemon, player) {
+    const chance = Math.random() * 100;
+    if (chance <= 15) {
+        const opponent = player === player1 ? player2.team[0] : player1.team[0];
+        opponent.resistance = Math.floor(opponent.resistance * 0.95);
+        logPlayerAction(player, `${pokemon.poke.name} activated Haunted Aura, reducing ${opponent.poke.name}'s resistance!`);
+    }
+}
+function draconicFerocity(pokemon, player) {
+    if (!pokemon.perkUsed) {
+        pokemon.might = Math.floor(pokemon.might * 1.05);
+        pokemon.perkUsed = true;
+        logPlayerAction(player, `${pokemon.poke.name} activated Draconic Ferocity, increasing its damage!`);
+    }
+}
+function endlessWill(pokemon, player) {
+    if (!pokemon.perkUsed) {
+        pokemon.resistance = Math.floor(pokemon.resistance * 1.05);
+        pokemon.perkUsed = true;
+        logPlayerAction(player, `${pokemon.poke.name} activated Endless Will, reducing damage taken!`);
+    }
+}
+function sneakyStrike(pokemon, player) {
+    if (!pokemon.perkUsed) {
+        pokemon.might = Math.floor(pokemon.might * 1.05);
+        pokemon.perkUsed = true;
+        logPlayerAction(player, `${pokemon.poke.name} activated Sneaky Strike, increasing its damage!`);
+    }
+}
+function nocturnalHunter(pokemon, player) {
+    if (pokemon.hp <= pokemon.poke.hp * 0.5 && !pokemon.perkUsed) {
+        pokemon.resistance = Math.floor(pokemon.resistance * 1.1);
+        pokemon.perkUsed = true;
+        logPlayerAction(player, `${pokemon.poke.name} activated Nocturnal Hunter, reducing damage taken!`);
+    }
+}
+function metalCore(pokemon, player) {
+    if (!pokemon.perkUsed) {
+        pokemon.resistance = Math.floor(pokemon.resistance * 1.1);
+        pokemon.perkUsed = true;
+        logPlayerAction(player, `${pokemon.poke.name} activated Metal Core, reducing damage taken!`);
+    }
+}
+function reinforcedBody(pokemon, player) {
+    if (!pokemon.perkUsed) {
+        pokemon.resistance = Math.floor(pokemon.resistance * 1.5);
+        pokemon.speed = Math.floor(pokemon.speed * 0.5);
+        pokemon.perkUsed = true;
+        logPlayerAction(player, `${pokemon.poke.name} activated reinforced Body, Hope you like to be slow!`);
+    }
+}
+function blessedShield(pokemon, player) {
+    if (!pokemon.perkUsed) {
+        pokemon.resistance = Math.floor(pokemon.resistance * 1.05);
+        pokemon.perkUsed = true;
+        logPlayerAction(player, `${pokemon.poke.name} activated Blessed Shield, reducing damage taken!`);
+    }
+}
+function pixieTrick(pokemon, player) {
+    const chance = Math.random() * 100;
+    if (chance <= 10) {
+        const opponent = player === player1 ? player2.team[0] : player1.team[0];
+        opponent.speed = Math.floor(opponent.speed * 0.95);
+        logPlayerAction(player, `${pokemon.poke.name} activated Pixie Trick, reducing ${opponent.poke.name}'s speed!`);
+    }
+}
+function adaptability(pokemon, player) {
+    if (!pokemon.perkUsed) {
+        pokemon.speed = Math.floor(pokemon.speed * 1.05);
+        pokemon.perkUsed = true;
+        logPlayerAction(player, `${pokemon.poke.name} activated Adaptability, increasing its speed!`);
+    }
+}
+function balancedInstincts(pokemon, player) {
+    const opponent = player === player1 ? player2.team[0] : player1.team[0];
+    if (opponent.speed > pokemon.speed && !pokemon.perkUsed) {
+        pokemon.resistance = Math.floor(pokemon.resistance * 1.1);
+        pokemon.perkUsed = true;
+        logPlayerAction(player, `${pokemon.poke.name} activated Balanced Instincts, reducing damage taken!`);
     }
 }

@@ -127,7 +127,7 @@ perks={
         },
         {
             "type": "steel",
-            "perk": "Reinforced Body: Steel Pokémon cannot take more than 20% of their max HP in a single attack."
+            "perk": "Reinforced Body: Steel Pokémon gain 50% resistance but loose 50% speed"
         },
         {
             "type": "fairy",
