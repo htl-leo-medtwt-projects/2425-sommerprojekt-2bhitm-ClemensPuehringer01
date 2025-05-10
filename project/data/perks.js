@@ -3,7 +3,7 @@ perks={
     "pokemon_perks": [
         {
             "type": "fire",
-            "perk": "Heat Surge: Fire Pokémon gain a 10% Speed boost after using a Fire-type move."
+            "perk": "Heat Surge: Fire Pokémon gain a 10% Speed boost."
         },
         {
             "type": "fire",
@@ -11,11 +11,11 @@ perks={
         },
         {
             "type": "water",
-            "perk": "Flow State: Water Pokémon regenerate 5% HP every 3 turns."
+            "perk": "Flow State: Water Pokémon regenerate 5% HP every turn."
         },
         {
             "type": "water",
-            "perk": "Wave Crash: Water Pokémon's attacks deal 10% more damage after switching in."
+            "perk": "Wave Crash: Water Pokémon's attacks deal 5% more damage."
         },
         {
             "type": "grass",
@@ -23,15 +23,15 @@ perks={
         },
         {
             "type": "grass",
-            "perk": "Vine Snare: Grass Pokémon’s attacks have a 20% chance to reduce the opponent’s Speed."
+            "perk": "Vine Snare: Grass Pokémon’s attacks have a 20% chance to reduce the opponent’s Speed by 5%."
         },
         {
             "type": "electric",
-            "perk": "Static Field: Electric Pokémon deal 10% more damage to opponents that switched in this turn."
+            "perk": "Electric Speed: Electric Pokémon have a 5% chance to doge an Attack."
         },
         {
             "type": "electric",
-            "perk": "Charge Up: If an Electric Pokémon doges an attack, its next move deals 20% more damage."
+            "perk": "Charge Up: Electrik Pokémon take 5% less damage."
         },
         {
             "type": "ice",
@@ -39,7 +39,7 @@ perks={
         },
         {
             "type": "ice",
-            "perk": "Chilling Touch: Ice Pokémon's attacks have a 15% chance to slow down the opponent, reducing their Speed."
+            "perk": "Chilling Touch: Ice Pokémon's attacks have a 15% chance to slow down the opponent, reducing their Speed by 5%."
         },
         {
             "type": "fighting",
@@ -55,15 +55,15 @@ perks={
         },
         {
             "type": "poison",
-            "perk": "Corrosive Touch: Poison Pokémon have a 25% chance to weaken the opponent’s next attack by 20%."
+            "perk": "Corrosive Touch: If a Poison Pokémon is knocked out, the opponents resistance is reduced by 20%"
         },
         {
             "type": "ground",
-            "perk": "Firm Footing: Ground Pokémon cannot have their Speed reduced by enemy effects."
+            "perk": "Firm Footing: Ground Pokémon gain 5% more speed."
         },
         {
             "type": "ground",
-            "perk": "Dust Cloud: When hit by an attack, Ground Pokémon have a 20% chance to reduce the opponent’s Accuracy."
+            "perk": "Dust Cloud: Ground Pokémon have a 10% chance to reduce the opponent’s speed by 5% at the end of a turn."
         },
         {
             "type": "flying",
@@ -71,19 +71,19 @@ perks={
         },
         {
             "type": "flying",
-            "perk": "Aerial Control: Flying Pokémon's moves have a 10% higher chance to land a critical hit."
+            "perk": "Aerial Control: Flying Pokémon have a 5% chance to Dodge the next Attack."
         },
         {
             "type": "psychic",
-            "perk": "Mental Clarity: Psychic Pokémon cannot have their stats lowered by opponent effects."
+            "perk": "Mental Clarity: Psychic Pokémon gain 5% resistance."
         },
         {
             "type": "psychic",
-            "perk": "Telekinetic Evasion: Psychic Pokémon have a 15% chance to completely avoid an attack."
+            "perk": "Telekinetic Evasion: Psychic Pokémon have a 5% chance to completely avoid an attack."
         },
         {
             "type": "bug",
-            "perk": "Swarm Formation: Bug Pokémon deal 10% more damage if there is another Bug Pokémon on their team."
+            "perk": "Swarm Formation: Bug Pokémon gain 5% more damage if there is another Bug Pokémon on their team."
         },
         {
             "type": "bug",
@@ -91,31 +91,31 @@ perks={
         },
         {
             "type": "rock",
-            "perk": "Hardened Defense: Rock Pokémon take 15% less damage when above 75% HP."
+            "perk": "Hardened Defense: Rock Pokémon take 15% less damage when under 75% HP."
         },
         {
             "type": "rock",
-            "perk": "Rolling Momentum: If a Rock Pokémon lands an attack, its next attack deals 10% more damage."
+            "perk": "Rolling Momentum: Every turn a rock Pokémon is on the field it deals 5% more damage."
         },
         {
             "type": "ghost",
-            "perk": "Ethereal Step: Ghost Pokémon ignore the first attack."
+            "perk": "Ethereal Step: Ghost Pokémon have a 5% chance to dodge an attack."
         },
         {
             "type": "ghost",
-            "perk": "Haunted Aura: Ghost Pokémon’s attacks have a 15% chance to weaken the opponent's next move by 20%."
+            "perk": "Haunted Aura: Ghost Pokémon’s attacks have a 15% chance to weaken the opponent's resistance by 5%."
         },
         {
             "type": "dragon",
-            "perk": "Draconic Ferocity: Dragon Pokémon deal 10% more damage when facing another Dragon Pokémon."
+            "perk": "Draconic Ferocity: Dragon Pokémon deal 5% more damage."
         },
         {
             "type": "dragon",
-            "perk": "Endless Will: Dragon Pokémon take 15% less damage when they are the last Pokémon standing on their team."
+            "perk": "Endless Will: Dragon Pokémon take 5% less damage."
         },
         {
             "type": "dark",
-            "perk": "Sneaky Strike: Dark Pokémon’s first attack in battle deals 20% more damage."
+            "perk": "Sneaky Strike: Dark Pokémon deal 5% more damage."
         },
         {
             "type": "dark",
@@ -123,23 +123,23 @@ perks={
         },
         {
             "type": "steel",
-            "perk": "Metal Core: Steel Pokémon take 10% less damage from super effective attacks."
+            "perk": "Metal Core: Steel Pokémon take 10% less damage."
         },
         {
             "type": "steel",
-            "perk": "Reinforced Body: Steel Pokémon cannot take more than 30% of their max HP in a single attack."
+            "perk": "Reinforced Body: Steel Pokémon cannot take more than 20% of their max HP in a single attack."
         },
         {
             "type": "fairy",
-            "perk": "Blessed Shield: Fairy Pokémon take 15% less damage from the first attack they receive."
+            "perk": "Blessed Shield: Fairy Pokémon take 5% less damage."
         },
         {
             "type": "fairy",
-            "perk": "Pixie Trick: Fairy Pokémon's attacks have a 10% chance to lower the oppenents speed."
+            "perk": "Pixie Trick: Fairy Pokémon's attacks have a 10% chance to lower the oppenents speed by 5%."
         },
         {
             "type": "normal",
-            "perk": "Adaptability: Normal Pokémon take no damage from the first super effective hit."
+            "perk": "Adaptability: Normal Pokémon gain 5% speed."
         },
         {
             "type": "normal",

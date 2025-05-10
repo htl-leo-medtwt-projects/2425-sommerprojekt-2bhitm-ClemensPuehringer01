@@ -17,7 +17,7 @@ let trainer = {
         {
             "name": "Grass-Trainer",
             "type": "grass",
-            "perk": "Verdant Recovery: Grass Pokémon regain 5% HP at the end of every turn."
+            "perk": "Verdant Recovery: Grass Pokémon regain 10% HP at the end of every turn."
         },
         {
             "name": "Electric-Trainer",

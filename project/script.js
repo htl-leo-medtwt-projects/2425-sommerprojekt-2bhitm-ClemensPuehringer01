@@ -26,6 +26,7 @@ let player1 = {
             dogedAttack: false,
             knockedOutOpponent: false,
             lastDamageDealt: 0,
+            perkUsed: false,
             moves: [
                 attacks.moves[0],
                 attacks.special_moves[1],
@@ -42,6 +43,7 @@ let player1 = {
             dogedAttack: false,
             knockedOutOpponent: false,
             lastDamageDealt: 0,
+            perkUsed: false,
             moves: [
                 attacks.moves[3],
                 attacks.special_moves[1],
@@ -58,6 +60,7 @@ let player1 = {
             dogedAttack: false,
             knockedOutOpponent: false,
             lastDamageDealt: 0,
+            perkUsed: false,
             moves: [
                 attacks.moves[0],
                 attacks.moves[2]
@@ -83,6 +86,7 @@ let player2 = {
             dogedAttack: false,
             knockedOutOpponent: false,
             lastDamageDealt: 0,
+            perkUsed: false,
             moves: [
                 attacks.moves[0],
                 attacks.special_moves[1],
@@ -99,6 +103,7 @@ let player2 = {
             dogedAttack: false,
             knockedOutOpponent: false,
             lastDamageDealt: 0,
+            perkUsed: false,
             moves: [
                 attacks.moves[3],
                 attacks.special_moves[1],
@@ -115,6 +120,7 @@ let player2 = {
             dogedAttack: false,
             knockedOutOpponent: false,
             lastDamageDealt: 0,
+            perkUsed: false,
             moves: [
                 attacks.moves[0],
                 attacks.moves[2]
@@ -1103,6 +1109,9 @@ function executeTurn() {
     applyPerk(player1, "start");
     applyPerk(player2, "start");
 
+    applyPokemonPerk(player1, "start");
+    applyPokemonPerk(player2, "start");
+
     setTimeout(function () {
 
         const player1Speed = player1.team[0].speed;
@@ -1244,6 +1253,9 @@ function executeTurn() {
 
         applyPerk(player1, "end");
         applyPerk(player2, "end");
+
+        applyPokemonPerk(player1, "end");
+        applyPokemonPerk(player2, "end");
 
         loadTopMidSection();
         setTimeout(function () {
@@ -1517,7 +1529,7 @@ function torrentialBoost(player) {
 
 function verdantRecovery(player) {
     if (player.team[0].poke.type.includes("grass") && player.team[0].hp > 0) {
-        const recoveredHP = Math.floor(player.team[0].poke.hp * 0.05);
+        const recoveredHP = Math.floor(player.team[0].poke.hp * 0.1);
         player.team[0].hp = Math.min(player.team[0].hp + recoveredHP, player.team[0].poke.hp);
         logPlayerAction(player, `${player.team[0].poke.name} recovered ${recoveredHP} HP!`);
     }
@@ -1718,4 +1730,191 @@ function underdogSpirit(player) {
         }
     }
 
+}
+function applyPokemonPerk(player, phase) {
+    const activePokemon = player.team[0];
+    const perk = activePokemon.perk;
+
+    switch (perk.type) {
+        case "fire":
+            if (perk.perk.includes("Heat Surge") && phase === "end") {
+                heatSurge(activePokemon, player);
+            } else if (perk.perk.includes("Ember Shield") && phase === "start") {
+                emberShield(activePokemon, player);
+            }
+            break;
+
+        case "water":
+            if (perk.perk.includes("Flow State") && phase === "end") {
+                flowState(activePokemon, player);
+            } else if (perk.perk.includes("Wave Crash") && phase === "start") {
+                waveCrash(activePokemon, player);
+            }
+            break;
+
+        case "grass":
+            if (perk.perk.includes("Rooted Strength") && phase === "end") {
+                rootedStrength(activePokemon, player);
+            } else if (perk.perk.includes("Vine Snare") && phase === "start") {
+                vineSnare(activePokemon, player);
+            }
+            break;
+
+        case "electric":
+            if (perk.perk.includes("Electric Speed") && phase === "start") {
+                electricSpeed(activePokemon, player);
+            } else if (perk.perk.includes("Charge Up") && phase === "start") {
+                chargeUp(activePokemon, player);
+            }
+            break;
+
+        case "ice":
+            if (perk.perk.includes("Frost Armor") && phase === "start") {
+                frostArmor(activePokemon, player);
+            } else if (perk.perk.includes("Chilling Touch") && phase === "end") {
+                chillingTouch(activePokemon, player);
+            }
+            break;
+
+        case "fighting":
+            if (perk.perk.includes("Second Wind") && phase === "end") {
+                secondWind(activePokemon, player);
+            } else if (perk.perk.includes("Unyielding") && phase === "start") {
+                unyielding(activePokemon, player);
+            }
+            break;
+
+        case "poison":
+            if (perk.perk.includes("Lingering Toxins") && phase === "end") {
+                lingeringToxins(activePokemon, player);
+            } else if (perk.perk.includes("Corrosive Touch") && phase === "end") {
+                corrosiveTouch(activePokemon, player);
+            }
+            break;
+
+        case "flying":
+            if (perk.perk.includes("Wind Rider") && phase === "start") {
+                windRider(activePokemon, player);
+            } else if (perk.perk.includes("Aerial Control") && phase === "start") {
+                aerialControl(activePokemon, player);
+            }
+            break;
+
+        case "psychic":
+            if (perk.perk.includes("Mental Clarity") && phase === "start") {
+                mentalClarity(activePokemon, player);
+            } else if (perk.perk.includes("Telekinetic Evasion") && phase === "start") {
+                telekineticEvasion(activePokemon, player);
+            }
+            break;
+
+        case "bug":
+            if (perk.perk.includes("Swarm Formation") && phase === "end") {
+                swarmFormation(activePokemon, player);
+            } else if (perk.perk.includes("Exoskeleton") && phase === "start") {
+                exoskeleton(activePokemon, player);
+            }
+            break;
+
+        case "rock":
+            if (perk.perk.includes("Hardened Defense") && phase === "start") {
+                hardenedDefense(activePokemon, player);
+            } else if (perk.perk.includes("Rolling Momentum") && phase === "end") {
+                rollingMomentum(activePokemon, player);
+            }
+            break;
+
+        case "ghost":
+            if (perk.perk.includes("Ethereal Step") && phase === "start") {
+                etherealStep(activePokemon, player);
+            } else if (perk.perk.includes("Haunted Aura") && phase === "end") {
+                hauntedAura(activePokemon, player);
+            }
+            break;
+
+        case "dragon":
+            if (perk.perk.includes("Draconic Ferocity") && phase === "start") {
+                draconicFerocity(activePokemon, player);
+            } else if (perk.perk.includes("Endless Will") && phase === "end") {
+                endlessWill(activePokemon, player);
+            }
+            break;
+
+        case "dark":
+            if (perk.perk.includes("Sneaky Strike") && phase === "start") {
+                sneakyStrike(activePokemon, player);
+            } else if (perk.perk.includes("Nocturnal Hunter") && phase === "start") {
+                nocturnalHunter(activePokemon, player);
+            }
+            break;
+
+        case "steel":
+            if (perk.perk.includes("Metal Core") && phase === "start") {
+                metalCore(activePokemon, player);
+            } else if (perk.perk.includes("Reinforced Body") && phase === "start") {
+                reinforcedBody(activePokemon, player);
+            }
+            break;
+
+        case "fairy":
+            if (perk.perk.includes("Blessed Shield") && phase === "start") {
+                blessedShield(activePokemon, player);
+            } else if (perk.perk.includes("Pixie Trick") && phase === "end") {
+                pixieTrick(activePokemon, player);
+            }
+            break;
+
+        case "normal":
+            if (perk.perk.includes("Adaptability") && phase === "start") {
+                adaptability(activePokemon, player);
+            } else if (perk.perk.includes("Balanced Instincts") && phase === "start") {
+                balancedInstincts(activePokemon, player);
+            }
+            break;
+    }
+}
+function heatSurge(pokemon, player) {
+    if (!pokemon.perkUsed) {
+        pokemon.speed = Math.floor(pokemon.speed * 1.1); 
+        pokemon.perkUsed = true;
+        logPlayerAction(player, `${pokemon.poke.name} activated Heat Surge, increasing its speed!`);
+    }
+}
+function emberShield(pokemon, player) {
+    if (!pokemon.perkUsed) {
+        pokemon.resistance = Math.floor(pokemon.resistance * 1.05);
+        pokemon.perkUsed = true; 
+        logPlayerAction(player, `${pokemon.poke.name} activated Ember Shield, increasing its resistance!`);
+    }
+}
+function flowState(pokemon, player) {
+    const recoveredHP = Math.floor(pokemon.poke.hp * 0.05);
+    pokemon.hp = Math.min(pokemon.hp + recoveredHP, pokemon.poke.hp);
+    logPlayerAction(player, `${pokemon.poke.name} activated Flow State, recovering ${recoveredHP} HP!`);
+}
+function waveCrash(pokemon, player) {
+    if (!pokemon.perkUsed) {
+        pokemon.might = Math.floor(pokemon.might * 1.05);
+        pokemon.perkUsed = true;
+        logPlayerAction(player, `${pokemon.poke.name} activated Wave Crash, increasing its damage!`);
+    }
+}   
+function rootedStrength(pokemon, player) {
+        pokemon.resistance = Math.floor(pokemon.resistance * 1.05);
+        logPlayerAction(player, `${pokemon.poke.name} activated Rooted Strength, increasing its resistance!`);
+}
+function vineSnare(pokemon, player) {
+    const chance = Math.random() * 100;
+    if (chance <= 20) {
+        const opponent = player === player1 ? player2.team[0] : player1.team[0];
+        opponent.speed = Math.floor(opponent.speed * 0.95);
+        logPlayerAction(player, `${pokemon.poke.name} activated Vine Snare, reducing ${opponent.poke.name}'s speed!`);
+    }
+}
+function electricSpeed(pokemon, player) {
+    const dodgeChance = Math.random() * 100;
+    if (dodgeChance <= 5) {
+        pokemon.dodgedAttack = true;
+        logPlayerAction(player, `${pokemon.poke.name} activated Electric Speed and is ready to dodge the next attack!`);
+    }
 }
