@@ -2127,3 +2127,31 @@ function balancedInstincts(pokemon, player) {
         logPlayerAction(player, `${pokemon.poke.name} activated Balanced Instincts, reducing damage taken!`);
     }
 }
+
+//Singleplayer
+function singleplayer() {
+    document.getElementById("homeBttns").style.animation = "none";
+    document.getElementById("homeBttns").offsetHeight;
+    document.getElementById("homeBttns").style.animation = "moveUp 1s";
+    document.getElementById("logo").style.animation = "none";
+    document.getElementById("logo").offsetHeight;
+    document.getElementById("logo").style.animation = "moveUp 1s";
+
+    setTimeout(function () {
+        document.getElementById("forestBG").innerHTML = `
+            <div id="singleplayerHeader">
+                <img id="logo" src="./media/img/logo.png" alt="Logo">
+                <div id="singleplayerBttns">
+                    <div onclick="EndlessMode()" class="mainBtn">Endless Mode</div>
+                    <div onclick="TutorialSingleplayer()" class="mainBtn">Tutorial</div>
+                </div>
+                <div id="back" onclick="homescreen()">Back</div>
+            </div>
+        `;
+
+        document.getElementById("singleplayerHeader").style.display = "block";
+        document.getElementById("singleplayerHeader").style.animation = "none";
+        document.getElementById("singleplayerHeader").offsetHeight;
+        document.getElementById("singleplayerHeader").style.animation = "movein 1s";
+    }, 900);
+}
