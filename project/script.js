@@ -2143,7 +2143,8 @@ function singleplayer() {
                 <img id="logo" src="./media/img/logo.png" alt="Logo">
                 <div id="singleplayerBttns">
                     <div onclick="EndlessMode()" class="mainBtn">Endless Mode</div>
-                    <div onclick="TutorialSingleplayer()" class="mainBtn">Tutorial</div>
+                    <div onclick="Leaderboard_endless()" class="mainBtn">Leaderboard</div>
+                    <a class="mainBtn" href="./reveal.js-master/tutorial_Endless.html">Tutorial</a>
                 </div>
                 <div id="back" onclick="homescreen()">Back</div>
             </div>
