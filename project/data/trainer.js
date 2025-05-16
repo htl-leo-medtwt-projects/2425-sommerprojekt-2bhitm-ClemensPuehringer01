@@ -41,7 +41,7 @@ let trainer = {
         {
             "name": "Poison-Trainer",
             "type": "poison",
-            "perk": "Venomous Precision: Poison Pokémon gain 15% of the damage dealt after an attack."
+            "perk": "Venomous Precision: Poison Pokémon gain 5% of the damage dealt in the whole battle."
         },
         {
             "name": "Flying-Trainer",

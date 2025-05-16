@@ -1307,7 +1307,7 @@ function processPlayerAction(attacker, defender) {
         const rndmMultiplier = Math.random() * (1.2 - 0.8) + 0.8;
         const damage = Math.floor((10 * (move.power * (attacker.team[0].might / defender.team[0].resistance)) / 50 + 2) * rndmMultiplier * effectiveness);
         defender.team[0].hp = Math.max(0, defender.team[0].hp - damage);
-        attacker.team[0].lastDamageDealt = damage;
+        attacker.team[0].lastDamageDealt += damage;
 
         if (effectiveness > 1) {
             if (attacker === player1) {
@@ -1571,7 +1571,7 @@ function unbreakableWill(player) {
 function venomousPrecision(player) {
     const activePokemon = player.team[0];
     if (activePokemon.poke.type.includes("poison")) {
-        const damageRecovered = Math.floor(activePokemon.lastDamageDealt * 0.15);
+        const damageRecovered = Math.floor(activePokemon.lastDamageDealt * 0.5);
         activePokemon.hp = Math.min(activePokemon.hp + damageRecovered, activePokemon.poke.hp);
         logPlayerAction(player, `${activePokemon.poke.name} recovered ${damageRecovered} HP with Venomous Precision!`);
     }
