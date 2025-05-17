@@ -2261,3 +2261,313 @@ function EndlessMode() {
         }, 100);
     }, 900);
 }
+function selectTrainerSingle() {
+    let tempstring = `
+    <div id="trainerDetailTop">
+        <div id="TrainerArrowL" onclick="changeTrainerSingle(-1)"> <img src="./media/img/pokearrow.png" alt=""></div>
+        <div id="TrainerImgBox"><img src="./media/img/trainer/${player_single.trainer.type}.png" alt=""></div>
+        <div id="TrainerArrowR" onclick="changeTrainerSingle(1)"> <img src="./media/img/pokearrow.png" alt=""></div>
+    </div>
+    <div id="trainerDetailBottom">
+        <div id="trainerPerk">
+            <img src="./media/img/types/${player_single.trainer.type}.png" alt=""> ${player_single.trainer.perk}
+        </div>
+        <div id="saveTrainer" onclick="saveTrainerSingle()">
+            Save
+        </div>
+    </div>
+    `;
+    document.getElementById("selectionDetail").style.display = "block";
+    document.getElementById("selectionDetail").innerHTML = tempstring;
+}
+
+function changeTrainerSingle(num) {
+    if (player_single.trainer == trainer.trainers[0] && num == -1) {
+        player_single.trainer = trainer.trainers[17];
+    } else if (player_single.trainer == trainer.trainers[17] && num == 1) {
+        player_single.trainer = trainer.trainers[0];
+    } else {
+        player_single.trainer = trainer.trainers[trainer.trainers.indexOf(player_single.trainer) + num];
+    }
+    selectTrainerSingle();
+}
+
+function saveTrainerSingle() {
+    player_single.trainer = trainer.trainers[trainer.trainers.indexOf(player_single.trainer)];
+    document.getElementById("selectionDetail").style.display = "none";
+    document.getElementById("trainerSelector").innerHTML = `<img src="./media/img/trainer/${player_single.trainer.type}.png" alt="">`;
+}
+
+function selectPokeSingle(pokemonTeamNum) {
+    let tempstring = "";
+    if (player_single.team[pokemonTeamNum].poke.type.length > 1) {
+        tempstring = `
+    <div id="pokeDetailInfo">
+        <div id="pokeDetailInfoImg" onclick="changePokeSingle(${pokemonTeamNum})">
+            <img src="./media/img/pokémon/${player_single.team[pokemonTeamNum].poke.name.toLocaleLowerCase()}.png" alt="">
+        </div>
+        <div id="pokeDetailInfoLower">
+            <div id="pokeDetailInfoName">${player_single.team[pokemonTeamNum].poke.name}</div>
+            <div id="pokeDetailInfoType2">
+                <img src="./media/img/types/${player_single.team[pokemonTeamNum].poke.type[0]}.png" alt="">
+                <img src="./media/img/types/${player_single.team[pokemonTeamNum].poke.type[1]}.png" alt="">
+            </div>
+            <div id="pokeDetailInfoHP">${player_single.team[pokemonTeamNum].hp} HP</div>
+            <div id="pokeDetailInfoStamina">${player_single.team[pokemonTeamNum].poke.stamina} Stamina</div>
+        </div>
+        <div id="pokeDetailAttacks">
+            <div class="pokeDetailAttack" onclick="selectAttackSingle(${pokemonTeamNum},0)">
+                <div class="pokeDetailAttackTxt"> <img src="./media/img/types/${player_single.team[pokemonTeamNum].moves[0].type}.png" alt=""> ${player_single.team[pokemonTeamNum].moves[0].name} <br> Pow: ${player_single.team[pokemonTeamNum].moves[0].power} Acc: ${player_single.team[pokemonTeamNum].moves[0].acc}</div>
+            </div>
+            <div class="pokeDetailAttack" onclick="selectAttackSingle(${pokemonTeamNum},1)">
+                <div class="pokeDetailAttackTxt"><img src="./media/img/types/${player_single.team[pokemonTeamNum].moves[1].type}.png" alt=""> ${player_single.team[pokemonTeamNum].moves[1].name} <br> Pow: ${player_single.team[pokemonTeamNum].moves[1].power} Acc: ${player_single.team[pokemonTeamNum].moves[1].acc}</div>
+            </div>
+        </div>
+        <div id="pokeDetailPerk">
+            <div id="PokePerkArrowL" onclick="changePokePerkSingle(${pokemonTeamNum},-1)"> <img src="./media/img/pokearrow.png" alt=""></div>
+            <div id="PokePerkBox"><img src="./media/img/types/${player_single.team[pokemonTeamNum].perk.type}.png" alt=""><div id="pokePerkTxt">${player_single.team[pokemonTeamNum].perk.perk}</div></div>
+            <div id="PokePerkArrowR" onclick="changePokePerkSingle(${pokemonTeamNum},1)"> <img src="./media/img/pokearrow.png" alt=""></div>
+        </div>
+    </div>
+    <div id="savePoke" onclick="savePokeSingle(${pokemonTeamNum})">
+        Save
+    </div>
+    `;
+    } else {
+        tempstring = `
+    <div id="pokeDetailInfo">
+        <div id="pokeDetailInfoImg" onclick="changePokeSingle(${pokemonTeamNum})">
+            <img src="./media/img/pokémon/${player_single.team[pokemonTeamNum].poke.name.toLocaleLowerCase()}.png" alt="">
+        </div>
+        <div id="pokeDetailInfoLower">
+            <div id="pokeDetailInfoName">${player_single.team[pokemonTeamNum].poke.name}</div>
+            <div id="pokeDetailInfoType1">
+                <img src="./media/img/types/${player_single.team[pokemonTeamNum].poke.type[0]}.png" alt="">
+            </div>
+            <div id="pokeDetailInfoHP">${player_single.team[pokemonTeamNum].hp} HP</div>
+            <div id="pokeDetailInfoStamina">${player_single.team[pokemonTeamNum].poke.stamina} Stamina</div>
+        </div>
+        <div id="pokeDetailAttacks">
+            <div class="pokeDetailAttack" onclick="selectAttackSingle(${pokemonTeamNum},0)">
+                <div class="pokeDetailAttackTxt"> <img src="./media/img/types/${player_single.team[pokemonTeamNum].moves[0].type}.png" alt=""> ${player_single.team[pokemonTeamNum].moves[0].name} <br> Pow: ${player_single.team[pokemonTeamNum].moves[0].power} Acc: ${player_single.team[pokemonTeamNum].moves[0].acc}</div>
+            </div>
+            <div class="pokeDetailAttack" onclick="selectAttackSingle(${pokemonTeamNum},1)">
+                <div class="pokeDetailAttackTxt"><img src="./media/img/types/${player_single.team[pokemonTeamNum].moves[1].type}.png" alt=""> ${player_single.team[pokemonTeamNum].moves[1].name} <br> Pow: ${player_single.team[pokemonTeamNum].moves[1].power} Acc: ${player_single.team[pokemonTeamNum].moves[1].acc}</div>
+            </div>
+        </div>
+        <div id="pokeDetailPerk">
+            <div id="PokePerkArrowL" onclick="changePokePerkSingle(${pokemonTeamNum},-1)"> <img src="./media/img/pokearrow.png" alt=""></div>
+            <div id="PokePerkBox"><img src="./media/img/types/${player_single.team[pokemonTeamNum].perk.type}.png" alt=""><div id="pokePerkTxt">${player_single.team[pokemonTeamNum].perk.perk}</div></div>
+            <div id="PokePerkArrowR" onclick="changePokePerkSingle(${pokemonTeamNum},1)"> <img src="./media/img/pokearrow.png" alt=""></div>
+        </div>
+    </div>
+    <div id="savePoke" onclick="savePokeSingle(${pokemonTeamNum})">
+        Save
+    </div>
+    `;
+    }
+    document.getElementById("selectionDetail").style.display = "block";
+    document.getElementById("selectionDetail").innerHTML = tempstring;
+}
+
+function changePokePerkSingle(pokemonTeamNum, num) {
+    const pokemonTypes = player_single.team[pokemonTeamNum].poke.type;
+    const filteredPerks = perks.pokemon_perks.filter(perk => pokemonTypes.includes(perk.type));
+    let currentIndex = filteredPerks.indexOf(player_single.team[pokemonTeamNum].perk);
+    if (currentIndex === -1) {
+        currentIndex = 0;
+    }
+    currentIndex = (currentIndex + num + filteredPerks.length) % filteredPerks.length;
+    player_single.team[pokemonTeamNum].perk = filteredPerks[currentIndex];
+    selectPokeSingle(pokemonTeamNum);
+}
+
+function savePokeSingle(pokemonTeamNum) {
+    document.getElementById("selectionDetail").style.display = "none";
+    document.getElementById("pokeSelectorMini").innerHTML = `
+    <div class="pokeBox" onclick="selectPokeSingle(0)">
+        <img src="./media/img/pokémon/${player_single.team[0].poke.name.toLocaleLowerCase()}.png" alt="">
+    </div>
+    <div class="pokeBox" onclick="selectPokeSingle(1)">
+        <img src="./media/img/pokémon/${player_single.team[1].poke.name.toLocaleLowerCase()}.png" alt="">
+    </div>
+    <div class="pokeBox" onclick="selectPokeSingle(2)">
+        <img src="./media/img/pokémon/${player_single.team[2].poke.name.toLocaleLowerCase()}.png" alt="">
+    </div>`;
+}
+
+function changePokeSingle(pokemonTeamNum) {
+    let tempstring = "";
+    if (player_single.team[pokemonTeamNum].poke.type.length > 1) {
+        tempstring = `
+<div id="PokeOverallSelector">
+    <div id="PokeOverArrowL" onclick="changePokeOverSingle(${pokemonTeamNum},-1)"> <img src="./media/img/pokearrow.png" alt=""></div>
+    <div id="pokeDetailInfoSelector">
+        <div id="pokeDetailInfoImgSelector">
+            <img src="./media/img/pokémon/${player_single.team[pokemonTeamNum].poke.name.toLocaleLowerCase()}.png" alt="">
+        </div>
+        <div id="pokeDetailInfoLower">
+            <div id="pokeDetailInfoName">${player_single.team[pokemonTeamNum].poke.name}</div>
+            <div id="pokeDetailInfoType2">
+                <img src="./media/img/types/${player_single.team[pokemonTeamNum].poke.type[0]}.png" alt="">
+                <img src="./media/img/types/${player_single.team[pokemonTeamNum].poke.type[1]}.png" alt="">
+            </div>
+            <div id="pokeDetailInfoStats">
+                <div id="pokeDetailInfoHP">${player_single.team[pokemonTeamNum].hp} HP</div>
+                <div id="pokeDetailInfoStamina">${player_single.team[pokemonTeamNum].poke.stamina} Stamina</div>
+                <div id="pokeDetailInfoMight">${player_single.team[pokemonTeamNum].poke.might} Might</div>
+                <div id="pokeDetailInfoResistance">${player_single.team[pokemonTeamNum].poke.resistance} Resistance</div>
+                <div id="pokeDetailInfoSpeed">${player_single.team[pokemonTeamNum].poke.speed} Speed</div>
+            </div>
+        </div>
+    </div>
+    <div id="PokeOverArrowR" onclick="changePokeOverSingle(${pokemonTeamNum},1)"> <img src="./media/img/pokearrow.png" alt=""></div>
+</div>
+<div id="savePoke" onclick="savePokeOverSingle(${pokemonTeamNum})"> Save </div>
+        `;
+    } else {
+        tempstring = `
+<div id="PokeOverallSelector">
+    <div id="PokeOverArrowL" onclick="changePokeOverSingle(${pokemonTeamNum},-1)"> <img src="./media/img/pokearrow.png" alt=""></div>
+    <div id="pokeDetailInfoSelector">
+        <div id="pokeDetailInfoImgSelector">
+            <img src="./media/img/pokémon/${player_single.team[pokemonTeamNum].poke.name.toLocaleLowerCase()}.png" alt="">
+        </div>
+        <div id="pokeDetailInfoLower">
+            <div id="pokeDetailInfoName">${player_single.team[pokemonTeamNum].poke.name}</div>
+            <div id="pokeDetailInfoType1">
+                <img src="./media/img/types/${player_single.team[pokemonTeamNum].poke.type[0]}.png" alt="">
+            </div>
+            <div id="pokeDetailInfoStats">
+                <div id="pokeDetailInfoHP">${player_single.team[pokemonTeamNum].hp} HP</div>
+                <div id="pokeDetailInfoStamina">${player_single.team[pokemonTeamNum].poke.stamina} Stamina</div>
+                <div id="pokeDetailInfoMight">${player_single.team[pokemonTeamNum].poke.might} Might</div>
+                <div id="pokeDetailInfoResistance">${player_single.team[pokemonTeamNum].poke.resistance} Resistance</div>
+                <div id="pokeDetailInfoSpeed">${player_single.team[pokemonTeamNum].poke.speed} Speed</div>
+            </div>
+        </div>
+    </div>
+    <div id="PokeOverArrowR" onclick="changePokeOverSingle(${pokemonTeamNum},1)"> <img src="./media/img/pokearrow.png" alt=""></div>
+</div>
+<div id="savePoke" onclick="savePokeOverSingle(${pokemonTeamNum})"> Save </div>
+        `;
+    }
+    document.getElementById("selectionDetail").innerHTML = tempstring;
+}
+
+function changePokeOverSingle(pokemonTeamNum, num) {
+    const pokemonList = pokémon.list;
+    let currentIndex = pokemonList.indexOf(player_single.team[pokemonTeamNum].poke);
+    if (currentIndex === -1) {
+        currentIndex = 0;
+    }
+    currentIndex = (currentIndex + num + pokemonList.length) % pokemonList.length;
+    player_single.team[pokemonTeamNum].poke = pokemonList[currentIndex];
+    player_single.team[pokemonTeamNum].hp = player_single.team[pokemonTeamNum].poke.hp;
+    player_single.team[pokemonTeamNum].st = player_single.team[pokemonTeamNum].poke.stamina;
+    player_single.team[pokemonTeamNum].might = player_single.team[pokemonTeamNum].poke.might;
+    player_single.team[pokemonTeamNum].resistance = player_single.team[pokemonTeamNum].poke.resistance;
+    player_single.team[pokemonTeamNum].speed = player_single.team[pokemonTeamNum].poke.speed;
+    for (let i = 0; i < perks.pokemon_perks.length; i++) {
+        if (perks.pokemon_perks[i].type == player_single.team[pokemonTeamNum].poke.type[0]) {
+            player_single.team[pokemonTeamNum].perk = perks.pokemon_perks[i];
+            break;
+        }
+    }
+    player_single.team[pokemonTeamNum].moves = [];
+    let movesselected = 0;
+    for (let i = 0; i < attacks.moves.length; i++) {
+        if (movesselected == 2) {
+            break;
+        }
+        if (attacks.moves[i].type == player_single.team[pokemonTeamNum].poke.type[0] || attacks.moves[i].type == player_single.team[pokemonTeamNum].poke.type[1]) {
+            player_single.team[pokemonTeamNum].moves.push(attacks.moves[i]);
+            movesselected++;
+        }
+    }
+    changePokeSingle(pokemonTeamNum);
+}
+
+function savePokeOverSingle(pokemonTeamNum) {
+    selectPokeSingle(pokemonTeamNum);
+    document.getElementById("pokeSelectorMini").innerHTML = `
+    <div class="pokeBox" onclick="selectPokeSingle(0)">
+        <img src="./media/img/pokémon/${player_single.team[0].poke.name.toLocaleLowerCase()}.png" alt="">
+    </div>
+    <div class="pokeBox" onclick="selectPokeSingle(1)">
+        <img src="./media/img/pokémon/${player_single.team[1].poke.name.toLocaleLowerCase()}.png" alt="">
+    </div>
+    <div class="pokeBox" onclick="selectPokeSingle(2)">
+        <img src="./media/img/pokémon/${player_single.team[2].poke.name.toLocaleLowerCase()}.png" alt="">
+    </div>`;
+}
+
+function selectAttackSingle(pokemonTeamNum, attackNum) {
+    const pokemonTypes = player_single.team[pokemonTeamNum].poke.type;
+    const availableMoves = [];
+    for (let i = 0; i < attacks.moves.length; i++) {
+        const move = attacks.moves[i];
+        if (pokemonTypes.includes(move.type)) {
+            availableMoves.push(move);
+        }
+    }
+    for (let i = 0; i < attacks.special_moves.length; i++) {
+        const specialMove = attacks.special_moves[i];
+        if (specialMove.exclusive_to.includes(player_single.team[pokemonTeamNum].poke.name.toLocaleLowerCase())) {
+            availableMoves.push(specialMove);
+        }
+    }
+    let moveListHTML = '';
+    for (let i = 0; i < availableMoves.length; i++) {
+        const move = availableMoves[i];
+        moveListHTML += `
+            <div class="moveItem" onclick="selectMoveSingle(${pokemonTeamNum}, ${i}, ${attackNum})">
+                <div class="moveItemType"><img src="./media/img/types/${move.type}.png" alt=""></div>
+                <div class="moveItemName">${move.name}</div>
+            </div>
+        `;
+    }
+    const selectedMove = player_single.team[pokemonTeamNum].moves[attackNum];
+    const moveDetailsHTML = `
+        <div class="moveDetails">
+            <div class="moveDetailsName">${selectedMove.name}</div>
+            <div class="moveDetailsType"><img src="./media/img/types/${selectedMove.type}.png" alt=""></div>
+            <div class="moveDetailsPower">Power: ${selectedMove.power}</div>
+            <div class="moveDetailsAccuracy">Accuracy: ${selectedMove.acc}</div>
+            <div class="moveDetailsStamina">Stamina Cost: ${selectedMove.stamina_cost}</div>
+            <div class="moveDetailsDescription">${selectedMove.description}</div>
+        </div>
+    `;
+    const tempstring = `
+        <div id="attackSelector">
+            <div id="attackList">
+                ${moveListHTML}
+            </div>
+            <div id="attackDetails">
+                ${moveDetailsHTML}
+            </div>
+        </div>
+        <div id="savePoke" onclick="selectPokeSingle(${pokemonTeamNum})">Save</div>
+    `;
+    document.getElementById("selectionDetail").style.display = "block";
+    document.getElementById("selectionDetail").innerHTML = tempstring;
+}
+
+function selectMoveSingle(pokemonTeamNum, moveIndex, attackNum) {
+    const pokemonTypes = player_single.team[pokemonTeamNum].poke.type;
+    const availableMoves = [];
+    for (let i = 0; i < attacks.moves.length; i++) {
+        const move = attacks.moves[i];
+        if (pokemonTypes.includes(move.type)) {
+            availableMoves.push(move);
+        }
+    }
+    for (let i = 0; i < attacks.special_moves.length; i++) {
+        const specialMove = attacks.special_moves[i];
+        if (specialMove.exclusive_to.includes(player_single.team[pokemonTeamNum].poke.name.toLocaleLowerCase())) {
+            availableMoves.push(specialMove);
+        }
+    }
+    player_single.team[pokemonTeamNum].moves[attackNum] = availableMoves[moveIndex];
+    selectAttackSingle(pokemonTeamNum, attackNum);
+}
