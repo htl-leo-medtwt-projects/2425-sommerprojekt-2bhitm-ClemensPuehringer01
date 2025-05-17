@@ -1631,7 +1631,7 @@ function unbreakableWill(player) {
 function venomousPrecision(player) {
     const activePokemon = player.team[0];
     if (activePokemon.poke.type.includes("poison")) {
-        const damageRecovered = Math.floor(activePokemon.lastDamageDealt * 0.5);
+        const damageRecovered = Math.floor(activePokemon.lastDamageDealt * 0.05);
         activePokemon.hp = Math.min(activePokemon.hp + damageRecovered, activePokemon.poke.hp);
         logPlayerAction(player, `${activePokemon.poke.name} recovered ${damageRecovered} HP with Venomous Precision!`);
     }
@@ -2239,7 +2239,7 @@ function EndlessMode() {
                     <img src="./media/img/pokémon/${player_single.team[2].poke.name.toLocaleLowerCase()}.png" alt="">
                 </div>
             </div>
-            <div id="back" onclick="singleplayer()">
+            <div id="back" onclick="homescreen()">
                 Back
             </div>
             <div id="trainerSelector" onclick="selectTrainerSingle()">
