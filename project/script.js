@@ -132,6 +132,66 @@ let player2 = {
     selectedSwitch: undefined,
     moveMade: undefined
 }
+let player_single = {
+    playerName: "Player",
+    team: [
+        {
+            poke: pokémon.list[4],
+            perk: perks.pokemon_perks[0],
+            hp: pokémon.list[4].hp,
+            st: pokémon.list[4].stamina,
+            might: pokémon.list[4].might,
+            resistance: pokémon.list[4].resistance,
+            speed: pokémon.list[4].speed,
+            dogedAttack: false,
+            knockedOutOpponent: false,
+            lastDamageDealt: 0,
+            perkUsed: false,
+            moves: [
+                attacks.moves[0],
+                attacks.special_moves[1],
+            ]
+        },
+        {
+            poke: pokémon.list[7],
+            perk: perks.pokemon_perks[0],
+            hp: pokémon.list[7].hp,
+            st: pokémon.list[7].stamina,
+            might: pokémon.list[7].might,
+            resistance: pokémon.list[7].resistance,
+            speed: pokémon.list[7].speed,
+            dogedAttack: false,
+            knockedOutOpponent: false,
+            lastDamageDealt: 0,
+            perkUsed: false,
+            moves: [
+                attacks.moves[3],
+                attacks.special_moves[1],
+            ]
+        },
+        {
+            poke: pokémon.list[26],
+            perk: perks.pokemon_perks[0],
+            hp: pokémon.list[26].hp,
+            st: pokémon.list[26].stamina,
+            might: pokémon.list[26].might,
+            resistance: pokémon.list[26].resistance,
+            speed: pokémon.list[26].speed,
+            dogedAttack: false,
+            knockedOutOpponent: false,
+            lastDamageDealt: 0,
+            perkUsed: false,
+            moves: [
+                attacks.moves[0],
+                attacks.moves[2]
+            ]
+        }
+    ],
+    trainer: trainer.trainers[0],
+    madeTurn: false,
+    selectedSwitch: undefined,
+    moveMade: undefined
+}
 audio.lobbyMusic.loop = true;
 audio.lobbyMusic.volume = 0.3;
 function mute() {
@@ -2154,5 +2214,50 @@ function singleplayer() {
         document.getElementById("singleplayerHeader").style.animation = "none";
         document.getElementById("singleplayerHeader").offsetHeight;
         document.getElementById("singleplayerHeader").style.animation = "movein 1s";
+    }, 900);
+}
+function EndlessMode() {
+    document.getElementById("singleplayerHeader").style.animation = "none";
+    document.getElementById("singleplayerHeader").offsetHeight;
+    document.getElementById("singleplayerHeader").style.animation = "moveUp 1s";
+
+    setTimeout(function () {
+        document.getElementById("forestBG").innerHTML = `
+        <div id="selectionScreen">
+            <div id="headPlayerSelection">
+                Endless Mode<br>
+                Choose your Team
+            </div>
+            <div id="pokeSelectorMini">
+                <div class="pokeBox" onclick="selectPokeSingle(0)">
+                    <img src="./media/img/pokémon/${player_single.team[0].poke.name.toLocaleLowerCase()}.png" alt="">
+                </div>
+                <div class="pokeBox" onclick="selectPokeSingle(1)">
+                    <img src="./media/img/pokémon/${player_single.team[1].poke.name.toLocaleLowerCase()}.png" alt="">
+                </div>
+                <div class="pokeBox" onclick="selectPokeSingle(2)">
+                    <img src="./media/img/pokémon/${player_single.team[2].poke.name.toLocaleLowerCase()}.png" alt="">
+                </div>
+            </div>
+            <div id="back" onclick="singleplayer()">
+                Back
+            </div>
+            <div id="trainerSelector" onclick="selectTrainerSingle()">
+                <img src="./media/img/trainer/${player_single.trainer.type.toLocaleLowerCase()}.png" alt="">
+            </div>
+            <div id="selectionDetail"></div>
+            <input type="text" placeholder="Name..." id="playerSingleName" class="nameSelector">
+            <div id="finish" onclick="startEndlessBattle()">
+                Finish
+            </div>
+        </div>
+        `;
+
+        setTimeout(function () {
+            document.getElementById("selectionScreen").style.display = "block";
+            document.getElementById("selectionScreen").style.animation = "none";
+            document.getElementById("selectionScreen").offsetHeight;
+            document.getElementById("selectionScreen").style.animation = "movein 1s";
+        }, 100);
     }, 900);
 }
