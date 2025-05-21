@@ -925,6 +925,7 @@ function selectMove2(pokemonTeamNum, moveIndex, attackNum) {
     player2.team[pokemonTeamNum].moves[attackNum] = availableMoves[moveIndex];
     selectAttack2(pokemonTeamNum, attackNum);
 }
+//MP Battle
 function battleMPStart() {
     player2.playerName = document.getElementById("player2Name").value
     if (player2.playerName == "") {
