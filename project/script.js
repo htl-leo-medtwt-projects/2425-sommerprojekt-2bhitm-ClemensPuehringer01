@@ -194,6 +194,9 @@ let player_single = {
 }
 audio.lobbyMusic.loop = true;
 audio.lobbyMusic.volume = 0.3;
+let endlessScore = 0;
+let endlessOpponent;
+
 function mute() {
     audio.lobbyMusic.currentTime = 0;
     if (!audio.musicOn) {
@@ -2571,4 +2574,121 @@ function selectMoveSingle(pokemonTeamNum, moveIndex, attackNum) {
     }
     player_single.team[pokemonTeamNum].moves[attackNum] = availableMoves[moveIndex];
     selectAttackSingle(pokemonTeamNum, attackNum);
+}
+function startEndlessBattle() {
+    player_single.playerName = document.getElementById("playerSingleName").value
+    if (player_single.playerName == "") {
+        player2.playerName = "Player"
+    }
+    document.getElementById("mute").style.display = "none";
+    audio.lobbyMusic.pause()
+    audio.battleMusic.play()
+    audio.battleMusic.loop = true
+    audio.battleMusic.volume = 0.4
+    document.getElementById("forestBG").style.animation = "none"
+    document.getElementById("forestBG").offsetHeight;
+    document.getElementById("forestBG").style.animation = "moveUp 1s"
+    setTimeout(function () {
+        getRandomOpponentPokemon();
+        loadBattleSiteEndless();
+        document.getElementById("forestBG").style.display = "none"
+    }, 900);
+}
+function getRandomOpponentPokemon() {
+    const poke = pokémon.list[Math.floor(Math.random() * pokémon.list.length)];
+
+    const possibleMoves = attacks.moves.filter(move =>
+        poke.type.includes(move.type)
+    );
+
+    const shuffled = possibleMoves.sort(() => Math.random() - 0.5);
+    const moves = shuffled.slice(0, 2);
+
+    endlessOpponent = {
+        poke: poke,
+        hp: poke.hp,
+        st: poke.stamina,
+        might: poke.might,
+        resistance: poke.resistance,
+        speed: poke.speed,
+        dodgedAttack: false,
+        knockedOutOpponent: false,
+        lastDamageDealt: 0,
+        perkUsed: false,
+        moves: moves.length > 0 ? moves : [attacks.moves[0], attacks.moves[1]]
+    };
+}
+function loadBattleSiteEndless() {
+    const battleContainer = document.getElementById("battleBG");
+    battleContainer.style.display = "flex";
+    battleContainer.style.flexDirection = "column";
+    const topSection = `
+        <div id="topSection">
+   
+            <div class="playerInfoBox" id="player1Info"> 
+                <div class="playerTrainerBox" id="player1Trainer">
+                <img src="./media/img/trainer/${player_single.trainer.type.toLocaleLowerCase()}.png" alt="${player_single.trainer.type}">
+                </div>
+                <div class="playerName">${player_single.playerName}</div>
+                <div class="playerTeam">
+                    ${player_single.team.map(pokemon => `
+                        <img class="player1PokeImg" src="./media/img/pokémon/${pokemon.poke.name.toLocaleLowerCase()}.png" alt="${pokemon.poke.name}">
+                    `).join('')}
+                </div>
+            </div>
+            <div class="currentPokemonStats" id="player1CurrentStats">
+                <div class="currentPokemonName">${player_single.team[0].poke.name}</div> <br>
+                <div class="currentPokemonHP"> ${player_single.team[0].hp}/${player_single.team[0].poke.hp} HP</div> <br>
+                <div class="currentPokemonStamina"> ${player_single.team[0].st}/${player_single.team[0].poke.stamina} ST</div> <br>
+            </div>
+            <div id="ingameButtons">
+            <div id="battleMusicSwitch">
+                <select id="musicSelector" onchange="switchBattleMusic(this.value)">
+                    <option value="battleMusic">Elite 4 Theme</option>
+                    <option value="battleMusic2">Team Aqua/Magma Team Leader</option>
+                    <option value="battleMusic3">Gym Leader Battle</option>
+                </select>
+            </div>
+            <div id="ingameBack" onclick="homescreen()">Back</div>
+            <div id="score">Score : ${endlessScore} </div>
+            </div>
+
+            <div class="currentPokemonStats" id="player2CurrentStats">
+                <div class="currentPokemonHP"> ${endlessOpponent.hp}/${endlessOpponent.poke.hp} HP</div> <br>
+                <div class="currentPokemonStamina"> ${endlessOpponent.st}/${endlessOpponent.poke.stamina} ST</div> <br>
+            </div>
+            <div class="playerInfoBox" id="player2Info">
+                <div class="playerName" style="padding-top: 10%" >Wild ${endlessOpponent.poke.name}</div>
+                <div class="playerTeam">
+                    <img class="player2PokeImg" src="./media/img/pokémon/${endlessOpponent.poke.name.toLocaleLowerCase()}.png" alt="${endlessOpponent.poke.name}">
+                </div>
+            </div>
+        </div>
+    `;
+    const middleSection = `
+        <div id="middleSection">
+            <img id="player1PokeImg" class="currentPokemon" src="./media/img/pokémon/${player_single.team[0].poke.name.toLocaleLowerCase()}.png" alt="${player1.team[0].poke.name}">
+            <img id="player2PokeImg" class="currentPokemon" src="./media/img/pokémon/${endlessOpponent.poke.name.toLocaleLowerCase()}.png" alt="${endlessOpponent.poke.name}">
+        </div>
+    `;
+    const bottomSection = `
+        <div id="bottomSection">
+            <div id="player1Controls">
+            ${player_single.team[0].moves.map((move) => `
+                <div class="actionButton" style="opacity: ${player_single.team[0].hp > 0 ? 1 : 0.5}; ${player_single.team[0].hp > 0 ? 'cursor: pointer;' : 'cursor: not-allowed;'}" ${player_single.team[0].hp > 0 ? `onclick='attack1(${JSON.stringify(move)})'` : ''}>
+                    ${move.name}
+                </div>
+            `).join('')}
+                <div class="actionButton" onclick="switchPokemon1()">Change Pokémon</div>
+            </div>
+            <div id="battleLog">
+                <p>Battle log will appear here...</p>
+            </div>
+        </div>
+    `;
+    battleContainer.innerHTML = `
+        ${topSection}
+        ${middleSection}
+        ${bottomSection}
+    `;
 }
