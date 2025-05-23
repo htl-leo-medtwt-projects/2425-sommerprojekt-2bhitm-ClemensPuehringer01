@@ -2675,11 +2675,11 @@ function loadBattleSiteEndless() {
         <div id="bottomSection">
             <div id="player1Controls">
             ${player_single.team[0].moves.map((move) => `
-                <div class="actionButton" style="opacity: ${player_single.team[0].hp > 0 ? 1 : 0.5}; ${player_single.team[0].hp > 0 ? 'cursor: pointer;' : 'cursor: not-allowed;'}" ${player_single.team[0].hp > 0 ? `onclick='attack1(${JSON.stringify(move)})'` : ''}>
+                <div class="actionButton" style="opacity: ${player_single.team[0].hp > 0 ? 1 : 0.5}; ${player_single.team[0].hp > 0 ? 'cursor: pointer;' : 'cursor: not-allowed;'}" ${player_single.team[0].hp > 0 ? `onclick='attackEndless(${JSON.stringify(move)})'` : ''}>
                     ${move.name}
                 </div>
             `).join('')}
-                <div class="actionButton" onclick="switchPokemon1()">Change Pokémon</div>
+                <div class="actionButton" onclick="switchPokemonEndless()">Change Pokémon</div>
             </div>
             <div id="battleLog">
                 <p>Battle log will appear here...</p>
@@ -2690,5 +2690,289 @@ function loadBattleSiteEndless() {
         ${topSection}
         ${middleSection}
         ${bottomSection}
+    `;
+}
+function attackEndless(move) {
+    move = typeof move === "string" ? JSON.parse(move) : move;
+
+    if (player_single.team[0].st >= move.stamina_cost) {
+        player_single.madeTurn = true;
+        player_single.moveMade = move;
+        TurnFinPlayerSingle();
+    } else {
+        alert("Not enough stamina!");
+    }
+}
+
+function TurnFinPlayerSingle() {
+    document.getElementById("player1Controls").innerHTML = `
+        <div class="turnFin"> ${player_single.playerName} finished their Turn!</div>
+    `;
+    // AI always "finishes" instantly
+    endlessOpponent.madeTurn = true;
+    if (player_single.madeTurn && endlessOpponent.madeTurn) {
+        executeTurnEndless();
+    }
+}
+
+function switchPokemonEndless() {
+    const selectorHTML = `
+        <div id="pokemonSwitchSelector">
+            ${player_single.team.map((pokemon, index) =>
+        `<div class="pokeBox" style="opacity: ${pokemon.hp > 0 ? 1 : 0.5}; ${pokemon.hp > 0 ? 'cursor: pointer;' : 'cursor: not-allowed;'}" 
+                    ${pokemon.hp > 0 ? `onclick="selectPokemonEndless(${index})"` : ''}>
+                    <img src="./media/img/pokémon/${pokemon.poke.name.toLocaleLowerCase()}.png" alt="${pokemon.poke.name}">
+                </div>`
+    ).join('')}
+        </div>
+    `;
+
+    const battleContainer = document.getElementById("battleBG");
+    const selectorContainer = document.createElement("div");
+    selectorContainer.id = "pokemonSwitchOverlay";
+    selectorContainer.innerHTML = selectorHTML;
+    battleContainer.appendChild(selectorContainer);
+}
+
+function selectPokemonEndless(selectedIndex) {
+    player_single.selectedSwitch = selectedIndex;
+
+    const selectorOverlay = document.getElementById("pokemonSwitchOverlay");
+    if (selectorOverlay) {
+        selectorOverlay.remove();
+    }
+
+    player_single.madeTurn = true;
+    TurnFinPlayerSingle();
+}
+
+function executeTurnEndless() {
+    applyPerk(player_single, "start");
+
+    setTimeout(function () {
+        const playerSpeed = player_single.team[0].speed;
+        const aiSpeed = endlessOpponent.speed;
+
+        const first = playerSpeed >= aiSpeed ? "player" : "ai";
+        const second = playerSpeed >= aiSpeed ? "ai" : "player";
+
+        if (player_single.selectedSwitch == undefined) {
+            setTimeout(function () {
+                processActionEndless(first);
+            }, 100);
+            setTimeout(function () {
+                if (getActive("ai").hp > 0 && getActive("player").hp > 0) {
+                    processActionEndless(second);
+                } else {
+                    if (getActive("ai").hp <= 0) {
+                        logPlayerAction(player_single, `Wild ${endlessOpponent.poke.name} fainted!`);
+                        document.getElementById("player2PokeImg").style.animation = "";
+                        document.getElementById("player2PokeImg").offsetHeight;
+                        document.getElementById("player2PokeImg").style.animation = "faint 0.5s forwards";
+                        audio.faintSound.play();
+                        endlessScore++;
+                        setTimeout(() => {
+                            getRandomOpponentPokemon();
+                            loadBattleSiteEndless();
+                        }, 1500);
+                    }
+                    if (getActive("player").hp <= 0) {
+                        logPlayerAction(player_single, `${player_single.team[0].poke.name} fainted!`);
+                        document.getElementById("player1PokeImg").style.animation = "";
+                        document.getElementById("player1PokeImg").offsetHeight;
+                        document.getElementById("player1PokeImg").style.animation = "faint 0.5s forwards";
+                        audio.faintSound.play();
+                        if (player_single.team.every(p => p.hp <= 0)) {
+                            setTimeout(() => {
+                                showEndlessGameOver();
+                            }, 1500);
+                        }
+                    }
+                }
+            }, 1000);
+        } else {
+            setTimeout(function () {
+                const selectedPokemon = player_single.team[player_single.selectedSwitch];
+                player_single.team.unshift(player_single.team.splice(player_single.selectedSwitch, 1)[0]);
+                player_single.selectedSwitch = undefined;
+                logPlayerAction(player_single, `${player_single.playerName} switched to ${selectedPokemon.poke.name}.`);
+                document.getElementById("player1PokeImg").style.animation = "";
+                document.getElementById("player1PokeImg").offsetHeight;
+                document.getElementById("player1PokeImg").style.animation = "fadeOut 0.5s forwards";
+                setTimeout(() => {
+                    loadBattleSiteEndless();
+                    audio.switchSound.play();
+                    document.getElementById("player1PokeImg").style.animation = "";
+                    document.getElementById("player1PokeImg").offsetHeight;
+                    document.getElementById("player1PokeImg").style.animation = "fadeIn 0.5s forwards";
+                }, 500);
+            }, 100);
+        }
+
+        player_single.madeTurn = false;
+        endlessOpponent.madeTurn = false;
+
+        player_single.team[0].st = Math.min(player_single.team[0].poke.stamina, player_single.team[0].st + Math.floor(player_single.team[0].poke.stamina * 0.05));
+        endlessOpponent.st = Math.min(endlessOpponent.poke.stamina, endlessOpponent.st + Math.floor(endlessOpponent.poke.stamina * 0.05));
+
+        applyPerk(player_single, "end");
+
+        setTimeout(function () {
+            loadBattleSiteEndless();
+        }, 2000);
+    }, 500);
+}
+
+function processActionEndless(who) {
+    if (who === "player") {
+        if (player_single.moveMade) {
+            processPlayerAttackEndless();
+        }
+    } else {
+        processAIAttackEndless();
+    }
+}
+
+function processPlayerAttackEndless() {
+    const move = player_single.moveMade;
+    player_single.team[0].st -= move.stamina_cost;
+
+    if (endlessOpponent.dodgedAttack) {
+        logPlayerAction(player_single, `Wild ${endlessOpponent.poke.name} dodged the attack!`);
+        endlessOpponent.dodgedAttack = false;
+        return;
+    }
+
+    const accuracyRoll = Math.random() * 100;
+    if (accuracyRoll <= move.acc) {
+        document.getElementById("player1PokeImg").style.animation = "";
+        document.getElementById("player1PokeImg").offsetHeight;
+        document.getElementById("player1PokeImg").style.animation = "attack1 0.5s forwards";
+        audio.attackSound.play();
+
+        let effectiveness = 1;
+        endlessOpponent.poke.type.forEach((type) => {
+            if (move.double.includes(type)) effectiveness *= 2;
+            else if (move.half.includes(type)) effectiveness *= 0.5;
+            else if (move.zero.includes(type)) effectiveness = 0;
+        });
+
+        const rndmMultiplier = Math.random() * (1.2 - 0.8) + 0.8;
+        const damage = Math.floor((10 * (move.power * (player_single.team[0].might / endlessOpponent.resistance)) / 50 + 2) * rndmMultiplier * effectiveness);
+        endlessOpponent.hp = Math.max(0, endlessOpponent.hp - damage);
+
+        if (effectiveness > 1) {
+            logPlayerAction(player_single, `${move.name} was super effective! Wild ${endlessOpponent.poke.name} lost ${damage} HP.`);
+        } else if (effectiveness < 1 && effectiveness > 0) {
+            logPlayerAction(player_single, `${move.name} was not very effective. Wild ${endlessOpponent.poke.name} lost ${damage} HP.`);
+        } else if (effectiveness === 0) {
+            logPlayerAction(player_single, `${move.name} had no effect on Wild ${endlessOpponent.poke.name}.`);
+        } else {
+            logPlayerAction(player_single, `${move.name} hit! Wild ${endlessOpponent.poke.name} lost ${damage} HP.`);
+        }
+    } else {
+        logPlayerAction(player_single, `${move.name} missed!`);
+    }
+    player_single.moveMade = undefined;
+}
+
+function processAIAttackEndless() {
+    const availableMoves = endlessOpponent.moves.filter(m => endlessOpponent.st >= m.stamina_cost);
+
+    let bestMoves = [];
+    let maxEffectiveness = 1;
+    let maxPower = 0;
+
+    for (const move of availableMoves) {
+        let effectiveness = 1;
+        player_single.team[0].poke.type.forEach(type => {
+            if (move.double.includes(type)) effectiveness *= 2;
+            else if (move.half.includes(type)) effectiveness *= 0.5;
+            else if (move.zero.includes(type)) effectiveness = 0;
+        });
+        if (effectiveness > maxEffectiveness) {
+            maxEffectiveness = effectiveness;
+            bestMoves = [move];
+            maxPower = move.power;
+        } else if (effectiveness === maxEffectiveness) {
+            if (move.power > maxPower) {
+                bestMoves = [move];
+                maxPower = move.power;
+            } else if (move.power === maxPower) {
+                bestMoves.push(move);
+            }
+        }
+    }
+
+    let move;
+    if (bestMoves.length > 0) {
+        move = bestMoves[Math.floor(Math.random() * bestMoves.length)];
+    } else if (availableMoves.length > 0) {
+        move = availableMoves.reduce((a, b) => (a.power > b.power ? a : b));
+    } else {
+        move = endlessOpponent.moves[0];
+    }
+
+    endlessOpponent.st -= move.stamina_cost;
+
+    if (player_single.team[0].dodgedAttack) {
+        logPlayerAction(player_single, `${player_single.team[0].poke.name} dodged the attack!`);
+        player_single.team[0].dodgedAttack = false;
+        return;
+    }
+
+    const accuracyRoll = Math.random() * 100;
+    if (accuracyRoll <= move.acc) {
+        document.getElementById("player2PokeImg").style.animation = "";
+        document.getElementById("player2PokeImg").offsetHeight;
+        document.getElementById("player2PokeImg").style.animation = "attack2 0.5s forwards";
+        audio.attackSound.play();
+
+        let effectiveness = 1;
+        player_single.team[0].poke.type.forEach((type) => {
+            if (move.double.includes(type)) effectiveness *= 2;
+            else if (move.half.includes(type)) effectiveness *= 0.5;
+            else if (move.zero.includes(type)) effectiveness = 0;
+        });
+
+        const rndmMultiplier = Math.random() * (1.2 - 0.8) + 0.8;
+        const damage = Math.floor((10 * (move.power * (endlessOpponent.might / player_single.team[0].resistance)) / 50 + 2) * rndmMultiplier * effectiveness);
+        player_single.team[0].hp = Math.max(0, player_single.team[0].hp - damage);
+
+        if (effectiveness > 1) {
+            logPlayerAction(player_single, `Wild ${endlessOpponent.poke.name}'s ${move.name} was super effective! ${player_single.team[0].poke.name} lost ${damage} HP.`);
+        } else if (effectiveness < 1 && effectiveness > 0) {
+            logPlayerAction(player_single, `Wild ${endlessOpponent.poke.name}'s ${move.name} was not very effective. ${player_single.team[0].poke.name} lost ${damage} HP.`);
+        } else if (effectiveness === 0) {
+            logPlayerAction(player_single, `Wild ${endlessOpponent.poke.name}'s ${move.name} had no effect on ${player_single.team[0].poke.name}.`);
+        } else {
+            logPlayerAction(player_single, `Wild ${endlessOpponent.poke.name}'s ${move.name} hit! ${player_single.team[0].poke.name} lost ${damage} HP.`);
+        }
+    } else {
+        logPlayerAction(player_single, `Wild ${endlessOpponent.poke.name}'s ${move.name} missed!`);
+    }
+}
+
+function getActive(who) {
+    if (who === "player") return player_single.team[0];
+    if (who === "ai") return endlessOpponent;
+}
+
+function showEndlessGameOver() {
+    audio.battleMusic.pause();
+    audio.battleMusic2.pause();
+    audio.battleMusic3.pause();
+    audio.victoryMusic.play();
+    audio.victoryMusic.loop = true;
+    audio.victoryMusic.volume = 0.4;
+
+    document.body.innerHTML = `
+        <div id="endScreen">
+            <div id="endScreenContent">
+                <h1>Game Over</h1>
+                <p>Your Score: ${endlessScore}</p>
+                <div id="restartButton" onclick="location.reload()">Restart</div>
+            </div>
+        </div>
     `;
 }
