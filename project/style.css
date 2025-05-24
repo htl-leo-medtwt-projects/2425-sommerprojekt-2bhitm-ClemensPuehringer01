@@ -1056,7 +1056,7 @@ body{
     width: 100%;
 }
 #score{
-            width: 100%;
+        width: 100%;
         color: black;
         background-color: var(--mainColor);
         border: 2px solid var(--secondColor);
@@ -1067,4 +1067,85 @@ body{
         font-family: poke;
         transition: 0.3s ease;
         text-align: center;
+}
+#leaderboardSelector {
+    background: var(--mainColor);
+    border: 3px solid var(--secondColor);
+    border-radius: 15px;
+    padding: 40px 40px;
+    min-width: 800px;
+    max-width: 98vw;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+    animation: scaleUpVictory 0.5s;
+}
+
+#leaderboardList {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+.leaderboardEntry {
+    background-color: rgba(255,255,255,0.85);
+    border-radius: 10px;
+    margin-bottom: 18px;
+    padding: 18px 20px 10px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    transition: background-color 0.2s;
+}
+
+.leaderboardEntry:hover {
+    background-color: var(--secondColor);
+    color: white;
+}
+
+.leaderboardRowMain {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    font-size: 1.15em;
+    margin-bottom: 6px;
+}
+
+.leaderboardRank {
+    width: 36px;
+    font-weight: bold;
+    font-size: 1.2em;
+    text-align: right;
+}
+
+.leaderboardName {
+    flex: 1.2;
+    font-weight: 600;
+    font-size: 1.1em;
+    text-align: left;
+}
+
+.leaderboardScore {
+    width: 120px;
+    text-align: left;
+    font-weight: 500;
+}
+
+.leaderboardAce {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 170px;
+}
+
+.leaderboardAceImg {
+    width: 44px;
+    height: 44px;
+    margin-right: 6px;
+    border-radius: 8px;
+    background: #f8f8f8;
+    border: 1px solid #ddd;
+}
+
+.leaderboardRowSub {
+    font-size: 0.95em;
+    color: #555;
+    margin-left: 60px;
+    margin-top: 2px;
 }

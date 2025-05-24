@@ -2581,7 +2581,7 @@ function selectMoveSingle(pokemonTeamNum, moveIndex, attackNum) {
 function startEndlessBattle() {
     player_single.playerName = document.getElementById("playerSingleName").value
     if (player_single.playerName == "") {
-        player2.playerName = "Player"
+        player_single.playerName = "Player"
     }
     document.getElementById("mute").style.display = "none";
     audio.lobbyMusic.pause()
@@ -2750,6 +2750,7 @@ function selectPokemonEndless(selectedIndex) {
 
 function executeTurnEndless() {
     applyPerk(player_single, "start");
+    applyPokemonPerk(player_single, "start");
 
     setTimeout(function () {
         const playerSpeed = player_single.team[0].speed;
@@ -2820,6 +2821,7 @@ function executeTurnEndless() {
         endlessOpponent.st = Math.min(endlessOpponent.poke.stamina, endlessOpponent.st + Math.floor(endlessOpponent.poke.stamina * 0.05));
 
         applyPerk(player_single, "end");
+        applyPokemonPerk(player_single, "end");
 
         setTimeout(function () {
             loadBattleSiteEndless();
@@ -2964,6 +2966,7 @@ function getActive(who) {
 }
 
 function showEndlessGameOver() {
+    saveEndlessScoreToLeaderboard();
     audio.battleMusic.pause();
     audio.battleMusic2.pause();
     audio.battleMusic3.pause();
@@ -2980,4 +2983,81 @@ function showEndlessGameOver() {
             </div>
         </div>
     `;
+}
+function saveEndlessScoreToLeaderboard() {
+    let ace = player_single.team[0];
+    for (const poke of player_single.team) {
+        if ((poke.kills || 0) > (ace.kills || 0)) ace = poke;
+    }
+
+    const entry = {
+        name: player_single.playerName,
+        score: endlessScore,
+        ace: ace.poke.name,
+        kills: ace.kills || 0,
+        date: new Date().toLocaleString()
+    };
+
+    let leaderboard = JSON.parse(localStorage.getItem("endlessLeaderboard") || "[]");
+    leaderboard.push(entry);
+
+    leaderboard.sort((a, b) => b.score - a.score);
+    leaderboard = leaderboard.slice(0, 10);
+
+    localStorage.setItem("endlessLeaderboard", JSON.stringify(leaderboard));
+}
+function Leaderboard_endless() {
+    let leaderboard = JSON.parse(localStorage.getItem("endlessLeaderboard") || "[]");
+
+   let leaderboardHTML = `
+    <div id="leaderboardOverlay" style="animation: fadeInVictory 0.5s;">
+        <div id="leaderboardSelector">
+            <h2 style="color: var(--secondColor); margin-bottom: 24px;">Endless Mode Leaderboard</h2>
+            <div id="leaderboardList">
+                ${leaderboard.length === 0 ? "<p>No entries yet!</p>" : leaderboard.map((entry, i) => `
+                    <div class="leaderboardEntry">
+                        <div class="leaderboardRowMain">
+                            <span class="leaderboardRank">${i + 1}.</span>
+                            <span class="leaderboardName">${entry.name}</span>
+                            <span class="leaderboardScore">Score: ${entry.score}</span>
+                            <span class="leaderboardAce">
+                                <img src="./media/img/pokémon/${entry.ace.toLowerCase()}.png" alt="${entry.ace}" class="leaderboardAceImg">
+                                <span>${entry.ace} (${entry.kills} KOs)</span>
+                            </span>
+                        </div>
+                        <div class="leaderboardRowSub">
+                            <span class="leaderboardDate">${entry.date}</span>
+                        </div>
+                    </div>
+                `).join("")}
+            </div>
+            <div class="actionButton" style="margin-top: 24px;" onclick="closeLeaderboardEndless()">Close</div>
+        </div>
+    </div>
+`;
+
+    const overlay = document.createElement("div");
+    overlay.innerHTML = leaderboardHTML;
+    overlay.id = "leaderboardOverlay";
+    overlay.style.position = "fixed";
+    overlay.style.top = "0";
+    overlay.style.left = "0";
+    overlay.style.width = "100vw";
+    overlay.style.height = "100vh";
+    overlay.style.background = "rgba(0,0,0,0.7)";
+    overlay.style.display = "flex";
+    overlay.style.justifyContent = "center";
+    overlay.style.alignItems = "center";
+    overlay.style.zIndex = "10000";
+    overlay.style.animation = "fadeInVictory 0.5s";
+
+    document.body.appendChild(overlay);
+}
+
+function closeLeaderboardEndless() {
+    const overlay = document.getElementById("leaderboardOverlay");
+    if (overlay) {
+        overlay.style.animation = "fadeOut 0.5s";
+        setTimeout(() => overlay.remove(), 500);
+    }
 }
