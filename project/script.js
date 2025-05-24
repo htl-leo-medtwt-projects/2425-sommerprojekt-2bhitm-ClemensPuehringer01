@@ -147,6 +147,7 @@ let player_single = {
             knockedOutOpponent: false,
             lastDamageDealt: 0,
             perkUsed: false,
+            kills: 0,
             moves: [
                 attacks.moves[0],
                 attacks.special_moves[1],
@@ -164,6 +165,7 @@ let player_single = {
             knockedOutOpponent: false,
             lastDamageDealt: 0,
             perkUsed: false,
+            kills: 0,
             moves: [
                 attacks.moves[3],
                 attacks.special_moves[1],
@@ -181,6 +183,7 @@ let player_single = {
             knockedOutOpponent: false,
             lastDamageDealt: 0,
             perkUsed: false,
+            kills: 0,
             moves: [
                 attacks.moves[0],
                 attacks.moves[2]
@@ -2708,7 +2711,6 @@ function TurnFinPlayerSingle() {
     document.getElementById("player1Controls").innerHTML = `
         <div class="turnFin"> ${player_single.playerName} finished their Turn!</div>
     `;
-    // AI always "finishes" instantly
     endlessOpponent.madeTurn = true;
     if (player_single.madeTurn && endlessOpponent.madeTurn) {
         executeTurnEndless();
@@ -2765,6 +2767,8 @@ function executeTurnEndless() {
                     processActionEndless(second);
                 } else {
                     if (getActive("ai").hp <= 0) {
+                        getActive("player").knockedOutOpponent = true;
+                        getActive("player").kills++;
                         logPlayerAction(player_single, `Wild ${endlessOpponent.poke.name} fainted!`);
                         document.getElementById("player2PokeImg").style.animation = "";
                         document.getElementById("player2PokeImg").offsetHeight;
@@ -2860,6 +2864,7 @@ function processPlayerAttackEndless() {
         const rndmMultiplier = Math.random() * (1.2 - 0.8) + 0.8;
         const damage = Math.floor((10 * (move.power * (player_single.team[0].might / endlessOpponent.resistance)) / 50 + 2) * rndmMultiplier * effectiveness);
         endlessOpponent.hp = Math.max(0, endlessOpponent.hp - damage);
+        player_single.team[0].lastDamageDealt += damage;
 
         if (effectiveness > 1) {
             logPlayerAction(player_single, `${move.name} was super effective! Wild ${endlessOpponent.poke.name} lost ${damage} HP.`);
