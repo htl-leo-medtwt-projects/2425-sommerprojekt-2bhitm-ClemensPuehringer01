@@ -2919,10 +2919,11 @@ function processAIAttackEndless() {
     } else {
         move = endlessOpponent.moves[0];
     }
-
-    endlessOpponent.st -= move.stamina_cost;
-
-    if (player_single.team[0].dodgedAttack) {
+    if (endlessOpponent.st < move.stamina_cost) {
+        logPlayerAction(player_single, `Wild ${endlessOpponent.poke.name} tried to use ${move.name}, but didn't have enough stamina!`);
+    }else{
+        endlessOpponent.st -= move.stamina_cost;
+        if (player_single.team[0].dodgedAttack) {
         logPlayerAction(player_single, `${player_single.team[0].poke.name} dodged the attack!`);
         player_single.team[0].dodgedAttack = false;
         return;
@@ -2958,6 +2959,10 @@ function processAIAttackEndless() {
     } else {
         logPlayerAction(player_single, `Wild ${endlessOpponent.poke.name}'s ${move.name} missed!`);
     }
+    }
+   
+
+
 }
 
 function getActive(who) {
