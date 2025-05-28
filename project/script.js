@@ -29,7 +29,7 @@ let player1 = {
             perkUsed: false,
             moves: [
                 attacks.moves[0],
-                attacks.special_moves[1],
+                attacks.moves[1],
             ]
         },
         {
@@ -46,7 +46,7 @@ let player1 = {
             perkUsed: false,
             moves: [
                 attacks.moves[3],
-                attacks.special_moves[1],
+                attacks.moves[1],
             ]
         },
         {
@@ -89,7 +89,7 @@ let player2 = {
             perkUsed: false,
             moves: [
                 attacks.moves[0],
-                attacks.special_moves[1],
+                attacks.moves[1],
             ]
         },
         {
@@ -106,7 +106,7 @@ let player2 = {
             perkUsed: false,
             moves: [
                 attacks.moves[3],
-                attacks.special_moves[1],
+                attacks.moves[1],
             ]
         },
         {
@@ -150,7 +150,7 @@ let player_single = {
             kills: 0,
             moves: [
                 attacks.moves[0],
-                attacks.special_moves[1],
+                attacks.moves[1],
             ]
         },
         {
@@ -168,7 +168,7 @@ let player_single = {
             kills: 0,
             moves: [
                 attacks.moves[3],
-                attacks.special_moves[1],
+                attacks.moves[1],
             ]
         },
         {
@@ -515,12 +515,6 @@ function selectAttack1(pokemonTeamNum, attackNum) {
             availableMoves.push(move);
         }
     }
-    for (let i = 0; i < attacks.special_moves.length; i++) {
-        const specialMove = attacks.special_moves[i];
-        if (specialMove.exclusive_to.includes(player1.team[pokemonTeamNum].poke.name.toLocaleLowerCase())) {
-            availableMoves.push(specialMove);
-        }
-    }
     let moveListHTML = '';
     for (let i = 0; i < availableMoves.length; i++) {
         const move = availableMoves[i];
@@ -564,12 +558,6 @@ function selectMove1(pokemonTeamNum, moveIndex, attackNum) {
         const move = attacks.moves[i];
         if (pokemonTypes.includes(move.type)) {
             availableMoves.push(move);
-        }
-    }
-    for (let i = 0; i < attacks.special_moves.length; i++) {
-        const specialMove = attacks.special_moves[i];
-        if (specialMove.exclusive_to.includes(player1.team[pokemonTeamNum].poke.name.toLocaleLowerCase())) {
-            availableMoves.push(specialMove);
         }
     }
     player1.team[pokemonTeamNum].moves[attackNum] = availableMoves[moveIndex];
@@ -871,12 +859,6 @@ function selectAttack2(pokemonTeamNum, attackNum) {
             availableMoves.push(move);
         }
     }
-    for (let i = 0; i < attacks.special_moves.length; i++) {
-        const specialMove = attacks.special_moves[i];
-        if (specialMove.exclusive_to.includes(player2.team[pokemonTeamNum].poke.name.toLocaleLowerCase())) {
-            availableMoves.push(specialMove);
-        }
-    }
     let moveListHTML = '';
     for (let i = 0; i < availableMoves.length; i++) {
         const move = availableMoves[i];
@@ -920,12 +902,6 @@ function selectMove2(pokemonTeamNum, moveIndex, attackNum) {
         const move = attacks.moves[i];
         if (pokemonTypes.includes(move.type)) {
             availableMoves.push(move);
-        }
-    }
-    for (let i = 0; i < attacks.special_moves.length; i++) {
-        const specialMove = attacks.special_moves[i];
-        if (specialMove.exclusive_to.includes(player2.team[pokemonTeamNum].poke.name.toLocaleLowerCase())) {
-            availableMoves.push(specialMove);
         }
     }
     player2.team[pokemonTeamNum].moves[attackNum] = availableMoves[moveIndex];
@@ -2518,12 +2494,6 @@ function selectAttackSingle(pokemonTeamNum, attackNum) {
             availableMoves.push(move);
         }
     }
-    for (let i = 0; i < attacks.special_moves.length; i++) {
-        const specialMove = attacks.special_moves[i];
-        if (specialMove.exclusive_to.includes(player_single.team[pokemonTeamNum].poke.name.toLocaleLowerCase())) {
-            availableMoves.push(specialMove);
-        }
-    }
     let moveListHTML = '';
     for (let i = 0; i < availableMoves.length; i++) {
         const move = availableMoves[i];
@@ -2567,12 +2537,6 @@ function selectMoveSingle(pokemonTeamNum, moveIndex, attackNum) {
         const move = attacks.moves[i];
         if (pokemonTypes.includes(move.type)) {
             availableMoves.push(move);
-        }
-    }
-    for (let i = 0; i < attacks.special_moves.length; i++) {
-        const specialMove = attacks.special_moves[i];
-        if (specialMove.exclusive_to.includes(player_single.team[pokemonTeamNum].poke.name.toLocaleLowerCase())) {
-            availableMoves.push(specialMove);
         }
     }
     player_single.team[pokemonTeamNum].moves[attackNum] = availableMoves[moveIndex];
