@@ -17,53 +17,53 @@ let player1 = {
     team: [
         {
             poke: pokémon.list[0],
-            perk: perks.pokemon_perks[0],
-            hp: pokémon.list[4].hp,
-            st: pokémon.list[4].stamina,
-            might: pokémon.list[4].might,
-            resistance: pokémon.list[4].resistance,
-            speed: pokémon.list[4].speed,
+            perk: perks.pokemon_perks[4],
+            hp: pokémon.list[0].hp,
+            st: pokémon.list[0].stamina,
+            might: pokémon.list[0].might,
+            resistance: pokémon.list[0].resistance,
+            speed: pokémon.list[0].speed,
             dogedAttack: false,
             knockedOutOpponent: false,
             lastDamageDealt: 0,
             perkUsed: false,
             moves: [
-                attacks.moves[0],
-                attacks.moves[1],
+                attacks.moves[18],
+                attacks.moves[19],
             ]
         },
         {
             poke: pokémon.list[3],
             perk: perks.pokemon_perks[0],
-            hp: pokémon.list[7].hp,
-            st: pokémon.list[7].stamina,
-            might: pokémon.list[7].might,
-            resistance: pokémon.list[7].resistance,
-            speed: pokémon.list[7].speed,
-            dogedAttack: false,
-            knockedOutOpponent: false,
-            lastDamageDealt: 0,
-            perkUsed: false,
-            moves: [
-                attacks.moves[3],
-                attacks.moves[1],
-            ]
-        },
-        {
-            poke: pokémon.list[6],
-            perk: perks.pokemon_perks[0],
-            hp: pokémon.list[26].hp,
-            st: pokémon.list[26].stamina,
-            might: pokémon.list[26].might,
-            resistance: pokémon.list[26].resistance,
-            speed: pokémon.list[26].speed,
+            hp: pokémon.list[3].hp,
+            st: pokémon.list[3].stamina,
+            might: pokémon.list[3].might,
+            resistance: pokémon.list[3].resistance,
+            speed: pokémon.list[3].speed,
             dogedAttack: false,
             knockedOutOpponent: false,
             lastDamageDealt: 0,
             perkUsed: false,
             moves: [
                 attacks.moves[0],
-                attacks.moves[2]
+                attacks.moves[1],
+            ]
+        },
+        {
+            poke: pokémon.list[6],
+            perk: perks.pokemon_perks[2],
+            hp: pokémon.list[6].hp,
+            st: pokémon.list[6].stamina,
+            might: pokémon.list[6].might,
+            resistance: pokémon.list[6].resistance,
+            speed: pokémon.list[6].speed,
+            dogedAttack: false,
+            knockedOutOpponent: false,
+            lastDamageDealt: 0,
+            perkUsed: false,
+            moves: [
+                attacks.moves[12],
+                attacks.moves[13]
             ]
         }
     ],
@@ -77,53 +77,53 @@ let player2 = {
     team: [
         {
             poke: pokémon.list[0],
-            perk: perks.pokemon_perks[0],
-            hp: pokémon.list[4].hp,
-            st: pokémon.list[4].stamina,
-            might: pokémon.list[4].might,
-            resistance: pokémon.list[4].resistance,
-            speed: pokémon.list[4].speed,
+            perk: perks.pokemon_perks[4],
+            hp: pokémon.list[0].hp,
+            st: pokémon.list[0].stamina,
+            might: pokémon.list[0].might,
+            resistance: pokémon.list[0].resistance,
+            speed: pokémon.list[0].speed,
             dogedAttack: false,
             knockedOutOpponent: false,
             lastDamageDealt: 0,
             perkUsed: false,
             moves: [
-                attacks.moves[0],
-                attacks.moves[1],
+                attacks.moves[18],
+                attacks.moves[19],
             ]
         },
         {
             poke: pokémon.list[3],
             perk: perks.pokemon_perks[0],
-            hp: pokémon.list[7].hp,
-            st: pokémon.list[7].stamina,
-            might: pokémon.list[7].might,
-            resistance: pokémon.list[7].resistance,
-            speed: pokémon.list[7].speed,
-            dogedAttack: false,
-            knockedOutOpponent: false,
-            lastDamageDealt: 0,
-            perkUsed: false,
-            moves: [
-                attacks.moves[3],
-                attacks.moves[1],
-            ]
-        },
-        {
-            poke: pokémon.list[6],
-            perk: perks.pokemon_perks[0],
-            hp: pokémon.list[26].hp,
-            st: pokémon.list[26].stamina,
-            might: pokémon.list[26].might,
-            resistance: pokémon.list[26].resistance,
-            speed: pokémon.list[26].speed,
+            hp: pokémon.list[3].hp,
+            st: pokémon.list[3].stamina,
+            might: pokémon.list[3].might,
+            resistance: pokémon.list[3].resistance,
+            speed: pokémon.list[3].speed,
             dogedAttack: false,
             knockedOutOpponent: false,
             lastDamageDealt: 0,
             perkUsed: false,
             moves: [
                 attacks.moves[0],
-                attacks.moves[2]
+                attacks.moves[1],
+            ]
+        },
+        {
+            poke: pokémon.list[6],
+            perk: perks.pokemon_perks[2],
+            hp: pokémon.list[6].hp,
+            st: pokémon.list[6].stamina,
+            might: pokémon.list[6].might,
+            resistance: pokémon.list[6].resistance,
+            speed: pokémon.list[6].speed,
+            dogedAttack: false,
+            knockedOutOpponent: false,
+            lastDamageDealt: 0,
+            perkUsed: false,
+            moves: [
+                attacks.moves[12],
+                attacks.moves[13]
             ]
         }
     ],
@@ -137,48 +137,30 @@ let player_single = {
     team: [
         {
             poke: pokémon.list[0],
-            perk: perks.pokemon_perks[0],
-            hp: pokémon.list[4].hp,
-            st: pokémon.list[4].stamina,
-            might: pokémon.list[4].might,
-            resistance: pokémon.list[4].resistance,
-            speed: pokémon.list[4].speed,
+            perk: perks.pokemon_perks[4],
+            hp: pokémon.list[0].hp,
+            st: pokémon.list[0].stamina,
+            might: pokémon.list[0].might,
+            resistance: pokémon.list[0].resistance,
+            speed: pokémon.list[0].speed,
             dogedAttack: false,
             knockedOutOpponent: false,
             lastDamageDealt: 0,
             perkUsed: false,
             kills: 0,
             moves: [
-                attacks.moves[0],
-                attacks.moves[1],
+                attacks.moves[18],
+                attacks.moves[19],
             ]
         },
         {
             poke: pokémon.list[3],
             perk: perks.pokemon_perks[0],
-            hp: pokémon.list[7].hp,
-            st: pokémon.list[7].stamina,
-            might: pokémon.list[7].might,
-            resistance: pokémon.list[7].resistance,
-            speed: pokémon.list[7].speed,
-            dogedAttack: false,
-            knockedOutOpponent: false,
-            lastDamageDealt: 0,
-            perkUsed: false,
-            kills: 0,
-            moves: [
-                attacks.moves[3],
-                attacks.moves[1],
-            ]
-        },
-        {
-            poke: pokémon.list[6],
-            perk: perks.pokemon_perks[0],
-            hp: pokémon.list[26].hp,
-            st: pokémon.list[26].stamina,
-            might: pokémon.list[26].might,
-            resistance: pokémon.list[26].resistance,
-            speed: pokémon.list[26].speed,
+            hp: pokémon.list[3].hp,
+            st: pokémon.list[3].stamina,
+            might: pokémon.list[3].might,
+            resistance: pokémon.list[3].resistance,
+            speed: pokémon.list[3].speed,
             dogedAttack: false,
             knockedOutOpponent: false,
             lastDamageDealt: 0,
@@ -186,7 +168,25 @@ let player_single = {
             kills: 0,
             moves: [
                 attacks.moves[0],
-                attacks.moves[2]
+                attacks.moves[1],
+            ]
+        },
+        {
+            poke: pokémon.list[6],
+            perk: perks.pokemon_perks[2],
+            hp: pokémon.list[6].hp,
+            st: pokémon.list[6].stamina,
+            might: pokémon.list[6].might,
+            resistance: pokémon.list[6].resistance,
+            speed: pokémon.list[6].speed,
+            dogedAttack: false,
+            knockedOutOpponent: false,
+            lastDamageDealt: 0,
+            perkUsed: false,
+            kills: 0,
+            moves: [
+                attacks.moves[12],
+                attacks.moves[13]
             ]
         }
     ],
