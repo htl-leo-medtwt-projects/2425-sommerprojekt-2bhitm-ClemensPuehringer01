@@ -16,7 +16,7 @@ let player1 = {
     playerName: "Player 1",
     team: [
         {
-            poke: pokémon.list[4],
+            poke: pokémon.list[0],
             perk: perks.pokemon_perks[0],
             hp: pokémon.list[4].hp,
             st: pokémon.list[4].stamina,
@@ -33,7 +33,7 @@ let player1 = {
             ]
         },
         {
-            poke: pokémon.list[7],
+            poke: pokémon.list[3],
             perk: perks.pokemon_perks[0],
             hp: pokémon.list[7].hp,
             st: pokémon.list[7].stamina,
@@ -50,7 +50,7 @@ let player1 = {
             ]
         },
         {
-            poke: pokémon.list[26],
+            poke: pokémon.list[6],
             perk: perks.pokemon_perks[0],
             hp: pokémon.list[26].hp,
             st: pokémon.list[26].stamina,
@@ -76,7 +76,7 @@ let player2 = {
     playerName: "Player 2",
     team: [
         {
-            poke: pokémon.list[4],
+            poke: pokémon.list[0],
             perk: perks.pokemon_perks[0],
             hp: pokémon.list[4].hp,
             st: pokémon.list[4].stamina,
@@ -93,7 +93,7 @@ let player2 = {
             ]
         },
         {
-            poke: pokémon.list[7],
+            poke: pokémon.list[3],
             perk: perks.pokemon_perks[0],
             hp: pokémon.list[7].hp,
             st: pokémon.list[7].stamina,
@@ -110,7 +110,7 @@ let player2 = {
             ]
         },
         {
-            poke: pokémon.list[26],
+            poke: pokémon.list[6],
             perk: perks.pokemon_perks[0],
             hp: pokémon.list[26].hp,
             st: pokémon.list[26].stamina,
@@ -136,7 +136,7 @@ let player_single = {
     playerName: "Player",
     team: [
         {
-            poke: pokémon.list[4],
+            poke: pokémon.list[0],
             perk: perks.pokemon_perks[0],
             hp: pokémon.list[4].hp,
             st: pokémon.list[4].stamina,
@@ -154,7 +154,7 @@ let player_single = {
             ]
         },
         {
-            poke: pokémon.list[7],
+            poke: pokémon.list[3],
             perk: perks.pokemon_perks[0],
             hp: pokémon.list[7].hp,
             st: pokémon.list[7].stamina,
@@ -172,7 +172,7 @@ let player_single = {
             ]
         },
         {
-            poke: pokémon.list[26],
+            poke: pokémon.list[6],
             perk: perks.pokemon_perks[0],
             hp: pokémon.list[26].hp,
             st: pokémon.list[26].stamina,
