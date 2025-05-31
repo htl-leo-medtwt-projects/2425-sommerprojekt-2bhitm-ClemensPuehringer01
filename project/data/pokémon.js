@@ -186,6 +186,11 @@ let pokémon = {
             hp: 85, stamina: 120, might: 105, resistance: 100, speed: 78, pokedexNr: "0160"
         },
         {
+        name: "Noctowl",
+        type: ["normal", "flying"],
+        hp: 100, stamina: 120, might: 50, resistance: 50, speed: 70, pokedexNr: "0164"
+        },
+        {
             name: "Togepi",
             type: ["fairy"],
             hp: 35, stamina: 70, might: 20, resistance: 65, speed: 20, pokedexNr: "0175"
