@@ -105,7 +105,7 @@ let pokémon = {
             type: ["water", "flying"],
             hp: 95, stamina: 150, might: 125, resistance: 79, speed: 81, pokedexNr: "0130"
         },
-                {
+        {
             name: "Ditto",
             type: ["normal"],
             hp: 48, stamina: 90, might: 48, resistance: 48, speed: 48, pokedexNr: "0132"
@@ -114,6 +114,11 @@ let pokémon = {
             name: "Eevee",
             type: ["normal"],
             hp: 55, stamina: 80, might: 55, resistance: 50, speed: 55, pokedexNr: "0133"
+        },
+        {
+            name: "Flareon",
+            type: ["fire"],
+            hp: 65, stamina: 130, might: 130, resistance: 60, speed: 65, pokedexNr: "0136"
         },
         {
             name: "Snorlax",
@@ -205,7 +210,7 @@ let pokémon = {
             type: ["bug", "steel"],
             hp: 70, stamina: 120, might: 130, resistance: 100, speed: 65, pokedexNr: "0212"
         },
-                {
+        {
             name: "Treecko",
             type: ["grass"],
             hp: 40, stamina: 70, might: 45, resistance: 35, speed: 70, pokedexNr: "0252"
@@ -260,7 +265,7 @@ let pokémon = {
             type: ["rock", "bug"],
             hp: 45, stamina: 100, might: 95, resistance: 50, speed: 75, pokedexNr: "0347"
         },
-                {
+        {
             name: "Metagross",
             type: ["steel", "psychic"],
             hp: 80, stamina: 140, might: 135, resistance: 130, speed: 70, pokedexNr: "0376"
